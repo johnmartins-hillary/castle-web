@@ -50,14 +50,14 @@ const ChatHeader = () => {
         style={{fontFamily:"Poppins"}}
         className=" font-normal gap-3 "
         >
-       <LinkIcon size={16} className="rotate-95" /> Attachments
+       <LinkIcon color={'black'} onClick={()=>{}}  size={16} className="rotate-95" /> Attachments
         </DropdownMenuItem>
         <DropdownMenuItem
               style={{fontFamily:"Poppins"}}
               className=" font-normal gap-3 "
           
         >
-           <BanIcon size={16} /> End Chat
+           <BanIcon color={'black'} className={''} onClick={()=>{}}  size={16} /> End Chat
         </DropdownMenuItem>
       </DropdownMenuContent>
           </DropdownMenu>
