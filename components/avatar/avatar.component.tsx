@@ -1,6 +1,6 @@
 import React from "react";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
-
+import Image from "next/image";
 interface Props {
   width?: string | number;
   className?: string;
@@ -9,7 +9,7 @@ interface Props {
 const AvatarWithBadge = ({ width, height, className }: Props) => {
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-      <img
+      <Image
         src={"/images/user-image.png"}
         className={className ? className : "m-auto object-contain aspect-auto "}
         alt="consultant"

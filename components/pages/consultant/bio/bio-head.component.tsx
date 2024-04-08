@@ -4,16 +4,20 @@ import { LiaShareSolid } from "react-icons/lia";
 const BioHead = () => {
     const socialMedia =[
         {
-          icon:<FaLinkedin color="black" size={30} />
+          icon:<FaLinkedin color="black" size={30} />,
+           id:1
         },
         {
-          icon:<FaInstagramSquare color="black" size={30} />
+          icon:<FaInstagramSquare color="black" size={30} />,
+           id:2
         },
         {
-          icon:<FaSquareXTwitter color="black" size={30}  />
+          icon:<FaSquareXTwitter color="black" size={30}  />,
+           id:3
         },
         {
-          icon:<FaFacebook color="black" size={30}  />
+          icon:<FaFacebook color="black" size={30}  />,
+           id:4
         },
     ]
     return ( 
@@ -30,8 +34,8 @@ const BioHead = () => {
         </div>
 
         <div className="w-1/2 flex items-center justify-center gap-1 md:hidden "  >
-        {socialMedia.map(({icon})=>(
-                  <div >
+        {socialMedia.map(({icon,id})=>(
+                  <div key={id} >
                     {icon}
                    </div>
                     ))}

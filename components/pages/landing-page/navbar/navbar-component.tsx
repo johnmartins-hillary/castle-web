@@ -16,7 +16,8 @@ const NavBar = () => {
   return (
     <div className="w-full flex items-stretch justify-between h-16 max-lg:px-14 max-lg:py-14 max-sm:px-3 ">
       <div className="w-1/2 flex items-center">
-        <img
+        <Image
+          width={120}
           src={"/images/logo-black.png"}
           className="h-[120px] w-auto lg:w-[120px] "
           alt="logo"

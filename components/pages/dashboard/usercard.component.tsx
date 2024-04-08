@@ -27,10 +27,10 @@ const UserCard = ({name,offline}:UserCardsProps) => {
             </div>
             <div className=" flex flex-flex_2 justify-center items-center gap-3 " >
             <div onClick={()=>{router.push(`/chat/val`)}} className={`w-8  h-8 ${ offline ? 'bg-light_grey' : 'bg-primary_color'} rounded-full items-center justify-center p-2 cursor-pointer `} >
-            <img src={'/images/chat-conversation.png'}   className=" object-cover w-24" alt="chat-conversation"  />
+            <Image width={96} src={'/images/chat-conversation.png'}   className=" object-cover w-24" alt="chat-conversation"  />
             </div>
                 <div  onClick={()=>{router.push(`/session-call`)}} className={`w-8  h-8 ${ offline ? 'bg-light_grey' : 'bg-primary_color'} rounded-full items-center justify-center p-2 cursor-pointer `} >
-                <img  src={'/images/hang-up.png'}   className=" object-cover w-24" alt="hang-up"  />
+                <Image width={96} src={'/images/hang-up.png'}   className=" object-cover w-24" alt="hang-up"  />
                 </div>
             </div>
         </div>

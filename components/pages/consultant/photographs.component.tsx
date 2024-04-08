@@ -8,8 +8,9 @@ const PhotoGraphs = () => {
       </div>
 
       <div className="w-full flex items-center justify-start gap-2  md:gap-2 mt-3 flex-wrap ">
-        {[0, 1, 2, 3, 4, 5].map(() =>
+        {[0, 1, 2, 3, 4, 5].map(item =>
           <Image
+            key={item}
             src={"/images/photograph.png"}
             height={26}
             width={118}
