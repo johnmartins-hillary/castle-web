@@ -2,9 +2,9 @@ import React from "react";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import Image from "next/image";
 interface Props {
-  width?: string | number;
+  width?: any;
   className?: string;
-  height?: string | number;
+  height?: any;
 }
 const AvatarWithBadge = ({ width, height, className }: Props) => {
   return (
