@@ -18,7 +18,7 @@ const Hello = () => {
         </div>
 
         <div className=" flex items-center justify-center lg:hidden " >
-            <MenuIcon  onClick={()=>{setShowModal(true)}} className="cursor-pointer w-[24px] h-[24px] "/>
+            <MenuIcon color={'black'} size={24} onClick={()=>{setShowModal(true)}} className="cursor-pointer w-[24px] h-[24px] "/>
         </div>
         </div>
         <MainMobileMenu setShowModal={setShowModal} showModal={showModal} />

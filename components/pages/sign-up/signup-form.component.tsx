@@ -14,7 +14,7 @@ const SignUpForm = () => {
         </div>
         <div className="w-full mt-10 items-center flex justify-center "  >
         <Button  className=" w-full md:w-96 bg-light_grey rounded-2xl text-black hover:bg-slate-200 hover:text-black cursor-pointer  py-7 md:max-lg:w-full " >
-            <GoogleIcon  size={50} className="mr-2 h-4 w-4" />Sign up with Google
+            <GoogleIcon color={''} onClick={()=>{}}  size={50} className="mr-2 h-4 w-4" />Sign up with Google
          </Button>
         </div>
 

@@ -21,7 +21,7 @@ const UserName = () => {
         </div>
         </div>
         <div className=" flex items-center justify-center lg:hidden " >
-            <MenuIcon   className="cursor-pointer w-[24px] h-[24px] "/>
+            <MenuIcon  size={24} onClick={()=>{}} color={''} className="cursor-pointer w-[24px] h-[24px] "/>
         </div>
         </div>
 

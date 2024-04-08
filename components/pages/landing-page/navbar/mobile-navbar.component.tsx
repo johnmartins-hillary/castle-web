@@ -16,7 +16,7 @@ const MobileNavbar = ({title,icon}:Props) => {
                 <p className="text-lg font-bold" >{title}</p>
             </div>
             <div className={` ${title || icon ? "w-1/2" : "w-full"} items-center justify-end flex `} >
-            <MenuIcon onClick={()=>{setShowModal(true)}} className="cursor-pointer w-[24px] h-[24px] "/>
+            <MenuIcon  color="black" size={24} onClick={()=>{setShowModal(true)}} className="cursor-pointer w-[24px] h-[24px] "/>
             </div>
             <MainMobileMenu setShowModal={setShowModal} showModal={showModal} />
         </div>

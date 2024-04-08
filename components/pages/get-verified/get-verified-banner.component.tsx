@@ -7,7 +7,7 @@ const GetVerifiedBanner = () => {
         <>
         <div className="w-full flex flex-col items-center justify-between rounded-xl bg-primary_color mt-14 md:flex-row " >
             <div className=" w-full p-[12px] flex justify-start items-center gap-2 md:w-2/5 md:p-14 " >
-                <CheckIcon color={'white'} size={33} />
+                <CheckIcon className={""} onClick={()=>{}} color={'white'} size={33} />
                 <p className=" text-white text-sm   md:text-base font-light"  >Get Verified</p>
             </div>
             <div className=" w-full p-[12px] md:p-0 md:w-3/5">

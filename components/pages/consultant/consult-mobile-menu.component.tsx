@@ -27,7 +27,7 @@ const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
       }}
     >
 
-        <CloseIcon  className={'absolute z-10 right-3 top-[-10%]'} size={24}  onClick={()=>{setOpenDrawer(false)}}/>
+        <CloseIcon color={'black'}  className={'absolute z-10 right-3 top-[-10%]'} size={24}  onClick={()=>{setOpenDrawer(false)}}/>
      
 
         <div className="w-full mb-5 ">

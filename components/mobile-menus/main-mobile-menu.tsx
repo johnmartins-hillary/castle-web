@@ -74,7 +74,7 @@ const MainMobileMenu = ({showModal,setShowModal}:Props) => {
       }}
     >
 
-        <CloseIcon  className={'absolute z-10 right-3 top-[-10%]'} size={24}  onClick={()=>{setShowModal(false)}}/>
+        <CloseIcon color={'black'} className={'absolute z-10 right-3 top-[-10%]'} size={24}  onClick={()=>{setShowModal(false)}}/>
      
 
         <div className="w-full mt-1 px-2 "  >

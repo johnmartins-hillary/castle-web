@@ -29,7 +29,7 @@ const LandingPageMenu = ({showModal,setShowModal}:Props) => {
       }}
     >
 
-        <CloseIcon  className={'absolute z-10 right-3 top-[-20%]'} size={24}  onClick={()=>{setShowModal(false)}}/>
+        <CloseIcon  color={'black'} className={'absolute z-10 right-3 top-[-20%]'} size={24}  onClick={()=>{setShowModal(false)}}/>
         <div className='w-full flex flex-1 mt-14 flex-col items-center justify-center ' >
         <Button     onClick={() => router.push("/auth/sign-in")} className=" bg-primary_color w-full rounded-[25px] mb-9 ">Sign Up</Button>
           <Button

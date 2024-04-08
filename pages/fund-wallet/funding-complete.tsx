@@ -17,7 +17,7 @@ const FundingComplete = () => {
             </div>
 
             <div className="w-full flex flex-1 items-center justify-center my-6 " >
-                <CheckIcon size={386} className={'m-auto'} />
+                <CheckIcon color={'black'} onClick={()=>{}}  size={386} className={'m-auto'} />
             </div>
 
             <div className="w-full mt-10  flex items-center justify-center" >

@@ -13,7 +13,7 @@ const WithdrawalConfirmed = () => {
         <DashboardLayout>
             <MobileNavbar/>
             <div className="w-full flex flex-1 items-center justify-center my-6 " >
-                <CheckIcon  size={311} className={'m-auto w-[100px] h-[100px] md:w-[311px] md:h-[311px] '} />
+                <CheckIcon color={'black'} onClick={()=>{}}   size={311} className={'m-auto w-[100px] h-[100px] md:w-[311px] md:h-[311px] '} />
             </div>
 
             <div className="w-full mt-10  flex items-center justify-center" >

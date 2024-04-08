@@ -31,7 +31,7 @@ const FundWallet = () => {
                 </div>
                 <div className="w-full  flex mt-5   items-center justify-start gap-2 md:w-1/2 md:mt-0 md:justify-center " >
                     <p className="font-bold text-sm" >Other Funding methods</p>
-                    <LogoutIcon size={26} className={"cursor-pointer"} />
+                    <LogoutIcon color={''} onClick={()=>{}}  size={26} className={"cursor-pointer"} />
                 </div>
             </div>
 
