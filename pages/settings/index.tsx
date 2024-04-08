@@ -1,0 +1,29 @@
+import ModeOfCommunication from "@/components/pages/settings/mode-communication.component";
+import DashboardLayout from "../dashboard/layout";
+import Head from "next/head";
+import Referrall from "@/components/pages/settings/referral.component";
+import Rate from "@/components/pages/settings/rate.component";
+import ReachOut from "@/components/pages/settings/reach-out.component";
+import AboutUs from "@/components/pages/settings/about-us.component";
+import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component";
+import Image from "next/image"
+const Settings = () => {
+    return ( 
+        <>
+        <Head>
+            <title>Settings</title>
+        </Head>
+        <DashboardLayout>
+            <MobileNavbar title="Settngs" icon={<Image src={"/images/setting-icon.png"} height={5} width={25} className=" object-contain" alt="icon" />} />
+            <div className="w-full md:max-lg:my-12" />
+            <ModeOfCommunication/>
+            <Referrall/>
+            <Rate/>
+            <ReachOut/>
+            <AboutUs/>
+        </DashboardLayout>
+        </>
+     );
+}
+ 
+export default Settings;
