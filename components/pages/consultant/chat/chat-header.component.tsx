@@ -22,7 +22,7 @@ const ChatHeader = () => {
 
     return ( 
         <>
-        <div className="w-full h-[70px] flex items-stretch justify-center  " >
+        <div className="w-full h-[70px] flex items-stretch justify-center" >
             <div className="w-3/5 flex items-center justify-start gap-5 " >
               <IoIosArrowBack className=" w-[23px] h-[23px] md:w-[34px] md:h-[34px]" onClick={()=>{  router.back()}} />
                 <AvatarWithBadge width={70} height={70} className="w-[45px] h-[45px] md:w-auto md:h-auto" />

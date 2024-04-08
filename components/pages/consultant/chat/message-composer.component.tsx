@@ -5,8 +5,8 @@ import { AiFillInstagram } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 const MessageComposer = () => {
   return (
-    <div className="fixed bottom-0 left-0 md:mx-auto lg:left-[28em] right-0 bg-white p-4">
-      <div className="max-w-[696px] flex items-center justify-between gap-2">
+    <div className="fixed bottom-0 left-0 w-[-webkit-fill-available] flex items-center justify-center lg:ml-[300px]  p-4 ">
+      <div className=" w-auto md:w-[689px] md:max-w-[696px] flex items-center justify-between gap-2">
         <div className="bg-slate-100 shadow-lg px-4 py-3 rounded-3xl flex items-center gap-4 flex-1">
           <SmileIcon size={23} />
           <input
@@ -25,3 +25,5 @@ const MessageComposer = () => {
 };
 
 export default MessageComposer;
+
+//fixed bottom-0 left-0 md:mx-auto lg:left-[28em] right-0 bg-white p-4

@@ -29,7 +29,7 @@ export default function LandingPage() {
           </h1>
         </div>
 
-        <div className="w-full mt-24 gap-10  flex items-center justify-center mt:justify-start">
+        <div className="w-full mt-24 gap-10  flex items-center justify-center md:items-start md:justify-start">
           <Button     onClick={() => router.push("/auth/sign-in")} className=" bg-primary_color w-44">Sign</Button>
           <Button
             onClick={() => router.push("/auth/sign-up")}

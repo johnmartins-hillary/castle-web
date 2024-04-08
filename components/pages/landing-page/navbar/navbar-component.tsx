@@ -18,7 +18,7 @@ const NavBar = () => {
       <div className="w-1/2 flex items-center">
         <img
           src={"/images/logo-black.png"}
-          className="h-[120px] w-auto "
+          className="h-[120px] w-auto lg:w-[120px] "
           alt="logo"
         />
       </div>
