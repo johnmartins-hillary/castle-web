@@ -18,6 +18,7 @@ const NavBar = () => {
       <div className="w-1/2 flex items-center">
         <Image
           width={120}
+          height={120}
           src={"/images/logo-black.png"}
           className="h-[120px] w-auto lg:w-[120px] "
           alt="logo"

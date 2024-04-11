@@ -1,3 +1,4 @@
+"use client"
 import Head from "next/head";
 import DashboardLayput from "./layout";
 import DashboardBanner from "@/components/pages/dashboard/dashboard-banner.component";
@@ -6,6 +7,7 @@ import History from "@/components/pages/dashboard/history.component";
 import Offline from "@/components/pages/dashboard/offline";
 
 const Dashboard = () => {
+  
     return ( 
         <>
         <Head>
