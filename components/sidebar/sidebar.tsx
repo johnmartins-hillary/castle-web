@@ -61,14 +61,21 @@ const logOutHandler =()=>{
 
         <div className="w-full mt-1 px-7 "  >
             <ul className="w-full p-0">
-                {sideBarLinks.map(({name,icon,path})=>(
-                    <div key={name} className="w-full flex items-center justify-start gap-2 mb-7" >
+                {/* {sideBarLinks.map(({name,icon,path})=>{
+                    <></>
+            })} */}
+            {sideBarLinks.map(({name,icon,path})=>{
+                const isActive = pathname === path;
+                console.log(isActive,pathname)
+                return(
+                    <div key={name} className={`w-full flex items-center justify-start gap-2 mb-7`} >
                     <Image src={icon} height={5} width={25} className=" object-contain" alt="icon" />
-                    <Link href={path} key={name} className={` ${pathname === path ? 'font-bold ' :" font-normal"} font-normal text-base cursor-pointer  p-0 mt-1`} > 
+                    <Link href={path} key={name} className={` text-black font-normal text-base cursor-pointer  p-0 mt-1`} > 
                         {name}
                     </Link>
                     </div>
-                ))}
+                )
+            })}
             </ul>
         </div>
         <div className="w-full mt-2 px-6 "  >

@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/pages/landing-page/navbar/navbar-component";
 // import NavBar from "../components/pages/landing-page/navbar.component"
-const poppins = Poppins({
+export const poppins = Poppins({
   weight: ['400', '500','600','700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body  style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553,backgroundRepeat:"no-repeat",backgroundPosition:"bottom"}} className={poppins.className}>
       <NavBar/>
         {children}
         </body>

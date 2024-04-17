@@ -1,12 +1,11 @@
 "use client";
-import { Modal } from '@milon27/react-modal';
-import '@milon27/react-modal/dist/style.css';
 import { useRouter } from 'next/navigation';
 import { CloseIcon } from '../icons/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button';
+import Modal from '../modal/modal.component';
 interface Props{
     showModal?:boolean | any,
     setShowModal?:any
@@ -63,37 +62,32 @@ const MainMobileMenu = ({showModal,setShowModal}:Props) => {
     return ( 
         <>
          <Modal
-      show={showModal}
-      className=" bg-white rm-bg-white shadow-md shadow-light_grey rounded-[18px] p-[3px]  flex flex-1 flex-col items-center justify-center "
-      bgStyleClassName="rm-bg-black-600 rm-bg-opacity-10"
-      
-      contentStyleClassName=' flex-flex_2 flex w-full flex-col justify-between bg-white p-0 '
-      onClose={() => {
-        setShowModal(false)
-        console.log("closing the modal");
-      }}
+      open={showModal}
     >
 
-        <CloseIcon color={'black'} className={'absolute z-10 right-3 top-[-10%]'} size={24}  onClick={()=>{setShowModal(false)}}/>
+<div className=" bg-white shadow-[#00000040] shadow-lg z-20 rounded-[18px] p-[13px] h-[445px] w-[392px] flex flex-col items-center justify-center">
+<CloseIcon color={'black'} className={'absolute z-10 right-[34px] top-[65px]'} size={24}  onClick={()=>{setShowModal(false)}}/>
      
 
-        <div className="w-full mt-1 px-2 "  >
-            <ul className="w-full p-0">
-                {routes.map(({name,icon,path})=>(
-                    <div key={name} className="w-full flex items-center justify-start gap-2 mb-4" >
-                    <Image src={icon} height={5} width={25} className=" object-contain" alt="icon" />
-                    <Link href={path} key={name} className={` ${pathname === path ? 'font-bold ' :" font-normal"} font-normal text-xs cursor-pointer  p-0 mt-1`} > 
-                        {name}
-                    </Link>
-                    </div>
-                ))}
-            </ul>
-        </div>
-        <div className="w-full mt-2 flex items-center justify-end p-3 "  >
-        <button onClick={logOutHandler} className="bg-primary_color rounded-xl py-3 text-xs text-white w-[107px] " >
-                Log Out
-        </button>
-        </div>
+     <div className="w-full mt-1 px-2 "  >
+         <ul className="w-full p-0">
+             {routes.map(({name,icon,path})=>(
+                 <div key={name} className="w-full flex items-center justify-start gap-2 mb-[13px]" >
+                 <Image src={icon} height={5} width={25} className=" object-contain" alt="icon" />
+                 <Link href={path} key={name} className={` ${pathname === path ? 'font-bold ' :" font-normal"} font-normal text-xs cursor-pointer  p-0 mt-1`} > 
+                     {name}
+                 </Link>
+                 </div>
+             ))}
+         </ul>
+     </div>
+     <div className="w-full mt-2 flex items-center justify-end px-3 "  >
+     <button onClick={logOutHandler} className="bg-primary_color rounded-xl py-3 text-xs text-white w-[107px] " >
+             Log Out
+     </button>
+     </div>
+</div>
+      
     </Modal>
         </>
      );

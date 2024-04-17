@@ -7,19 +7,24 @@ import {useRouter} from "next/navigation"
 import { useForm } from "react-hook-form";
 import {SignInSchema} from "../../../utilities/schemas/sign-in.schema"
 import { BASE_URL } from "@/constants";
+import { useState } from "react";
 const SignInForm = () => {
     const router = useRouter()
-
+    const [loading,setLoading] = useState(false)
     const onSubmit =async(values:any)=>{
-        console.log(values)
-        const data ={password:values?.password,email:values?.username_email}
-        const response = await fetch(`${BASE_URL}auth/login`,{method:"POST",body:JSON.stringify(data)})
-        if (response.status === 200) {
-            const responseData = await response.json();
-            console.log("sign in response",responseData)
-            localStorage.setItem("token",responseData?.authorization)
-        }
-        // router.push("/dashboard")
+        //     setLoading(true)
+        // const data ={password:values?.password,email:values?.username_email}
+        // const response = await fetch(`${BASE_URL}auth/login`,{method:"POST",body:JSON.stringify(data),headers:{
+        //     "Content-Type": "application/json",
+        //     Accept: "application/json"
+        //   }})
+        // if (response.status === 200) {
+        //     const responseData = await response.json();
+        //     console.log("sign in response",responseData)
+        //     localStorage.setItem("token",responseData?.authorization)
+        //     setLoading(false)
+        // }
+        router.push("/dashboard")
     }
     const {handleSubmit,control,register,formState:{errors,}} = useForm(
         {
@@ -72,8 +77,8 @@ const SignInForm = () => {
 
           
     <div className="w-full mt-10" >
-        <Button onClick={handleSubmit(onSubmit)}  className="bg-primary_color rounded-3xl py-7 text-white w-full " >
-      Login
+        <Button  disabled={loading}  onClick={handleSubmit(onSubmit)}  className="bg-primary_color rounded-3xl py-7 text-white w-full " >
+                {loading ? "Loggin In..." : "Login"}
         </Button>
       </div>
       <div className="mt-4 w-full pb-10" >

@@ -10,29 +10,26 @@ import {useRouter} from "next/navigation"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import registerUser from  "@/pages/api/registerUser"
 const SignUpForm = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const [googleLink,setGoogleLink] = useState("")
+    const [loading,setLoading] = useState(false)
     const getGoogleLinkHandler  = async()=>{
         const response = await fetch(`${BASE_URL}auth/google`)
         const data = await response.json();
         setGoogleLink(data?.url)
     }
-    useEffect(()=>{
-        getGoogleLinkHandler()
-    },[])
+    // useEffect(()=>{
+    //     getGoogleLinkHandler()
+    // },[])
 
     const onSubmit =async(values:any)=>{
-        console.log(values)
+        setLoading(true)
         const data ={email:values?.email,password:values?.password,password_confirmation:values?.password,username:values?.username}
-        const response = await fetch(`${BASE_URL}auth/register`,{method:"POST",body:JSON.stringify(data)})
-        if (response.status === 200) {
-            const responseData = await response.json();
-            console.log("sign in response",responseData)
-            localStorage.setItem("token",responseData?.authorization)
-        }
-        // >router.push("/auth/email-verification")
+        registerUser(data,setLoading)
+        // router.push("/auth/email-verification")
     }
     const {handleSubmit,control,register,formState:{errors,}} = useForm(
         {
@@ -48,7 +45,7 @@ const SignUpForm = () => {
     
     return ( 
         <>
-        <div className=" w-[85%] lg:w-1/3 flex flex-col items-center justify-center mt-10 md:max-lg:w-2/5  " >
+        <div className=" w-[85%] mt-[155px] lg:w-1/3 flex flex-col items-center justify-center  md:max-lg:w-2/5 lg:mt-[0px]  " >
         <div className="w-full" >
             <h3 className="font-bold text-left md:text-center text-lg" > Create account</h3>
         </div>
@@ -111,8 +108,8 @@ const SignUpForm = () => {
      
     </div> 
     <div className="w-full mt-10" >
-        <Button onClick={handleSubmit(onSubmit)} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
-        Sign Up
+        <Button disabled={loading} onClick={handleSubmit(onSubmit)} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
+            {loading ? "Signing Up..." : " Sign Up"}
         </Button>
       </div>
       <div className="mt-4 w-full pb-10" >

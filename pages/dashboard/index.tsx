@@ -18,6 +18,9 @@ const Dashboard = () => {
         <DashboardLayput>
         <div className="w-full" >
             <Hello/>
+            <div className={"w-full mb-[12px] md:hidden"} >
+                <p className="text-center font-light text-xs" >Hello</p>
+            </div>
            <DashboardBanner/>
         </div>
 

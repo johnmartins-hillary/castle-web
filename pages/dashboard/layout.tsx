@@ -23,7 +23,7 @@ export default function DashboardLayout({
       {/* <div className=" ml-0 w-full  min-h-screen  py-14 px-8 lg:ml-[300px] lg:p-14 md:max-lg:ml-0 md:max-lg:w-full md:max-lg:min-h-screen overflow-hidden   ">
         {children}
       </div> */}
-      <div className=" w-full m-0 min-h-screen p-[20px] lg:w-auto lg:ml-[300px] lg:p-14  relative   ">
+      <div className=" w-full m-0 min-h-screen p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative   ">
         {children}
       </div>
     </div>

@@ -1,3 +1,4 @@
+"use client"
 import Actions from "@/components/pages/consultant/actions/actions.component";
 import Bio from "@/components/pages/consultant/bio/bio.component";
 import ConsultDrawer from "@/components/pages/consultant/consult-drawer.component";
@@ -9,9 +10,10 @@ import { Drawer } from "@/components/ui/drawer";
 import { DrawerProvider } from "@/context/drawer-context";
 import DashboardLayout from "@/pages/dashboard/layout";
 import Head from "next/head";
+import { useState } from "react";
 
 const ConsultantProfile = () => {
-
+    const  [openConsultModal, setOpenConsultModal] = useState(false)
     return ( 
         <>
 
@@ -25,14 +27,14 @@ const ConsultantProfile = () => {
             </div>
             <div className="w-full xl:w-[70%]" >
             <ProfileSummary/>
-        <Actions/>
+        <Actions setOpenModal={setOpenConsultModal} />
         <Bio/>
         <PhotoGraphs/>
             <div className=" hidden md:block" >
             <ConsultDrawer/>  
             </div>
             <div className=" block md:hidden" >
-            <ConsultMobileMenu/>  
+            <ConsultMobileMenu showModal={openConsultModal} setShowModal={setOpenConsultModal} />  
             </div>
             </div>
         </DashboardLayout>

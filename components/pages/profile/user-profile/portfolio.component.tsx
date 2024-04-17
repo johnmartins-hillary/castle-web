@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -9,16 +10,19 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { CirclePlus } from "lucide-react";
+import PortfolioModal from "../modals/portfolio-modal.component";
+import { useState } from "react";
 const Portfolio = () => {
+  const [openModal,setOpenModal] = useState(false)
     return ( 
         <>
-        <div className="w-full">
-        <div className=" mb-1 flex items-center justify-start gap-2 " >
-        <p className=" font-light text-left text-base" >Portfolio</p>
-        <CirclePlus size={16} />
+        <div className="w-full mt-5 ">
+        <div className=" flex items-center justify-start gap-2 " >
+        <p className=" font-light text-left text-[15px]" >Portfolio</p>
+        <CirclePlus onClick={()=>{setOpenModal(true)}} size={16} />
         </div>
 
-        <div className="w-full flex items-center justify-between mt-5 gap-7 " >
+        {/* <div className="w-full flex items-center justify-between mt-5 gap-7 " >
         <div className="grid w-3/5 max-w-sm items-center gap-1.5">
         <label htmlFor="role" className="font-normal mt-3 mb-1 text-sm" >Role</label>
       <input type="text" id="role" placeholder="" className="w-full bg-light_grey rounded-2xl text-black p-2  outline-none " />
@@ -41,10 +45,10 @@ const Portfolio = () => {
       </SelectContent>
     </Select>
         </div>
-        </div>
+        </div> */}
 
 
-        <div className="w-full flex items-end justify-between mt-4 gap-4 " >
+        {/* <div className="w-full flex items-end justify-between mt-4 gap-4 " >
         
         <div className="grid w-3/5 max-w-sm items-center gap-1.5">
         <label htmlFor="role" className="font-normal mt-3 mb-1 text-sm" >Company/Organization</label>
@@ -56,9 +60,10 @@ const Portfolio = () => {
           Save
         </Button>
         </div>
-        </div>
+        </div> */}
 
         </div>
+        <PortfolioModal openModal={openModal} setOpenModal={setOpenModal}  />
         </>
      );
 }

@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,17 +11,22 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import Image from "next/image";
+import { useState } from "react";
+import PersonalDataModal from "../modals/personal-modal.component";
 
 const Personal = () => {
+    const [openModal,setOpenModal] = useState(false)
     return (
         <>
-            <div className="w-full mt-24">
-                <div className="mb-1">
-                    <p className="font-semibold text-left text-base">Personal</p>
-                    <p className="font-light text-left text-sm mt-2">This information is not available to the public</p>
+            <div className="w-full mt-12">
+                <div className="mb-1 flex items-center justify-start gap-2 ">
+                    <p className="font-semibold text-left text-[20px]">Personal</p>
+                    {/* <p className="font-light text-left text-sm mt-2">This information is not available to the public</p> */}
+                    <Image onClick={()=>{setOpenModal(true)}} width={20.58} height={20.58} src={'/images/edit-icon.png'} alt="edit-icon" className={' w-[20.58px] h-[20.58px]   md:w-[35px] md:h-[35px] '} />
                 </div>
 
-                <div className="w-full mt-5">
+                {/* <div className="w-full mt-5">
                     <div className="w-full flex items-center justify-between gap-5">
                         <div className="w-1/2">
                             <input className="w-full mb-5 border-b-2 border-b-light_grey p-2 outline-none" />
@@ -98,8 +104,9 @@ const Personal = () => {
                     </Button>
                     </div>
                     </div>
-                </div>
+                </div> */}
             </div>
+            <PersonalDataModal openModal={openModal} setOpenModal={setOpenModal} />
         </>
     );
 }

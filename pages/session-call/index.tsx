@@ -15,7 +15,7 @@ const SessionCall =()=>{
         <DashboardLayout>
             <MobileNavbar/>
             <div className="max-lg:px-14 max-lg:mb-12 max-sm:px-3" />
-            <div className="w-full flex flex-col items-center justify-center gap-8 " >
+            <div className="w-full flex flex-col items-center justify-center gap-8 lg:mt-10 " >
             <AvatarWithBadge/>
             <p className=" text-bold text-lg " >Val Okafor</p>
             </div>

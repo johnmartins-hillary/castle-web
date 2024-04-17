@@ -14,19 +14,19 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full flex items-stretch justify-between h-16 max-lg:px-14 max-lg:py-14 max-sm:px-3 ">
+    <div className="w-full pt-[100px] pb-[35px] md:pt-[13px]  flex md:px-[13px] items-stretch justify-between h-[140px] overflow-hidden">
       <div className="w-1/2 flex items-center">
         <Image
           width={120}
-          height={120}
+          height={194}
           src={"/images/logo-black.png"}
-          className="h-[120px] w-auto lg:w-[120px] "
+          className="h-[194px] w-[120px] lg:w-[194] "
           alt="logo"
         />
       </div>
 
       {/* Display UL menu on large screens */}
-      <div className="flex max-lg:hidden items-center  w-1/2 justify-center">
+      <div className="hidden lg:flex items-center  w-1/2 justify-center">
         <ul className="flex items-center justify-center gap-4">
           {routes.map(({ name }, index) =>
             <li
@@ -40,7 +40,7 @@ const NavBar = () => {
       </div>
 
       {/* Display menu icon on mobile and tablet screens */}
-      <div className="hidden max-lg:flex items-center justify-end w-1/2">
+      <div className="flex pr-[35px]  lg:hidden items-center justify-end w-1/2">
         <CiMenuBurger
           className="cursor-pointer w-[24px] h-[24px] "
           onClick={() => setIsMenuOpen(!isMenuOpen)}

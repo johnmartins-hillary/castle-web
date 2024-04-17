@@ -1,3 +1,4 @@
+"use client"
 import Hello from "@/components/pages/dashboard/hello.component";
 import DashboardLayout from "../dashboard/layout";
 import Head from "next/head";
@@ -7,8 +8,22 @@ import AmountSetter from "@/components/pages/fund-wallet/amount-setter.component
 import PayWithCard from "@/components/pages/fund-wallet/pay-with-card.component";
 import TransactionHistory from "@/components/pages/fund-wallet/transaction-history.component";
 import { LogoutIcon } from "@/components/icons/icons";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import FundWalletModal from "@/components/pages/fund-wallet/modals/fund-wallet-modal.component";
+import SaveCardModal from "@/components/pages/fund-wallet/modals/save-card-modal.component";
+import FundingCompleteModal from "@/components/pages/fund-wallet/modals/funding-complete-modal.component";
+import FundingMethodModal from "@/components/pages/fund-wallet/modals/funding-method-modal.component";
+import WithdrawalModal from "@/components/pages/fund-wallet/modals/withdrawal-modal.component";
+import WithdrawalCompleteModal from "@/components/pages/fund-wallet/modals/withdrawal-completed-modal.component";
 
 const FundWallet = () => {
+    const [openFundWallet,setOpenFundWallet] = useState(false)
+    const [opensaveCard,setOpenSaveCard] = useState(false)
+    const [openFundingComplete,setOpenFundingComplete] = useState(false)
+    const [openFundingMethod,setOpenFundingMethod] = useState(false)
+    const [openWithdrawal,setOpenWithdrawal] = useState(false)
+    const [openWithdrawalComplete,setOpenWithdrawalComplete] = useState(false)
     return (
         <>
         <Head>
@@ -18,26 +33,38 @@ const FundWallet = () => {
             <Hello/>
             <AmountView/>
 
-            <div className="w-full flex items-center justify-start gap-2 mt-7 " >
-                <Image src={'/images/wallet-icon.png'} alt="wallet" width={39.75} height={26.5}  />
-                <h1 className="font-bold text-base  md:max-lg:text-lg lg:text-2xl " >Fund Your Wallet</h1>
+            <div className="w-full mt-7 " >
+            <Button  onClick={(e)=>{
+                setOpenFundWallet(true)
+                }}  className="bg-primary_color w-[220px] text-[16px] rounded-xl py-3 mb-5 text-sm text-white flex justify-between items-center" >
+                   Fund Your Wallet
+                   <Image src={'/images/money-icon.png'} width={24} height={24} alt="money-icon" />
+                 </Button>
+            <Button       
+                variant="outline"  onClick={(e)=>{
+                    setOpenSaveCard(true)
+                }}  className="bg-white w-[220px] border-primary_color text-[16px] rounded-xl py-3 text-sm text-black flex justify-start gap-5 items-center" >
+                Pay with card
+                 </Button>
             </div>
-            <AmountSetter/>
+            {/* <AmountSetter/> */}
 
 
             <div className="w-full flex flex-col items-stretch justify-between mt-10 md:flex-row " >
                 <div className="w-full md:w-1/2" >
-            <PayWithCard/>
-                </div>
-                <div className="w-full  flex mt-5   items-center justify-start gap-2 md:w-1/2 md:mt-0 md:justify-center " >
-                    <p className="font-bold text-sm" >Other Funding methods</p>
-                    <LogoutIcon color={''} onClick={()=>{}}  size={26} className={"cursor-pointer"} />
+            <PayWithCard setOpenFundingMethod={setOpenFundingMethod} setOpenWithdrawal={setOpenWithdrawal} />
                 </div>
             </div>
 
 
             <TransactionHistory/>
         </DashboardLayout>
+        <FundWalletModal openModal={openFundWallet} setOpenModal={setOpenFundWallet} />
+        <SaveCardModal openModal={opensaveCard} setOpenModal={setOpenSaveCard} />
+        <FundingCompleteModal openModal={openFundingComplete} setOpenModal={setOpenFundingComplete} />
+        <FundingMethodModal openModal={openFundingMethod} setOpenModal={setOpenFundingMethod} />
+        <WithdrawalModal openModal={openWithdrawal} setOpenModal={setOpenWithdrawal} />
+        <WithdrawalCompleteModal openModal={openWithdrawalComplete} setOpenModal={setOpenWithdrawalComplete} />
         </>
       );
 }

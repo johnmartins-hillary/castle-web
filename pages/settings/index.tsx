@@ -14,7 +14,7 @@ const Settings = () => {
             <title>Settings</title>
         </Head>
         <DashboardLayout>
-            <MobileNavbar title="Settngs" icon={<Image src={"/images/setting-icon.png"} height={5} width={25} className=" object-contain" alt="icon" />} />
+            <MobileNavbar title="Settings" icon={<Image src={"/images/setting-icon.png"} height={5} width={25} className=" object-contain" alt="icon" />} />
             <div className="w-full md:max-lg:my-12" />
             <ModeOfCommunication/>
             <Referrall/>

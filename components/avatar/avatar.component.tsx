@@ -19,12 +19,16 @@ const AvatarWithBadge = ({ width, height, className }: Props) => {
       <div
         style={{
           position: "absolute",
-          top: "15%",
-          right: "0%",
+          top: "12%",
+          right: "-5%",
           transform: "translateY(-50%)"
         }}
       >
-        <RiVerifiedBadgeFill color="#3897F0" size={20} />
+        <RiVerifiedBadgeFill
+          color="#3897F0"
+          size={20}
+          className="  size-[13px] md:size-[20px]"
+        />
       </div>
     </div>
   );

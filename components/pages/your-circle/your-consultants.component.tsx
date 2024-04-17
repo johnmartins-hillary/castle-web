@@ -18,7 +18,7 @@ const YourConsultants = () => {
     return ( 
         <>
         
-        <div className="w-full flex items-center justify-start gap-2 flex-wrap  mt-14 md:justify-between md:gap-0 " >
+        <div className="w-full flex items-center justify-center gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 " >
             {usersData?.slice(0,20)?.map(({firstName,lastName,id})=>(
                 <Consultant firstName={firstName} lastName={lastName} key={id} />
             ))}

@@ -41,7 +41,7 @@ const VerificationSteps =()=>{
                 <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 3</p>
                 <p className="font-normal text-xs md:text-sm mt-5 " >Pay Verification fee of NGN 2, 000</p>
 
-                        <div className="w-full flex items-center justify-between mt-8 md:max-lg:justify-start md:max-lg:gap-8 " >
+                        <div className="w-full flex items-center justify-start gap-[43px] mt-8 md:max-lg:justify-start md:max-lg:gap-8 " >
                     <Button className="w-[142px] text-xs bg-primary_color rounded-[12px] p-3" >
                         Pay from Wallet
                     </Button>

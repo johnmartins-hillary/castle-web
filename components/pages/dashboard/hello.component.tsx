@@ -9,7 +9,7 @@ const Hello = () => {
     return ( 
         <>
         
-        <div className="w-full mb-7 flex items-center justify-start gap-4 "  >
+        <div className="w-full  flex items-center justify-start gap-4  pt-[50px] pb-[35px]  h-[140px] md:px-[24px] lg:pt-0  "  >
     <div  className=" w-14 h-14 rounded-full flex items-center justify-center bg-faint_grey  shadow-md shadow-faint_grey" >
             <Image src={'/images/user-icon.png'} width={34.84} height={17.42} alt="user-placeholder" />
         </div>

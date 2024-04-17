@@ -1,28 +1,29 @@
 'use client'
+import { LogoutIcon } from "@/components/icons/icons";
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { HiMiniInformationCircle } from "react-icons/hi2";
-const PayWithCard=()=>{
+const PayWithCard=({setOpenFundingMethod,setOpenWithdrawal}:any)=>{
     const router = useRouter()
     return(
         <>
           <form className="w-full" >
-                <div className="w-full mb-8 " >
+                {/* <div className="w-full mb-8 " >
                     <p className="font-bold text-base text-left m-0" >
                         Pay with new card
                     </p>
-                </div>
-                <div className="w-full" >
+                </div> */}
+                {/* <div className="w-full" >
                     <input className="w-full bg-light_grey rounded-2xl p-3" id="card-number" />
                     <label className="font-normal text-sm text-left relative left-2" htmlFor="card-number" >
                         Card number
                     </label>
-                </div>
+                </div> */}
 
 
-                <div className="w-full flex items-center justify-between mt-5 " >
+                {/* <div className="w-full flex items-center justify-between mt-5 " >
                     <div className="w-2/5" >
                         <input className="w-full bg-light_grey rounded-2xl p-3" id="expiry-date" />
                         <label className="font-normal text-sm text-left relative left-2" htmlFor="expiry-date" >
@@ -35,9 +36,9 @@ const PayWithCard=()=>{
                             CVV
                         </label>
                     </div>
-                </div>
+                </div> */}
 
-                <div className="w-full flex items-center justify-between mt-10 " >
+                {/* <div className="w-full flex items-center justify-between mt-10 " >
                 <div className="flex items-center space-x-2 ">
              <Checkbox id="terms" className=" bg-light_grey" />
                  <label
@@ -50,9 +51,12 @@ const PayWithCard=()=>{
                 <Button className=" w-[98px] p-1 rounded-md bg-black text-center text-white text-xs " >
                         Fund      
                  </Button>
+                </div> */}
+
+                <div className="w-full  flex mt-5   items-center justify-start gap-2 md:w-1/2 md:mt-0 md:justify-center " >
+                    <p onClick={()=>{setOpenFundingMethod(true)}} className="font-bold text-sm cursor-pointer" >Other Funding methods</p>
+                    <LogoutIcon  color={''} onClick={()=>{setOpenFundingMethod(true)}}  size={26} className={"cursor-pointer"} />
                 </div>
-
-
 
                 <div className="w-full mt-9 flex items-start justify-start gap-3 " >
                 <HiMiniInformationCircle size={20} />
@@ -61,8 +65,8 @@ const PayWithCard=()=>{
                 <div className="w-full mt-9 flex items-start justify-start gap-3 " >
                 <Button  onClick={(e)=>{
                     e.preventDefault();
-                    router.push(`/withdrawal`)
-                }}  className="bg-primary_color w-[334px] rounded-xl py-6 text-sm text-white flex justify-start gap-5 items-center" >
+                    setOpenWithdrawal(true)
+                }}  className="bg-primary_color w-[242px] md:w-[334px] rounded-xl py-6 text-sm text-white flex justify-start gap-5 items-center" >
                    <Image src={'/images/import-icon.png'} width={33} height={33} alt="upload" /> Place a Withdrawal
                  </Button>
                 </div>
