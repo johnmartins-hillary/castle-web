@@ -18,7 +18,7 @@ const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
       open={showModal}
     >
 <div className=" bg-white shadow-[#00000040] shadow-lg z-20 rounded-[18px] p-[13px] h-[564px] w-[392px] flex flex-col items-center justify-center py-[40px] ">
-        <CloseIcon  color={'black'} className={'absolute z-10 right-[34px] top-[21px]'} size={24}  onClick={()=>{setShowModal(false)}}/>
+        <CloseIcon  color={'black'} className={'absolute z-10 right-[34px] top-[65px]'} size={14}  onClick={()=>{setShowModal(false)}}/>
      
 
      <div className="w-full mb-5 ">

@@ -82,15 +82,40 @@ const ConsultDrawer = () => {
 export default ConsultDrawer;
 
 export const Counter = () => {
+  const [minute, setMinutes] = React.useState(0);
+  const minuteIncrement = React.useMemo(
+    () => () => {
+      if (minute < 60) {
+        setMinutes(minute + 1);
+      }
+    },
+    [minute]
+  );
+  const minuteDecrement = React.useMemo(
+    () => () => {
+      if (minute > 0) {
+        setMinutes(minute - 1);
+      }
+    },
+    [minute]
+  );
   return (
     <div className="my-9 w-full flex flex-col items-center justify-center ">
       <div className="w-1/2  flex items-center justify-evenly  mb-3 ">
-        <Button className="bg-primary_color  py-3 md:py-7  w-[37px] md:w-16 text-white hover:bg-primary_color ">
+        <Button
+          onClick={minuteDecrement}
+          className="bg-primary_color  py-3 md:py-7  w-[37px] md:w-16 text-white hover:bg-primary_color "
+        >
           -
         </Button>
 
-        <p className=" text-center font-bold text-base">30</p>
-        <Button className="bg-primary_color  py-3 md:py-7  text-white w-[37px] md:w-16 hover:bg-primary_color ">
+        <p className=" text-center font-bold text-base">
+          {minute}
+        </p>
+        <Button
+          onClick={minuteIncrement}
+          className="bg-primary_color  py-3 md:py-7  text-white w-[37px] md:w-16 hover:bg-primary_color "
+        >
           +
         </Button>
       </div>

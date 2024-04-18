@@ -7,6 +7,7 @@ export const poppins = Poppins({
   weight: ['400', '500','600','700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
+  variable:"--poppins",
   display: 'swap',
 });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body  style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553,backgroundRepeat:"no-repeat",backgroundPosition:"bottom"}} className={poppins.className}>
+      <body  style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553,backgroundRepeat:"no-repeat",backgroundPosition:"bottom"}} className={`${poppins.variable}`}>
       <NavBar/>
         {children}
         </body>
