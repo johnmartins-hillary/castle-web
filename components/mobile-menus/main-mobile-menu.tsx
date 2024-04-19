@@ -62,6 +62,9 @@ const MainMobileMenu = ({showModal,setShowModal}:Props) => {
     return ( 
         <>
          <Modal
+         onClose={()=>{
+            setShowModal(false)
+         }}
       open={showModal}
     >
 
@@ -74,7 +77,9 @@ const MainMobileMenu = ({showModal,setShowModal}:Props) => {
              {routes.map(({name,icon,path})=>(
                  <div key={name} className="w-full flex items-center justify-start gap-2 mb-[13px]" >
                  <Image src={icon} height={5} width={25} className=" object-contain" alt="icon" />
-                 <Link href={path} key={name} className={` ${pathname === path ? 'font-bold ' :" font-normal"} font-normal text-xs cursor-pointer  p-0 mt-1`} > 
+                 <Link onClick={()=>{
+                       setShowModal(false)
+                 }} href={path} key={name} className={` ${pathname === path ? 'font-bold ' :" font-normal"} font-normal text-xs cursor-pointer  p-0 mt-1`} > 
                      {name}
                  </Link>
                  </div>

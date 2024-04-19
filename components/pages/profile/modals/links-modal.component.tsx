@@ -7,7 +7,11 @@ import { Label } from "@/components/ui/label";
 const LinksModal = ({openModal,setOpenModal}:any) => {
     return (
         <>
-            <Modal open={openModal} >
+            <Modal 
+                     onClose={()=>{
+                        setOpenModal(false)
+                     }} 
+            open={openModal} >
                 <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] h-[416px]  md:w-[655px] lg:w-[758px] md:flex-col md:flex md:items-center md:justify-center md:px-[143px] lg:px-[195px] " >
 
                 <div className="w-full mt-[38px] " >

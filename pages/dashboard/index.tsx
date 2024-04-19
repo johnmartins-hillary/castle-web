@@ -7,7 +7,6 @@ import History from "@/components/pages/dashboard/history.component";
 import Offline from "@/components/pages/dashboard/offline";
 
 const Dashboard = () => {
-  
     return ( 
         <>
         <Head>
@@ -19,7 +18,7 @@ const Dashboard = () => {
         <div className="w-full" >
             <Hello/>
             <div className={"w-full mb-[12px] md:hidden"} >
-                <p className="text-center font-light text-xs" >Hello</p>
+                <p className="text-center font-light text-xs" >Home</p>
             </div>
            <DashboardBanner/>
         </div>

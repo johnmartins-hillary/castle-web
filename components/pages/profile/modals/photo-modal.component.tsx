@@ -18,8 +18,13 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
           }
         }
     return (
-        <>
-            <Modal open={openModal} >
+        <> 
+            <Modal
+            
+            onClose={()=>{
+                setOpenModal(false)
+             }} 
+            open={openModal} >
                 <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] h-[416px] flex flex-col items-center justify-center  md:flex-row md:items-center md:justify-between md:w-[655px] lg:w-[758px] lg:px-[95px] " >
              
                     <input     

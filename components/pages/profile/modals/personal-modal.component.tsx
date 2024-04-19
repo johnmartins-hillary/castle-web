@@ -9,7 +9,9 @@ import { useState } from "react";
 const PersonalDataModal = ({openModal,setOpenModal}:any) => {
     return (
         <>
-            <Modal open={openModal} >
+            <Modal          onClose={()=>{
+            setOpenModal(false)
+         }}  open={openModal} >
                 <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] h-[531px] md:w-[655px] md:px-[196px] lg:w-[758px] lg:px-[162px]  " >
 
                 <div className="w-full mt-[38px] " >

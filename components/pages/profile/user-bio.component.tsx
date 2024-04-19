@@ -2,9 +2,11 @@
 import Image from "next/image";
 import BioModal from "./modals/bio-modal.component";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const UserBio = () => {
     const [openModal,setOpenModal] = useState(false)
+    const bio = useSelector(({userprofile}:any)=>userprofile.bio)
     return ( 
         <>
         <div className="w-full mt-14" >
@@ -15,7 +17,7 @@ const UserBio = () => {
         </div>
 
         <div className="w-full" >
-            <p  className="font-light text-[12px] cursor-pointer text-left ">Business Leader (Techpreneur)|| Clean Energy Enthusiast || SDGs Advocate || Social impact Strategist</p>
+            <p  className="font-light text-[12px] cursor-pointer text-left ">{bio}</p>
         </div>
         </div>
         <BioModal openModal={openModal} setOpenModal={setOpenModal}  />

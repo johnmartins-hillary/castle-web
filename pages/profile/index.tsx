@@ -3,6 +3,7 @@ import DashboardLayout from "../dashboard/layout";
 import UserBio from "@/components/pages/profile/user-bio.component";
 import UserProfile from "@/components/pages/profile/user-profile";
 import Head from "next/head";
+import { useGetUserDetailsQuery } from "@/services/user";
 
 const Profile = () => {
     return ( 

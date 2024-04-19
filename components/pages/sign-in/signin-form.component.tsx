@@ -6,35 +6,40 @@ import { Input } from "@/components/ui/input";
 import {useRouter} from "next/navigation"
 import { useForm } from "react-hook-form";
 import {SignInSchema} from "../../../utilities/schemas/sign-in.schema"
-import { BASE_URL } from "@/constants";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useSignInUserMutation } from "@/services/auth";
+import { useToast } from "@/components/ui/use-toast";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "@/redux/slices/user";
 const SignInForm = () => {
     const router = useRouter()
-    const [loading,setLoading] = useState(false)
+    const {toast} = useToast()
+    const dispatch = useDispatch()
+    const [signInUser,{isLoading,isSuccess,error,isError,data:signInData}] = useSignInUserMutation()
     const onSubmit =async(values:any)=>{
-        //     setLoading(true)
-        // const data ={password:values?.password,email:values?.username_email}
-        // const response = await fetch(`${BASE_URL}auth/login`,{method:"POST",body:JSON.stringify(data),headers:{
-        //     "Content-Type": "application/json",
-        //     Accept: "application/json"
-        //   }})
-        // if (response.status === 200) {
-        //     const responseData = await response.json();
-        //     console.log("sign in response",responseData)
-        //     localStorage.setItem("token",responseData?.authorization)
-        //     setLoading(false)
-        // }
-        router.push("/dashboard")
+        const data ={email:values?.email,password:values?.password}
+        signInUser(data)
     }
     const {handleSubmit,control,register,formState:{errors,}} = useForm(
         {
             defaultValues:{
-                username_email:"",
+                email:"",
                 password:""
             },
             resolver:yupResolver(SignInSchema)
         }
     )
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(setUser({user:signInData?.user}))
+            dispatch(setToken({authorization:signInData?.authorization}))
+            toast({
+                title:"Sign In Successful",
+            })
+            router.push("/dashboard")
+        }
+      }, [isSuccess, dispatch]);
     return ( 
         <>
         <div className=" lg:w-1/3 flex flex-col items-center justify-center mt-10  md:max-lg:w-2/5 w-[85%]  " >
@@ -49,15 +54,15 @@ const SignInForm = () => {
 
             <div className="w-full mt-9" >
                 <div className="w-full mb-5" >
-                <label className="font-normal text-sm text-left relative left-3"  htmlFor="username">
-                    Username / Email
+                <label className="font-normal text-sm text-left relative left-3"  htmlFor="email">
+                   Email
                 </label>
                 </div>
 
                 <div className="w-full" >
-                    <Input {...register("username_email")} id="username"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
+                    <Input {...register("email")} id="email"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
                 </div>
-                <p className=" mt-5  text-red-600 text-sm text-left left-[12px] " >{errors.username_email?.message}</p>
+                <p className=" mt-5  text-red-600 text-sm text-left left-[12px] " >{errors.email?.message}</p>
             </div>
             <div className="w-full mt-3" >
                 <div className="w-full mb-5" >
@@ -77,8 +82,8 @@ const SignInForm = () => {
 
           
     <div className="w-full mt-10" >
-        <Button  disabled={loading}  onClick={handleSubmit(onSubmit)}  className="bg-primary_color rounded-3xl py-7 text-white w-full " >
-                {loading ? "Loggin In..." : "Login"}
+        <Button  disabled={isLoading}  onClick={handleSubmit(onSubmit)}  className="bg-primary_color rounded-3xl py-7 text-white w-full " >
+                {isLoading ? "Loggin In..." : "Login"}
         </Button>
       </div>
       <div className="mt-4 w-full pb-10" >

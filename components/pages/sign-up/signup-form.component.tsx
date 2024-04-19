@@ -11,9 +11,14 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerUser from  "@/pages/api/registerUser"
+import { useSignUpMutation } from "@/services/auth";
+import { setToken, setUser } from "@/redux/slices/user";
+import { useDispatch } from "react-redux";
+import { useToast } from "@/components/ui/use-toast";
 const SignUpForm = () => {
     const router = useRouter()
-    const dispatch = useAppDispatch()
+    const dispatch = useDispatch()
+    const {toast} = useToast()
     const [googleLink,setGoogleLink] = useState("")
     const [loading,setLoading] = useState(false)
     const getGoogleLinkHandler  = async()=>{
@@ -21,15 +26,12 @@ const SignUpForm = () => {
         const data = await response.json();
         setGoogleLink(data?.url)
     }
-    // useEffect(()=>{
-    //     getGoogleLinkHandler()
-    // },[])
+    const [signUp,{isLoading,isSuccess,error,isError,data:signUpData}] = useSignUpMutation()
 
     const onSubmit =async(values:any)=>{
-        setLoading(true)
         const data ={email:values?.email,password:values?.password,password_confirmation:values?.password,username:values?.username}
-        registerUser(data,setLoading)
-        // router.push("/auth/email-verification")
+        signUp(data)
+     
     }
     const {handleSubmit,control,register,formState:{errors,}} = useForm(
         {
@@ -43,6 +45,20 @@ const SignUpForm = () => {
         }
     )
     
+
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(setUser({user:signUpData?.user}))
+            dispatch(setToken({authorization:signUpData?.authorization}))
+            toast({
+                title:"Sign Up Successful",
+            })
+            router.push("/dashboard")
+        }
+      }, [isSuccess, dispatch]);
+      
+    console.log("Sign Up data",signUpData)
     return ( 
         <>
         <div className=" w-[85%] mt-[155px] lg:w-1/3 flex flex-col items-center justify-center  md:max-lg:w-2/5 lg:mt-[0px]  " >
@@ -108,8 +124,8 @@ const SignUpForm = () => {
      
     </div> 
     <div className="w-full mt-10" >
-        <Button disabled={loading} onClick={handleSubmit(onSubmit)} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
-            {loading ? "Signing Up..." : " Sign Up"}
+        <Button disabled={isLoading} onClick={handleSubmit(onSubmit)} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
+            {isLoading ? "Signing Up..." : " Sign Up"}
         </Button>
       </div>
       <div className="mt-4 w-full pb-10" >

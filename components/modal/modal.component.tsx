@@ -16,7 +16,7 @@ const Modal = ({ children, onClose, open }: any) => {
 
   return (
     <div
-      onClick={onClose}
+      onClick={handleOverlayClick}
       style={{ backgroundColor: "#FFFFFFE5" }}
       className={`${open
         ? "fixed"

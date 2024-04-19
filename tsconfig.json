@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/drawer-context/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "context/drawer-context/index.js", "components/pages/profile/modals/profile-pic-modal.component.jsx"],
   "exclude": ["node_modules"]
 }
