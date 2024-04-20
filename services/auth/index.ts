@@ -3,12 +3,21 @@ import { UserDataProps } from "@/lib/types";
 import { IGenericResponse, SignInProps, SignUpProps } from "@/redux/types"
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { userApi } from "../user";
+import { clearUser } from "@/redux/slices/user";
 
 
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: fetchBaseQuery({
         baseUrl: `${BASE_URL}auth/`,
+        prepareHeaders: (headers, { getState }) => {
+            const token = localStorage.getItem("authorization") || null
+            console.log("Prepring heders", token)
+            if (token) {
+                headers.set("Authorization", `Bearer ${JSON.parse(token)}`)
+            }
+            return headers;
+        }
     }),
     endpoints: (builder) => ({
         signUp: builder.mutation<void, SignUpProps>({
@@ -18,20 +27,18 @@ export const authApi = createApi({
                 body: payload,
                 mode: "cors",
                 headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json'
                 }
             }),
-            // transformResponse: (result: { data: { user: UserDataProps } }) => {
-            //     result.data.user
-            // },
-            // async onQueryStarted(args, { dispatch, queryFulfilled }) {
-            //     try {
-            //         const { data } = await queryFulfilled;
-            //         dispatch(setUser(data))
-            //     } catch (error) {
-            //         console.log("Sign Up Error",error)
-            //     }
-            // }
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    await dispatch(userApi.endpoints.getUserDetails.initiate(null))
+                } catch (error) {
+                    console.log("Sign Up User error", error)
+                }
+            }
         }),
         signInUser: builder.mutation<{ access_token: string, status: string }, SignInProps>({
             query: (payload) => ({
@@ -40,7 +47,8 @@ export const authApi = createApi({
                 body: payload,
                 mode: "cors",
                 headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json'
                 }
             }),
             async onQueryStarted(args, { dispatch, queryFulfilled }) {
@@ -51,10 +59,69 @@ export const authApi = createApi({
                     console.log("Login User error", error)
                 }
             }
+        }),
+        googleAuth: builder.query<void, void>({
+            query: () => ({
+                url: "google",
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json'
+                }
+            }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    await dispatch(userApi.endpoints.getUserDetails.initiate(null))
+                } catch (error) {
+                    console.log("Google Auth User error", error)
+                }
+            }
+        }),
+        googleAuthCallBack: builder.query<void, { location: string }>({
+            query: ({ location }) => ({
+                url: `google/callback${location}`,
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json'
+                }
+            }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    await dispatch(userApi.endpoints.getUserDetails.initiate(null))
+                } catch (error) {
+                    console.log("Google Callback User error", error)
+                }
+            }
+        }),
+        logOutUser: builder.mutation<void, void>({
+            query: () => ({
+                url: "logout",
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    'Accept': 'application/json'
+                }
+            }),
+            async onQueryStarted(args, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    await dispatch(clearUser())
+                    localStorage.clear()
+                } catch (error) {
+                    console.log("Google Callback User error", error)
+                }
+            }
+
         })
-    })
+    }),
 })
 
 
-export const { useSignUpMutation, useSignInUserMutation } = authApi
+export const { useSignUpMutation, useSignInUserMutation, useGoogleAuthQuery, useGoogleAuthCallBackQuery, useLazyGoogleAuthCallBackQuery, useLogOutUserMutation } = authApi
 

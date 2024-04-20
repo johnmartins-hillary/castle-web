@@ -43,8 +43,8 @@ const UserName = () => {
 
         </div>
         <div className="w-[60%] flex items-center justify-start mx-auto gap-[13px] mt-1 md:w-[80%]" >
-            <p onClick={()=>{setPictureModal(true)}} className="font-light text-xs cursor-pointer " >Add a Nickname</p>
-            <p onClick={()=>{setPictureModal(true)}} className="font-light text-xs cursor-pointer">Category</p>
+            <p onClick={()=>{setNameModal(true)}} className="font-light text-xs cursor-pointer " >Add a Nickname</p>
+            <p onClick={()=>{setNameModal(true)}} className="font-light text-xs cursor-pointer">Category</p>
         </div>
      
        </div>

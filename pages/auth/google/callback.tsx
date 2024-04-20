@@ -1,20 +1,11 @@
-import { useEffect } from "react";
-import AuthLayout from "../layout";
-import { BASE_URL } from "@/constants";
+import AuthLayout from "../layout";;
+import GoogleCallback from "@/components/pages/google/callback";
 
 const CallBack = () => {
-    const googleCallbackHandler =async()=>{
-        const response = await fetch(`${BASE_URL}auth/google/callback/${location.search}`)
-        const data = await response.json();
-        console.log(data)
-    }
-    useEffect(()=>{
-        googleCallbackHandler()
-    },[])
     return ( 
         <>
         <AuthLayout>
-            <h1>Call Back</h1>
+           <GoogleCallback/>
         </AuthLayout>
         </>
      );

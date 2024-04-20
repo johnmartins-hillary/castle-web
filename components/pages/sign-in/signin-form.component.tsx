@@ -6,8 +6,8 @@ import { Input } from "@/components/ui/input";
 import {useRouter} from "next/navigation"
 import { useForm } from "react-hook-form";
 import {SignInSchema} from "../../../utilities/schemas/sign-in.schema"
-import { useEffect } from "react";
-import { useSignInUserMutation } from "@/services/auth";
+import { useEffect, useState } from "react";
+import { useGoogleAuthQuery, useSignInUserMutation } from "@/services/auth";
 import { useToast } from "@/components/ui/use-toast";
 import { useDispatch } from "react-redux";
 import { setToken, setUser } from "@/redux/slices/user";
@@ -15,12 +15,14 @@ const SignInForm = () => {
     const router = useRouter()
     const {toast} = useToast()
     const dispatch = useDispatch()
-    const [signInUser,{isLoading,isSuccess,error,isError,data:signInData}] = useSignInUserMutation()
+    const [googleLink,setGoogleLink] = useState("")
+    const {data,isSuccess:googleAuthSuccess}:any = useGoogleAuthQuery()
+    const [signInUser,{isLoading,isSuccess,error,isError,data:signInData}]:any = useSignInUserMutation()
     const onSubmit =async(values:any)=>{
         const data ={email:values?.email,password:values?.password}
         signInUser(data)
     }
-    const {handleSubmit,control,register,formState:{errors,}} = useForm(
+    const {handleSubmit,register,formState:{errors,}} = useForm(
         {
             defaultValues:{
                 email:"",
@@ -40,6 +42,12 @@ const SignInForm = () => {
             router.push("/dashboard")
         }
       }, [isSuccess, dispatch]);
+
+      useEffect(()=>{
+        if (googleAuthSuccess) {
+            setGoogleLink(data?.url)
+        }
+       },[googleAuthSuccess])
     return ( 
         <>
         <div className=" lg:w-1/3 flex flex-col items-center justify-center mt-10  md:max-lg:w-2/5 w-[85%]  " >
@@ -47,7 +55,7 @@ const SignInForm = () => {
             <h3 className="font-bold text-center text-lg" >Sign in</h3>
         </div>
         <div className="w-full mt-10 flex items-center justify-center "  >
-        <Button  className=" w-full md:w-96 bg-light_grey rounded-2xl text-black hover:bg-slate-200 hover:text-black cursor-pointer  py-7 md:max-lg:w-full" >
+        <Button  onClick={()=>{router.replace(googleLink)}} className=" w-full md:w-96 bg-light_grey rounded-2xl text-black hover:bg-slate-200 hover:text-black cursor-pointer  py-7 md:max-lg:w-full" >
             <GoogleIcon  color={''} onClick={()=>{}} size={50} className="mr-2 h-4 w-4" />Sign in with Google
          </Button>
         </div>

@@ -11,22 +11,18 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import registerUser from  "@/pages/api/registerUser"
-import { useSignUpMutation } from "@/services/auth";
+import { useGoogleAuthQuery, useSignUpMutation } from "@/services/auth";
 import { setToken, setUser } from "@/redux/slices/user";
 import { useDispatch } from "react-redux";
 import { useToast } from "@/components/ui/use-toast";
+import Image from "next/image";
 const SignUpForm = () => {
     const router = useRouter()
     const dispatch = useDispatch()
     const {toast} = useToast()
     const [googleLink,setGoogleLink] = useState("")
-    const [loading,setLoading] = useState(false)
-    const getGoogleLinkHandler  = async()=>{
-        const response = await fetch(`${BASE_URL}auth/google`)
-        const data = await response.json();
-        setGoogleLink(data?.url)
-    }
-    const [signUp,{isLoading,isSuccess,error,isError,data:signUpData}] = useSignUpMutation()
+    const {data,isSuccess:googleAuthSuccess}:any = useGoogleAuthQuery()
+    const [signUp,{isLoading,isSuccess,error,isError,data:signUpData}]:any = useSignUpMutation()
 
     const onSubmit =async(values:any)=>{
         const data ={email:values?.email,password:values?.password,password_confirmation:values?.password,username:values?.username}
@@ -44,7 +40,13 @@ const SignUpForm = () => {
             
         }
     )
+
     
+   useEffect(()=>{
+    if (googleAuthSuccess) {
+        setGoogleLink(data?.url)
+    }
+   },[googleAuthSuccess])
 
 
     useEffect(() => {
@@ -58,7 +60,6 @@ const SignUpForm = () => {
         }
       }, [isSuccess, dispatch]);
       
-    console.log("Sign Up data",signUpData)
     return ( 
         <>
         <div className=" w-[85%] mt-[155px] lg:w-1/3 flex flex-col items-center justify-center  md:max-lg:w-2/5 lg:mt-[0px]  " >
@@ -125,7 +126,7 @@ const SignUpForm = () => {
     </div> 
     <div className="w-full mt-10" >
         <Button disabled={isLoading} onClick={handleSubmit(onSubmit)} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
-            {isLoading ? "Signing Up..." : " Sign Up"}
+            {isLoading ? <Image src={'/images/loader.gif'} alt="loader" width={50} height={50}  /> : " Sign Up"}
         </Button>
       </div>
       <div className="mt-4 w-full pb-10" >
