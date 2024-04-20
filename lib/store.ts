@@ -6,19 +6,22 @@ import { usersApi } from "@/services/search/get-users"
 import { userApi } from "@/services/user"
 import { configureStore } from "@reduxjs/toolkit"
 import usersSlice from "@/redux/slices/users/index"
-
+import { walletApi } from "@/services/wallet"
+import walletSlice from "@/redux/slices/wallet/index"
 export const makeStore = () => {
     return configureStore({
         reducer: {
             [authApi.reducerPath]: authApi.reducer,
             [userApi.reducerPath]: userApi.reducer,
             [usersApi.reducerPath]: usersApi.reducer,
+            [walletApi.reducerPath]: walletApi.reducer,
             userState: userReducer,
             userprofile: userProfileSlice,
             singleUser: singleUser,
-            users: usersSlice
+            users: usersSlice,
+            wallet: walletSlice
         },
-        middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware, userApi.middleware, usersApi.middleware)
+        middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware, userApi.middleware, usersApi.middleware, walletApi.middleware)
     })
 }
 

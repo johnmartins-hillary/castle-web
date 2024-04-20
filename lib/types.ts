@@ -32,3 +32,14 @@ export interface SingleUserProps {
     user?: any,
     id?: number
 }
+
+
+export interface VerifyProfileProp {
+    photo_id_front?: any,
+    photo_id_back?: any
+}
+
+
+export interface FundWalletProps {
+    amount: any | null
+}

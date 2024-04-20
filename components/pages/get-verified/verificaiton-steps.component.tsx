@@ -1,10 +1,23 @@
 "use client"
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { useVerifyProfileMutation } from "@/services/user";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const VerificationSteps =()=>{
+    const [verifyProfile,{data,isLoading,isSuccess}] = useVerifyProfileMutation()
+    const [photo_id_front,setPhototFront] = useState("")
+    const [photo_id_back,setPhototBack] = useState("");
     const router = useRouter()
+    const handleSubmit=()=>{
+        const formData = new FormData();
+        formData.append("photo_id_front",photo_id_front)
+        formData.append("photo_id_back",photo_id_back)
+        verifyProfile(formData)
+    }
     return(
         <>
         <div className="w-full mt-9">
@@ -30,8 +43,10 @@ const VerificationSteps =()=>{
                         <p className="font-normal text-xs md:text-sm" >Upload a valid ID card</p>
                         <p className="font-normal text-[10px] md:text-xs mt-3 " >Your data is safe with us.</p>
                         </div>
+                   
                     </div>
                 </div>
+                <Indicator setPhototBack={setPhototBack} setPhototFront={setPhototFront} photo_id_back={photo_id_back} photo_id_front={photo_id_front} />
                 </div>
             </div>
             
@@ -56,8 +71,8 @@ const VerificationSteps =()=>{
                 </div>
                 </div>
                 <div className=" w-full flex items-center justify-center md:block md:w-2/5 mt-14 md:mt-0 md:max-lg:w-full md:max-lg:mt-8 " >
-                   <Button onClick={()=>router.push("/get-verified/verification-submitted")}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
-                     Submit Application
+                   <Button disabled={isLoading}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
+                        {isLoading ? "Submitting..." : "Submit Application"}
                     </Button>
                      
            
@@ -73,3 +88,39 @@ const VerificationSteps =()=>{
 }
 
 export default VerificationSteps;
+
+
+
+const Indicator = ({photo_id_front,photo_id_back,setPhototFront,setPhototBack}:any)=>{
+
+    const ptfCheck = photo_id_front ? true : false
+    const ptbCheck = photo_id_back ? true : false;
+    const handlePhoto=(e:any,t:string)=>{
+        const [file] = e.target.files;
+        console.log("target file", e.target.files[0])
+        if (file) {
+            if (t === "ptf") {
+                setPhototFront(e.target.files[0])
+            }
+            else{
+                setPhototBack( e.target.files[0])
+            }
+        }
+    }
+    return(
+        <>
+        <div className="w-full flex items-center justify-between mt-[25px] " >
+            <div className="w-1/2 flex items-center justify-start gap-[12px]" >
+                <input onChange={(e)=>{handlePhoto(e,"ptf")}}  type="file" className="hidden" id="photo-front"/>
+                <Checkbox checked={ptfCheck} />
+                <Label htmlFor="photo-front" className="text-xs md:text-sm" >Photo Id Front</Label>
+            </div>
+            <div className="w-1/2 flex items-center justify-start gap-[12px]" >
+                <input onChange={(e)=>{handlePhoto(e,"ptb")}} type="file" className="hidden" id="photo-back" />
+                <Checkbox checked={ptbCheck} />
+                <Label htmlFor="photo-back" className="text-xs md:text-sm" >Photo Id Back</Label>
+            </div>
+        </div>
+        </>
+    )
+}

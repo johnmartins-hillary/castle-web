@@ -1,5 +1,4 @@
 import { BASE_URL } from "@/constants";
-import { RootState } from "@/lib/store";
 import { UserDataProps, UserProfileProps } from "@/lib/types";
 import { setUser } from "@/redux/slices/user";
 import { setBioHandler, setCountryHandler, setNameHandler, setProfilePicHandler, setRateHandler, setStateHandler, setUserNameHandler } from "@/redux/slices/user/user-profile.slice";
@@ -68,8 +67,6 @@ export const userApi = createApi({
 
             uploadProfilePic: builder.mutation({
                 query: (payload) => {
-                    const formData = new FormData()
-                    // formData.append("profile_image", payload);
                     console.log("image payload", payload)
                     return {
                         url: "profile/update_avater",
@@ -99,9 +96,24 @@ export const userApi = createApi({
                 },
                 invalidatesTags: ['user-data']
             }),
+            verifyProfile: builder.mutation({
+                query: (body) => {
+                    return {
+                        url: "user/verification/request",
+                        method: "POST",
+                        body,
+                        mode: 'cors',
+                        headers: {
+                            'Content-type': 'application/json; charset=UTF-8',
+                            'Accept': "application/json",
+
+                        }
+                    }
+                }
+            })
         }
     )
 })
 
 
-export const { useGetUserDetailsQuery, useUpdateUserProfileMutation, useUploadProfilePicMutation,useUploadSocialLinkMutation } = userApi
+export const { useGetUserDetailsQuery, useUpdateUserProfileMutation, useUploadProfilePicMutation, useUploadSocialLinkMutation, useVerifyProfileMutation } = userApi

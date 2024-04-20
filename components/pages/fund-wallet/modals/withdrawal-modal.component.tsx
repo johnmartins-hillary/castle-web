@@ -10,7 +10,9 @@ import WithdrawalForm from "../../withdrawal/withdrawal-form.component";
 const WithdrawalModal = ({openModal,setOpenModal}:modalProps) => {
     return (
         <>
-            <Modal open={openModal} >
+            <Modal  onClose={()=>{
+                setOpenModal(false)
+            }}  open={openModal} >
                 <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] py-[60px] h-[auto] md:w-[535px] md:h-[654px] md:flex md:flex-col md:items-center md:justify-center  " >
 
            <WithdrawalForm/>
