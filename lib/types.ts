@@ -14,12 +14,17 @@ export interface UserDataProps {
 export interface UserProfileProps {
     name?: string | null,
     username?: string | null,
+    email?: string | null,
     dateofbirth?: string | null,
     country?: string | null,
     state?: string | null,
     bio?: string | null,
     rate?: string | null,
-    profile_image?: any | null
+    profile_image?: any | null,
+    portfolios?: any | null,
+    socialmedia?: any | null,
+    photographs?: any | null,
+    links?: any | null,
 }
 
 
@@ -42,4 +47,12 @@ export interface VerifyProfileProp {
 
 export interface FundWalletProps {
     amount: any | null
+}
+
+export interface PortfolioProp {
+    role?: string | null,
+    company?: string | null,
+    start_date?: string | null,
+    end_date?: string | null,
+    works_there?: any | null,
 }

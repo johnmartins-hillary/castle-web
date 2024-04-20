@@ -42,7 +42,7 @@ const UsernameModal = ({openModal,setOpenModal}:any) => {
                     <Input value={name} onChange={(e)=>{
                       dispatch(setNameHandler(e.target.value))
                     }}  className="w-[246px] bg-light_grey rounded-[21px] p-[12px] " />
-                    <Label className=" text-[14px] text-left font-light  top-[14px] relative left-[15px] " >User Name</Label>
+                    <Label className=" text-[14px] text-left font-light  top-[14px] relative left-[15px] " >Fullname</Label>
                    </div>
                    <div className="w-full lg:w-[45%]" >
                    <Select>
@@ -68,7 +68,7 @@ const UsernameModal = ({openModal,setOpenModal}:any) => {
                     <Input value={username} onChange={(e)=>{
                       dispatch(setUserNameHandler(e.target.value))
                     }}   className="w-[246px] bg-light_grey rounded-[21px] p-[12px] " />
-                    <Label className=" text-[14px] text-left font-light  top-[14px] relative left-[15px] " >Nick Name</Label>
+                    <Label className=" text-[14px] text-left font-light  top-[14px] relative left-[15px] " >Username</Label>
                    </div>
 
                    <div className="w-full flex items-center justify-end mt-[50px] lg:mt-[0px] lg:justify-start " >

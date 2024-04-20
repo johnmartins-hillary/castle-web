@@ -1,27 +1,33 @@
 'use client'
 import { useEffect, useState } from "react";
 import Consultant from "../explore/consultant.component";
-import { usersData } from "../dashboard/user-data";
+import { useGetCircleQuery } from "@/services/circle";
+import { useToast } from "@/components/ui/use-toast";
 
 
 const YourConsultants = () => {
-    const [users, setUsers] = useState([]);
-    // const getData = async () => {
-    //   await fetch("https://dummyjson.com/users")
-    //     .then(res => res.json())
-    //     .then(json => setUsers(json?.users));
-    // };
-
-    // useEffect(()=>{
-    //     getData()
-    // },[])
+    const {toast} = useToast()
+    const {data:circleData,isError,isLoading,error}:any = useGetCircleQuery()
+    
+    useEffect(()=>{
+        if (isError) {
+          toast({
+            title:'Oops!',
+            description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
+          })
+        }
+      },[isError,isLoading,error])
     return ( 
         <>
         
-        <div className="w-full flex items-center justify-center gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 " >
-            {usersData?.slice(0,20)?.map(({firstName,lastName,id})=>(
-                <Consultant firstName={firstName} lastName={lastName} key={id} />
-            ))}
+        <div className={`w-full flex items-center ${circleData?.circles.length > 1 ? 'justify-center' :'justify-start'} gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 `} >
+            {isLoading ? <p>Loading...</p> :  circleData?.circles?.length >0 ? <>
+                {circleData?.circles?.map(({name,username,id,verification_status}:any)=>(
+     <Consultant name={name} username={username} verification_status={verification_status} id={id} key={id} />
+                ))}
+            </> : <div className="w-full flex items-center justify-center mt-3 " >
+                <p className=" font-medium text-lg md:text-xl" >You do not have anyone in your circle</p>
+            </div> }
         </div>
         </>
      );

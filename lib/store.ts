@@ -9,6 +9,8 @@ import usersSlice from "@/redux/slices/users/index"
 import { walletApi } from "@/services/wallet"
 import walletSlice from "@/redux/slices/wallet/index"
 import { notificationApi } from "@/services/notifications"
+import { circleApi } from "@/services/circle"
+import { countriesApi } from "@/services/countries"
 export const makeStore = () => {
     return configureStore({
         reducer: {
@@ -17,13 +19,15 @@ export const makeStore = () => {
             [usersApi.reducerPath]: usersApi.reducer,
             [walletApi.reducerPath]: walletApi.reducer,
             [notificationApi.reducerPath]: notificationApi.reducer,
+            [circleApi.reducerPath]: circleApi.reducer,
+            [countriesApi.reducerPath]: countriesApi.reducer,
             userState: userReducer,
             userprofile: userProfileSlice,
             singleUser: singleUser,
             users: usersSlice,
             wallet: walletSlice
         },
-        middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware, userApi.middleware, usersApi.middleware, walletApi.middleware, notificationApi.middleware)
+        middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware, userApi.middleware, usersApi.middleware, walletApi.middleware, notificationApi.middleware, circleApi.middleware, countriesApi.middleware)
     })
 }
 

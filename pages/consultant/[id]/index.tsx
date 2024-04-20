@@ -18,10 +18,6 @@ const ConsultantProfile = () => {
     const  [openConsultModal, setOpenConsultModal] = useState(false)
     return ( 
         <>
-
-        <Head>
-            <title>Val Okafor - Carsle</title>
-        </Head>
         <DrawerProvider>
         <DashboardLayout>
             <div className="block md:hidden"  >

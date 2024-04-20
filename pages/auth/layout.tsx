@@ -24,7 +24,7 @@ export default function AuthLayout({
 <StoreProvider>
 <div className={poppins.className}>
       <NavBar/>
-    <main  style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553}} className="w-full flex items-center justify-center  bg-no-repeat  bg-bottom h-screen  " >
+    <main   className="w-full flex items-center justify-center  bg-no-repeat  bg-bottom h-screen  " >
     {children}
     </main>
     <Toaster/>
@@ -33,3 +33,6 @@ export default function AuthLayout({
    
   );
 }
+
+
+// style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553}}

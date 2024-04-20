@@ -23,10 +23,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body  style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553,backgroundRepeat:"no-repeat",backgroundPosition:"bottom"}} className={`${poppins.variable}`}>
+      <body  className={`${poppins.variable}`}>
       <NavBar/>
         {children}
         </body>
     </html>
   );
 }
+
+
+// style={{backgroundImage:`url(/images/background-pattern.png)`,backgroundPositionX:"right",backgroundSize:553,backgroundRepeat:"no-repeat",backgroundPosition:"bottom"}} 

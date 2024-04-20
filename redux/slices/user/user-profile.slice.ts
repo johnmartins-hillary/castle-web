@@ -5,11 +5,15 @@ const initialState: UserProfileProps = {
     name: "",
     username: "",
     dateofbirth: "",
+    email: "",
     country: "",
     state: "",
     bio: "",
     rate: "",
-    profile_image: ""
+    profile_image: "",
+    portfolios: [],
+    photographs: [],
+    links: [],
 }
 
 
@@ -22,6 +26,9 @@ const UserProfileSlice = createSlice({
         },
         setUserNameHandler: (state, { payload }) => {
             state.username = payload
+        },
+        setEmailHandler: (state, { payload }) => {
+            state.email = payload
         },
         setDobHandler: (state, { payload }) => {
             state.dateofbirth = payload
@@ -45,7 +52,7 @@ const UserProfileSlice = createSlice({
 })
 
 
-export const { setNameHandler, setBioHandler, setCountryHandler, setDobHandler, setRateHandler, setStateHandler, setUserNameHandler,setProfilePicHandler } = UserProfileSlice.actions
+export const { setNameHandler, setBioHandler, setCountryHandler, setDobHandler, setRateHandler, setStateHandler, setUserNameHandler, setProfilePicHandler, setEmailHandler } = UserProfileSlice.actions
 
 
 export default UserProfileSlice.reducer

@@ -1,12 +1,12 @@
 import { BASE_URL } from "@/constants";
-import { UserDataProps, UserProfileProps } from "@/lib/types";
+import { PortfolioProp, UserDataProps, UserProfileProps } from "@/lib/types";
 import { setUser } from "@/redux/slices/user";
-import { setBioHandler, setCountryHandler, setNameHandler, setProfilePicHandler, setRateHandler, setStateHandler, setUserNameHandler } from "@/redux/slices/user/user-profile.slice";
+import { setBioHandler, setCountryHandler, setEmailHandler, setNameHandler, setProfilePicHandler, setRateHandler, setStateHandler, setUserNameHandler } from "@/redux/slices/user/user-profile.slice";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
     reducerPath: "userApi",
-    tagTypes: ['user-data', 'profile-update'],
+    tagTypes: ['user-data', 'profile-update', 'portfolios'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${BASE_URL}`,
         mode: "cors",
@@ -45,6 +45,7 @@ export const userApi = createApi({
                         dispatch(setStateHandler(data?.user?.state))
                         dispatch(setRateHandler(data?.user?.rate))
                         dispatch(setProfilePicHandler(data?.user?.profile_image))
+                        dispatch(setEmailHandler(data?.user?.email))
                     } catch (error) {
                         console.log("get user data error", error)
                     }
@@ -113,10 +114,35 @@ export const userApi = createApi({
                         }
                     }
                 }
-            })
+            }),
+            getUsersPortfolios: builder.query<void, void>({
+                query: () => ({
+                    url: "profile/portfolio",
+                    mode: "cors",
+                    method: "GET",
+                    headers: {
+                        'Content-type': 'multipart/form-data',
+                        'Accept': "application/json"
+                    },
+                }),
+                providesTags: ['portfolios']
+            }),
+            createUsersPortfolios: builder.mutation<void, PortfolioProp>({
+                query: (payload) => ({
+                    url: "profile/portfolio",
+                    mode: "cors",
+                    body: payload,
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'multipart/form-data',
+                        'Accept': "application/json"
+                    },
+                }),
+                invalidatesTags: ['portfolios']
+            }),
         }
     )
 })
 
 
-export const { useGetUserDetailsQuery, useUpdateUserProfileMutation, useUploadProfilePicMutation, useUploadSocialLinkMutation, useVerifyProfileMutation } = userApi
+export const { useGetUserDetailsQuery, useUpdateUserProfileMutation, useUploadProfilePicMutation, useUploadSocialLinkMutation, useVerifyProfileMutation, useGetUsersPortfoliosQuery, useCreateUsersPortfoliosMutation } = userApi

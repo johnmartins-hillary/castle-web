@@ -12,8 +12,11 @@ import {
 import { CirclePlus } from "lucide-react";
 import PortfolioModal from "../modals/portfolio-modal.component";
 import { useState } from "react";
+import { useGetUsersPortfoliosQuery } from "@/services/user";
 const Portfolio = () => {
   const [openModal,setOpenModal] = useState(false)
+  const {data:portfolios} = useGetUsersPortfoliosQuery()
+  console.log("portfolios",portfolios)
     return ( 
         <>
         <div className="w-full mt-5 ">

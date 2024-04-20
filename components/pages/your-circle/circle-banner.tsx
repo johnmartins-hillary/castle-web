@@ -18,7 +18,7 @@ const YourCirlceBanner = () => {
         <Image src={'/images/exclamation-icon.png'} alt="exclamation-icon" width={45} height={45} className=" hidden md:block md:w-[45px] md:h-[45px]" />   <p className="text-start font-light text-primary_color text-xs md:text-center md:text-base" >Click on verified user’s profile to add them to your circle</p>
         </div> */}
 
-        <div className="w-full flex flex-col p-[23px] items-center justify-between md:p-[35px] rounded-[24px] bg-primary_color mt-1 md:flex-row lg:p-[43px] " >
+        <div className="w-full flex flex-col p-[23px] items-center justify-between md:p-[35px] rounded-[24px] bg-primary_color mt-1 md:flex-row lg:p-[43px] 2xl:w-[65%] 2xl:mx-auto" >
             <div className=" w-full flex-1 md:flex-[1] flex items-center justify-start gap-2" >
             <Image src={'/images/user-add-icon.png'} alt="user-icon"  width={45} height={45} className=" w-[30px] h-[30px] md:w-[45px] md:h-[45px]" />
                 <p className=" text-white text-sm   md:text-base font-light" >Your Circle</p>

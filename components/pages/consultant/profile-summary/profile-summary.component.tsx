@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { useGetSingleUserQuery } from "@/services/search/get-users";
 import { useAppSelector } from "@/lib/hooks";
 import { useSelector } from "react-redux";
+import Head from "next/head";
 
 const ProfileSummary = () => {
     const params = useParams<any>();
@@ -15,6 +16,9 @@ const ProfileSummary = () => {
     const isVerified = singleUser?.verification_status === "0" ? false : true
     return ( 
         <>
+          <Head>
+            <title>{singleUser?.name ? singleUser?.name : singleUser?.username} - Carsle</title>
+        </Head>
         <div className="w-full flex items-center mt-4 md:mt-0 justify-between gap-5 md:gap-0" >
             <div className="w-1/5 flex items-center justify-start  "  >
                 {/* <ProfileImage/> */}

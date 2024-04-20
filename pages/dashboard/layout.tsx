@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "../../app/globals.css";
 import SideBar from "@/components/sidebar/sidebar";
 import StoreProvider from "@/app/StoreProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
   weight: ['400', '500','600','700'],
@@ -28,6 +29,7 @@ export default function DashboardLayout({
       <div className=" w-full m-0 min-h-screen p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative   ">
         {children}
       </div>
+      <Toaster/>
     </div>
 </StoreProvider>
   );
