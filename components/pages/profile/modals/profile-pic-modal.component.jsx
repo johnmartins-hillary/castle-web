@@ -36,6 +36,8 @@ const ProfilePicModal = ({ openModal, setOpenModal }) => {
     }
 
     const handleSubmit = () => {
+        const formData = new FormData();
+        formData.append("profile_image", profile_image)
         uploadProfilePic(profile_image)
     }
     console.log(profile_image)
@@ -53,9 +55,10 @@ const ProfilePicModal = ({ openModal, setOpenModal }) => {
                         }}
                         type="file" id="profile-picture-upload" className="hidden" />
 
-                    {image && <Image src={image} width={161} height={161} alt="profile-image" className=" w-[161px] h-[161px] rounded-full mx-auto mb-4  object-cover " />}
+                    {image && <label htmlFor="profile-picture-upload" >
+                        <Image src={image} width={161} height={161} alt="profile-image" className=" w-[161px] h-[161px] rounded-full mx-auto mb-4  object-cover " /></label>}
 
-                    <div className={` w-full flex ${image ? "h-auto" : "h-full"} flex-col items-center justify-center ${image ? "md:flex md:flex-row-reverse md:items-baseline md:justify-start md:gap-[22px]" : "md:block"} `} >
+                    <div className={` w-full flex ${image ? "h-auto" : "h-full"} flex-col items-center justify-center ${image ? "md:flex md:flex-row-reverse md:items-baseline md:justify-start md:gap-[22px]" : "md:flex md:flex-col"} `} >
                         {image ? <button onClick={handleSubmit} disabled={isLoading} className="w-[135px] bg-black rounded-[22px] py-[13px] text-center text-white text-[17px] mx-auto cursor-pointer  lg:m-[inherit] " >
                             {isLoading ? "Saving..." : "Save"}
                         </button> :

@@ -65,18 +65,21 @@ export const userApi = createApi({
                 invalidatesTags: ['user-data']
             }),
 
-            uploadProfilePic: builder.mutation({
-                query: (payload) => {
-                    console.log("image payload", payload)
+            uploadProfilePic: builder.mutation<any, any>({
+                query: (profile_image) => {
+                    const formData = new FormData();
+                    formData.append("profile_image", profile_image);
+                    console.log(formData, profile_image)
                     return {
                         url: "profile/update_avater",
                         method: "POST",
                         mode: "cors",
-                        body: payload,
+                        body: formData,
+                        // formData:true,
                         headers: {
-                            'Content-type': 'application/json; charset=UTF-8',
-                            'Accept': "application/json"
-                        }
+                            'Content-type': 'multipart/form-data',
+                            // 'Accept': "application/json"
+                        },
                     }
                 },
                 invalidatesTags: ['user-data']
