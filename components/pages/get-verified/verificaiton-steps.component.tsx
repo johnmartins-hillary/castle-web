@@ -2,22 +2,51 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
 import { useVerifyProfileMutation } from "@/services/user";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const VerificationSteps =()=>{
-    const [verifyProfile,{data,isLoading,isSuccess}] = useVerifyProfileMutation()
+    const [verifyProfile,{data,isLoading,isSuccess,isError,error}]:any = useVerifyProfileMutation()
     const [photo_id_front,setPhototFront] = useState("")
     const [photo_id_back,setPhototBack] = useState("");
     const router = useRouter()
+    const {toast} = useToast()
     const handleSubmit=()=>{
-        const formData = new FormData();
-        formData.append("photo_id_front",photo_id_front)
-        formData.append("photo_id_back",photo_id_back)
-        verifyProfile(formData)
+        verifyProfile({photo_id_back,photo_id_front})
     }
+
+
+    useEffect(()=>{
+
+        if (isSuccess) {
+            if (data?.message?.includes("Insufficient")) {
+                toast({
+                    title:"Oops",
+                    description:`${data?.message}`,
+                })
+            }
+
+            else{
+                toast({
+                    title:`${data?.message}`,
+                })
+                router.push("/get-verified/verification-submitted")
+            }
+        }
+        else if(isError){
+            toast({
+                title:"Oops",
+
+             description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
+})
+        }
+
+    },[isLoading,isSuccess,isError,error])
+
     return(
         <>
         <div className="w-full mt-9">

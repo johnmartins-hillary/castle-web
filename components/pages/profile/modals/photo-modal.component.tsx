@@ -35,7 +35,7 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
             else if (isError) {
                 setOpenModal(false)
                 toast({
-                    title:"Photo Upload sFailed ",
+                    title:"Photo Upload Failed ",
 
                  description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
     })

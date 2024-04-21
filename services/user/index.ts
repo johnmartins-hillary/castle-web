@@ -118,17 +118,21 @@ export const userApi = createApi({
             },
             invalidatesTags: ["user-data"]
         }),
-        verifyProfile: builder.mutation({
-            query: (body) => {
+        verifyProfile: builder.mutation<void, { photo_id_front: any, photo_id_back: any }>({
+            query: ({ photo_id_back, photo_id_front }: any) => {
+                const formData = new FormData()
+                formData.append("photo_id_front", photo_id_front)
+                formData.append("Content-Type", photo_id_front.type)
+                formData.append("photo_id_back", photo_id_back)
                 return {
                     url: "user/verification/request",
                     method: "POST",
-                    body,
                     mode: "cors",
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        Accept: "application/json"
-                    }
+                    body: formData,
+                    // headers:{
+                    //     "Content-type": "multipatha",
+                    // Accept: "application/json" 
+                    // }
                 };
             }
         }),
