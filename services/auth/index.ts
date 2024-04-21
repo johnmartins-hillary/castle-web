@@ -12,7 +12,6 @@ export const authApi = createApi({
         baseUrl: `${BASE_URL}auth/`,
         prepareHeaders: (headers, { getState }) => {
             const token = localStorage.getItem("authorization") || null
-            console.log("Prepring heders", token)
             if (token) {
                 headers.set("Authorization", `Bearer ${JSON.parse(token)}`)
             }

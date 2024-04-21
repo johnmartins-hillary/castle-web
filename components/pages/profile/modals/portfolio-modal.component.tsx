@@ -4,9 +4,8 @@ import Modal from "@/components/modal/modal.component"
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
-import { useCreateUsersPortfoliosMutation, useGetUsersPortfoliosQuery } from "@/services/user";
+import { useCreateUsersPortfoliosMutation } from "@/services/user";
 import { useEffect, useState } from "react";
 
 const PortfolioModal = ({openModal,setOpenModal}:any) => {
@@ -21,9 +20,11 @@ const PortfolioModal = ({openModal,setOpenModal}:any) => {
     const handleSubmit=()=>{
       const data = {role:role,company:company,start_date:startDate,end_date:endDate,works_there:works}
       createUsersPortfolios(data)
+  
     }
     useEffect(()=>{
       if (isSuccess) {
+        setOpenModal(false)
         toast({
           title:`Upload Successful`
         })
@@ -34,6 +35,13 @@ const PortfolioModal = ({openModal,setOpenModal}:any) => {
           title:'Oops!',
           description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
         })
+      }
+      return()=>{
+        setRole("")
+        setCompany("")
+        setStartDate("")
+        setEndDate("")
+        setWorks(false)
       }
     },[isSuccess,isLoading,isError,error])
     return (
@@ -79,6 +87,8 @@ const PortfolioModal = ({openModal,setOpenModal}:any) => {
                     <Label className=" text-[14px] text-left font-light  relative left-[15px] mb-2 " >End Date</Label>
                     <input
                     type={"date"}
+                    placeholder=""
+                  
                     value={endDate} onChange={(e)=>{
                       setEndDate(e.target.value)}}
                     className="w-full bg-light_grey rounded-[11px] p-[12px] " />

@@ -1,3 +1,4 @@
+import moment from "moment"
 export const getParameterByName = (name?: string, url?: string) => {
     if (!url) url = window.location.href;
     name = name?.replace(/[\[\]]/g, "\\$&");
@@ -6,4 +7,10 @@ export const getParameterByName = (name?: string, url?: string) => {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+export const dateFormatter = (date: any) => {
+    const result = moment(date).format('MMMM DD YYYY')
+    return result
 }

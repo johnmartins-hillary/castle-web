@@ -1,3 +1,4 @@
+"use client"
 import BioData from "./bio-data.component";
 import BioHead from "./bio-head.component";
 

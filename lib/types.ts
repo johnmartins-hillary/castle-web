@@ -19,11 +19,10 @@ export interface UserProfileProps {
     country?: string | null,
     state?: string | null,
     bio?: string | null,
+    gender?: string | null,
     rate?: string | null,
     profile_image?: any | null,
-    portfolios?: any | null,
-    socialmedia?: any | null,
-    photographs?: any | null,
+    list_of_categories?: any | null,
     links?: any | null,
 }
 
@@ -55,4 +54,8 @@ export interface PortfolioProp {
     start_date?: string | null,
     end_date?: string | null,
     works_there?: any | null,
+}
+export interface SocialLinkProp {
+    platform?: string | null,
+    url?: string | null,
 }

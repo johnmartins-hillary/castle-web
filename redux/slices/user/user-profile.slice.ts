@@ -11,9 +11,7 @@ const initialState: UserProfileProps = {
     bio: "",
     rate: "",
     profile_image: "",
-    portfolios: [],
-    photographs: [],
-    links: [],
+    gender: ""
 }
 
 
@@ -48,11 +46,17 @@ const UserProfileSlice = createSlice({
         setProfilePicHandler: (state, { payload }) => {
             state.profile_image = payload
         },
+        setGenderHandler: (state, { payload }) => {
+            state.gender = payload
+        },
+        // setCategories: (state, { payload }) => {
+        //     state.list_of_categories = payload
+        // },
     }
 })
 
 
-export const { setNameHandler, setBioHandler, setCountryHandler, setDobHandler, setRateHandler, setStateHandler, setUserNameHandler, setProfilePicHandler, setEmailHandler } = UserProfileSlice.actions
+export const { setNameHandler, setBioHandler, setCountryHandler, setDobHandler, setRateHandler, setStateHandler, setUserNameHandler, setProfilePicHandler, setEmailHandler, setGenderHandler } = UserProfileSlice.actions
 
 
 export default UserProfileSlice.reducer

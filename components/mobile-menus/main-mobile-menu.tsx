@@ -6,6 +6,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button';
 import Modal from '../modal/modal.component';
+import { useToast } from '../ui/use-toast';
+import { useEffect } from 'react';
+import { useLogOutUserMutation } from '@/services/auth';
 interface Props{
     showModal?:boolean | any,
     setShowModal?:any
@@ -13,9 +16,28 @@ interface Props{
 const MainMobileMenu = ({showModal,setShowModal}:Props) => {
     const router = useRouter();
     const pathname = usePathname()
-    const logOutHandler =()=>{
+    const [logOutUser,{isLoading,isSuccess,data,isError}] = useLogOutUserMutation()
+const {toast} = useToast()
+const logOutHandler =()=>{
+    logOutUser()
+}
+useEffect(()=>{
+    if (isSuccess) {
         router.push("/auth/sign-in")
+        toast({
+            title:"Logout Successful"
+        })
     }
+},[isSuccess])
+
+useEffect(()=>{
+    if (isError) {
+        router.push("/auth/sign-in")
+        toast({
+            title:"Logout Successful"
+        })
+    }
+},[isError])
 
     const routes=[
         {
@@ -88,7 +110,7 @@ const MainMobileMenu = ({showModal,setShowModal}:Props) => {
      </div>
      <div className="w-full mt-2 flex items-center justify-end px-3 "  >
      <button onClick={logOutHandler} className="bg-primary_color rounded-xl py-3 text-xs text-white w-[107px] " >
-             Log Out
+     {isLoading ? <Image src={'/images/loader.gif'} width={45} height={45} alt="loader" /> : "Log Out"}
      </button>
      </div>
 </div>

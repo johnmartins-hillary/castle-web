@@ -29,8 +29,8 @@ const ListOfConsultants = () => {
             {!isError && !isLoading && usersList?.users?.data?.length >0 && 
             
             <>
-            {keyword === "" ? usersList?.users?.data?.map(({name,username,id,verification_status}:any)=>(
-                <Consultant name={name} username={username} verification_status={verification_status} id={id} key={id} />
+            {keyword === "" ? usersList?.users?.data?.map(({name,username,id,verification_status,profile_image}:any)=>(
+                <Consultant profile_image={profile_image} name={name} username={username} verification_status={verification_status} id={id} key={id} />
             ))   :  searchedUsers?.users?.length >0  && searchedUsers?.users?.map(({name,username,id,verification_status}:any)=>(
                 <Consultant name={name} username={username} verification_status={verification_status} id={id} key={id} />
             )) }
