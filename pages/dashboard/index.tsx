@@ -3,8 +3,7 @@ import Head from "next/head";
 import DashboardLayput from "./layout";
 import DashboardBanner from "@/components/pages/dashboard/dashboard-banner.component";
 import Hello from "@/components/pages/dashboard/hello.component";
-import History from "@/components/pages/dashboard/history.component";
-import Offline from "@/components/pages/dashboard/offline";
+import BookingHistory from "@/components/pages/dashboard/bookings/booking-history.component";
 
 const Dashboard = () => {
     return ( 
@@ -22,11 +21,7 @@ const Dashboard = () => {
             </div>
            <DashboardBanner/>
         </div>
-{/* 
-        <div className="w-full mt-14 flex flex-col items-start justify-between gap-9 md:max-lg:flex-col lg:flex-row " >
-            <History/>
-            <Offline/>
-        </div> */}
+        <BookingHistory/>
         </DashboardLayput>
         </>
      );
