@@ -22,21 +22,21 @@ export default function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [userToken, setUserToken] = useState<any>()
-  const router = useRouter()
+  // const [userToken, setUserToken] = useState<any>()
+  // const router = useRouter()
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const token = localStorage.getItem("authorization") || null
-      setUserToken(token)
-    }
-  },[])
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     const token = localStorage.getItem("authorization") || null
+  //     setUserToken(token)
+  //   }
+  // },[])
 
-  useEffect(() => {
-      if(userToken) {
-        router.replace("/dashboard")
-      }
-  },[userToken])
+  // useEffect(() => {
+  //     if(userToken) {
+  //       router.replace("/dashboard")
+  //     }
+  // },[userToken])
 
   return (
 
