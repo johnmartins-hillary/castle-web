@@ -16,7 +16,7 @@ const NotificationView = () => {
                     <>
                     
                     {notifications?.map(({title,id,notice,status,created_at}:any)=>(
-                        <NotificationItem title={title} id={id} notice={notice} status={status} created_at={created_at} />
+                        <NotificationItem key={title} title={title} id={id} notice={notice} status={status} created_at={created_at} />
                     ))}
                     </>
                     
