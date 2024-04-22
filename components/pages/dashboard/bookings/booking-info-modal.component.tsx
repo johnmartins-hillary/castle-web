@@ -35,7 +35,7 @@ function getStatusColorClass(status: string | undefined) {
       <Modal open={showModal} onClose={()=>{
         setShowModal(false)
       }} >
-        <div className="bg-white rounded-[24px] flex items-center justify-center33 shadow-[#00000040] shadow-lg w-[375px] p-[23px] h-[416px] md:w-[655px] lg:w-[758px] lg:px-[162px] ">
+        <div className="bg-white rounded-[24px] flex flex-col items-center justify-center33 shadow-[#00000040] shadow-lg w-[375px] p-[23px] h-[416px] md:w-[655px] lg:w-[758px] lg:px-[162px] ">
           <div  className="w-full mt-[12px] " >
             <h4 className="text-center font-bold text-[20px]" >{title}</h4>
           </div>
