@@ -22,11 +22,11 @@ const Dashboard = () => {
             </div>
            <DashboardBanner/>
         </div>
-
+{/* 
         <div className="w-full mt-14 flex flex-col items-start justify-between gap-9 md:max-lg:flex-col lg:flex-row " >
             <History/>
             <Offline/>
-        </div>
+        </div> */}
         </DashboardLayput>
         </>
      );
