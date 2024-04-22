@@ -46,7 +46,7 @@ export const circleApi = createApi({
                 query: ({ user_id }) => ({
                     url: "remove",
                     mode: "cors",
-                    method: "POST",
+                    method: "DELETE",
                     body: { user_id: user_id },
                     headers: {
                         'Content-type': 'application/json; charset=UTF-8',

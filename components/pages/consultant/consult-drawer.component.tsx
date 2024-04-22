@@ -62,11 +62,12 @@ const ConsultDrawer = () => {
 
  
     React.useEffect(()=>{
+      setOpenDrawer(false)
       if (consultIsSuccess) {
         toast({
-          title:`${data?.message}`
+          title:`${data?.status ? "Appointment is booked" : data?.message}`
         })
-        setOpenDrawer(false)
+ 
       }
       else if (consultIsError) {
         setOpenDrawer(false)
@@ -79,8 +80,11 @@ const ConsultDrawer = () => {
       }
     },[consultIsSuccess,consultIsError,error,isLoading,booking])
 
-    const handleSubmit =()=>{
-      bookConsultant({agentId:params?.id,timeInMin:minute,mode:consultantData?.modes})
+    const handleSubmitCall =()=>{
+      bookConsultant({agentId:params?.id,timeInMin:minute,mode:consultantData?.modes?.call})
+    }
+    const handleSubmitChat =()=>{
+      bookConsultant({agentId:params?.id,timeInMin:minute,mode:consultantData?.modes?.text})
     }
 
   return (
@@ -110,10 +114,10 @@ const ConsultDrawer = () => {
         <Counter minute={minute} setMinutes={setMinutes} />
         <div className="w-full mb-5 ">
           <p className=" text-center font-bold text-sm md:text-lg">
-            Bill: NGN{bill  ? bill : 0}
+            Bill: NGN{bill  ? bill?.toFixed(2) : 0}
           </p>
         </div>
-        <ChatOption handleSubmit={handleSubmit} />
+       { bill >0 && <ChatOption handleSubmitCall={handleSubmitCall} handleSubmitChat={handleSubmitChat}  />}
       </Drawer>
     </div>
   );
@@ -148,9 +152,12 @@ export const Counter = ({minute,setMinutes}:any) => {
           -
         </Button>
 
-        <p className=" text-center font-bold text-base">
+        {/* <p className=" text-center font-bold text-base">
           {minute}
-        </p>
+        </p> */}
+        <input type="number" className="w-[50px] text-center outline-none border-none" value={minute} onChange={(e:any)=>{
+            setMinutes(e.target.value);
+        }} />
         <Button
           onClick={minuteIncrement}
           className="bg-primary_color  py-3 md:py-7  text-white w-[37px] md:w-16 hover:bg-primary_color "
@@ -165,7 +172,7 @@ export const Counter = ({minute,setMinutes}:any) => {
   );
 };
 
-export const ChatOption = ({handleSubmit}:any) => {
+export const ChatOption = ({handleSubmitCall,handleSubmitChat,bill}:any) => {
 
 
   return (
@@ -175,7 +182,7 @@ export const ChatOption = ({handleSubmit}:any) => {
           className={` bg-primary_color rounded-md items-center justify-center py-4  flex cursor-pointer w-[48px] md:w-full m-auto mb-3 `}
         >
           <Image
-          onClick={handleSubmit}
+          onClick={handleSubmitCall}
             width={20.26}
             height={20.26}
             src={"/images/hang-up.png"}
@@ -193,7 +200,7 @@ export const ChatOption = ({handleSubmit}:any) => {
           className={` bg-primary_color rounded-md items-center justify-center py-4  flex cursor-pointer w-[48px] md:w-full m-auto mb-3  `}
         >
           <Image
-          onClick={handleSubmit}
+          onClick={handleSubmitChat}
             width={20.26}
             height={20.26}
             src={"/images/chat-conversation.png"}

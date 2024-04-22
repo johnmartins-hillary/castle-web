@@ -41,7 +41,16 @@ const SignInForm = () => {
             })
             router.push("/dashboard")
         }
-      }, [isSuccess, dispatch]);
+        else if (isError ) {
+            toast({
+              title: "Oops!",
+      
+              description: `${
+                error?.data?.message ? error?.data?.message : "Something went wrong"
+              }`
+            })
+        }
+      }, [isSuccess, dispatch,isError,error]);
 
       useEffect(()=>{
         if (googleAuthSuccess) {
@@ -68,7 +77,7 @@ const SignInForm = () => {
                 </div>
 
                 <div className="w-full" >
-                    <Input {...register("email")} id="email"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
+                    <Input type="email"  {...register("email")} id="email"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
                 </div>
                 <p className=" mt-5  text-red-600 text-sm text-left left-[12px] " >{errors.email?.message}</p>
             </div>
@@ -80,7 +89,7 @@ const SignInForm = () => {
                 </div>
 
                 <div className="w-full" >
-                    <Input {...register("password")} id="password"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
+                    <Input type="password"  {...register("password")} id="password"  className="w-full bg-light_grey rounded-2xl text-black py-6  outline-none " />
                 </div>
                 <p className=" mt-5  text-red-600 text-sm text-left left-[12px] " >{errors.password?.message}</p>
                 <div className="mt-2 w-full" >

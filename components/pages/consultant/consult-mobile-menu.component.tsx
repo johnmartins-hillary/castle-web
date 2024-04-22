@@ -5,6 +5,8 @@ import Modal from '@/components/modal/modal.component';
 import { useEffect, useState } from 'react';
 import { useGetSingleUserQuery } from '@/services/search/get-users';
 import { useParams } from 'next/navigation';
+import { useToast } from '@/components/ui/use-toast';
+import { useBookConsultantMutation } from '@/services/booking';
 interface Props{
     showModal?:boolean | any,
     setShowModal?:any
@@ -12,8 +14,38 @@ interface Props{
 const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
   const params = useParams<any>();
   const  {isLoading,isError,isSuccess,data:consultantData}:any = useGetSingleUserQuery({id:params?.id})
+  const [bookConsultant,{data,isSuccess:consultIsSuccess,isError:consultIsError,error,isLoading:booking}]:any = useBookConsultantMutation()
   const [bill,setBill] = useState(0)
   const [minute, setMinutes] = useState(0);
+  const {toast} = useToast()
+
+  useEffect(()=>{
+    setShowModal(false)
+    if (consultIsSuccess) {
+      toast({
+        title:`${data?.status ? "Appointment is booked" : data?.message}`
+      })
+
+    }
+    else if (consultIsError) {
+      setShowModal(false)
+      toast({
+        title:"Oops!",
+        description: `${
+          error?.data?.message ? error?.data?.message : "Something went wrong"
+        }`
+      })
+    }
+  },[consultIsSuccess,consultIsError,error,isLoading,booking])
+
+  const handleSubmitCall =()=>{
+    bookConsultant({agentId:params?.id,timeInMin:minute,mode:consultantData?.modes?.call})
+  }
+  const handleSubmitChat =()=>{
+    bookConsultant({agentId:params?.id,timeInMin:minute,mode:consultantData?.modes?.text})
+  }
+
+
   useEffect(()=>{
     setBill(consultantData?.user?.rate * minute)
 },[minute])
@@ -46,9 +78,9 @@ const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
      </div>
      <Counter minute={minute} setMinutes={setMinutes} />
      <div className="w-full mb-5 ">
-       <p className=" text-center font-bold text-lg">Bill: NGN {bill  ? bill : 0}</p>
+       <p className=" text-center font-bold text-lg">Bill: NGN{bill  ? bill?.toFixed(2) : 0}</p>
      </div>
-     <ChatOption />
+     { bill >0 && <ChatOption handleSubmitCall={handleSubmitCall} handleSubmitChat={handleSubmitChat}  />}
     </div>
     </Modal>
         </>
