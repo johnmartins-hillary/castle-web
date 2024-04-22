@@ -1,5 +1,5 @@
-import { BASE_URL } from "@/constants";
-import { useGetUserDetailsQuery } from "@/services/user";
+
+import Cookie from "js-cookie"
 import moment from "moment";
 export const getParameterByName = (name?: string, url?: string) => {
   if (!url) url = window.location.href;
@@ -17,12 +17,13 @@ export const dateFormatter = (date: any) => {
 };
 
 export const TokenChecker = () => {
-  let token: any;
-  if (typeof window !== "undefined") {
-    token = localStorage.getItem("authorization") || null;
+  let token = Cookie.get("authorization");
+  // if (typeof window !== "undefined") {
 
-  }
-  
+  //   token = localStorage.getItem("authorization") || null;
+
+  // }
+
   if (token) {
     return true;
   } else {
