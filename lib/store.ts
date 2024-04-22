@@ -1,40 +1,55 @@
-import singleUser from "@/redux/slices/single-user"
-import userReducer from "@/redux/slices/user"
-import userProfileSlice from "@/redux/slices/user/user-profile.slice"
-import { authApi } from "@/services/auth"
-import { usersApi } from "@/services/search/get-users"
-import { userApi } from "@/services/user"
-import { configureStore } from "@reduxjs/toolkit"
-import usersSlice from "@/redux/slices/users/index"
-import { walletApi } from "@/services/wallet"
-import walletSlice from "@/redux/slices/wallet/index"
-import { notificationApi } from "@/services/notifications"
-import { circleApi } from "@/services/circle"
-import { countriesApi } from "@/services/countries"
+import singleUser from "@/redux/slices/single-user";
+import userReducer from "@/redux/slices/user";
+import userProfileSlice from "@/redux/slices/user/user-profile.slice";
+import { authApi } from "@/services/auth";
+import { usersApi } from "@/services/search/get-users";
+import { userApi } from "@/services/user";
+import { configureStore } from "@reduxjs/toolkit";
+import usersSlice from "@/redux/slices/users/index";
+import { walletApi } from "@/services/wallet";
+import walletSlice from "@/redux/slices/wallet/index";
+import { notificationApi } from "@/services/notifications";
+import { circleApi } from "@/services/circle";
+import { countriesApi } from "@/services/countries";
+import { bookingApi } from "@/services/booking";
+import { withdrawalApi } from "@/services/withdrawal";
 export const makeStore = () => {
-    return configureStore({
-        reducer: {
-            [authApi.reducerPath]: authApi.reducer,
-            [userApi.reducerPath]: userApi.reducer,
-            [usersApi.reducerPath]: usersApi.reducer,
-            [walletApi.reducerPath]: walletApi.reducer,
-            [notificationApi.reducerPath]: notificationApi.reducer,
-            [circleApi.reducerPath]: circleApi.reducer,
-            [countriesApi.reducerPath]: countriesApi.reducer,
-            userState: userReducer,
-            userprofile: userProfileSlice,
-            singleUser: singleUser,
-            users: usersSlice,
-            wallet: walletSlice
-        },
-        middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware, userApi.middleware, usersApi.middleware, walletApi.middleware, notificationApi.middleware, circleApi.middleware, countriesApi.middleware)
-    })
-}
+  return configureStore({
+    reducer: {
+      [authApi.reducerPath]: authApi.reducer,
+      [userApi.reducerPath]: userApi.reducer,
+      [usersApi.reducerPath]: usersApi.reducer,
+      [walletApi.reducerPath]: walletApi.reducer,
+      [notificationApi.reducerPath]: notificationApi.reducer,
+      [circleApi.reducerPath]: circleApi.reducer,
+      [countriesApi.reducerPath]: countriesApi.reducer,
+      [bookingApi.reducerPath]: bookingApi.reducer,
+      [withdrawalApi.reducerPath]: withdrawalApi.reducer,
+      userState: userReducer,
+      userprofile: userProfileSlice,
+      singleUser: singleUser,
+      users: usersSlice,
+      wallet: walletSlice
+    },
+    middleware: (getDefualtMiddleware) =>
+      getDefualtMiddleware().concat(
+        authApi.middleware,
+        userApi.middleware,
+        usersApi.middleware,
+        walletApi.middleware,
+        notificationApi.middleware,
+        circleApi.middleware,
+        countriesApi.middleware,
+        bookingApi.middleware,
+        withdrawalApi.middleware,
 
+      )
+  });
+};
 
-export type AppStore = ReturnType<typeof makeStore>
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];
 
 // import userReducer from "@/redux/slices/user"
 // import { authApi } from "@/services/auth"
@@ -61,7 +76,6 @@ export type AppDispatch = AppStore['dispatch']
 //         middleware: (getDefualtMiddleware) => getDefualtMiddleware().concat(authApi.middleware,userApi.middleware)
 //     })
 // }
-
 
 // export type AppStore = ReturnType<typeof makeStore>
 // export type RootState = ReturnType<AppStore['getState']>

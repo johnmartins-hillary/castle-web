@@ -89,7 +89,6 @@ const logOutHandler =()=>{
             })} */}
             {sideBarLinks.map(({name,icon,path})=>{
                 const isActive = pathname === path;
-                console.log(isActive,pathname)
                 return(
                     <div key={name} className={`w-full flex items-center justify-start gap-2 mb-7`} >
                     <Image src={icon} height={5} width={25} className=" object-contain" alt="icon" />
