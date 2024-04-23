@@ -78,21 +78,27 @@ const BookingInfoModal = ({ data, showModal, setShowModal }: any) => {
           </div>
 
           <div className="w-full mt-[20px]">
-            <div className="w-full mb-[12px]">
-              <p className="text-center font-medium text-[16px]">Consultant: {agent?.name}</p>
+            <div className="w-full mb-[12px] flex items-center justify-between ">
+              <p className="text-left font-medium text-[16px]">Consultant:</p>
+              <p className="text-right font-medium text-[16px]">Consultant: {agent?.name}</p>
             </div>
 
-            <div className="w-full mb-[12px]">
-              <p className="text-center font-medium text-[16px]">Customer: {customer?.name}</p>
+            <div className="w-full mb-[12px] flex items-center justify-between ">
+              <p className="text-left font-medium text-[16px]">Customer:</p>
+              <p className="text-right font-medium text-[16px]">{customer?.name}</p>
             </div>
 
-            <div className="w-full mb-[12px]">
-              <p className="text-center font-medium text-[16px]">Duration: {duration} mins</p>
+            <div className="w-full mb-[12px] flex items-center justify-between ">
+              <p className="text-left font-medium text-[16px]">Duration:</p>
+              <p className="text-right font-medium text-[16px]">{duration} mins</p>
             </div>
 
-            <div className="w-full mb-[12px]">
-              <p className={`text-center font-medium text-[16px]`}>
-                Status: <span className={`${statusColorClass}`}>{status}</span>
+            <div className="w-full mb-[12px] flex items-center justify-between ">
+              <p className={`text-le font-medium text-[16px]`}>
+                Status:
+              </p>
+              <p className={`text-right font-medium text-[16px]`}>
+              <span className={`${statusColorClass}`}>{status}</span>
               </p>
             </div>
 
