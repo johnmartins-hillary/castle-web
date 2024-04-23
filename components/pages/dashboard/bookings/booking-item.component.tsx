@@ -3,6 +3,7 @@ import Image from "next/image";
 import { IoEllipsisVertical } from "react-icons/io5";
 import BookingInfoModal from "./booking-info-modal.component";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 interface Props {
@@ -29,9 +30,9 @@ const BookingItem = ({
   status,
   mode,
 }: Props) => {
-  // Define Tailwind CSS classes based on status
-  const statusColorClass = getStatusColorClass(status);
 
+  const statusColorClass = getStatusColorClass(status);
+  const router = useRouter();
   const data = {title,time,customer,agent,amount,duration,reference,status,mode}
   const [showModal,setShowModal] = useState<boolean>()
   function getStatusColorClass(status: string | undefined) {
@@ -49,6 +50,16 @@ const BookingItem = ({
     }
   }
 
+  const chatNavigator =()=>{
+    const id =   title === "Recent Booking" ? agent?.id : customer?.id
+    const name =   title === "Recent Booking" ? agent?.name : customer?.name
+    router.push(`chat/${id}/${reference}/${name}`)
+  }
+  const callNavigator =()=>{
+    const id =   title === "Recent Booking" ? agent?.id : customer?.id
+    const name =   title === "Recent Booking" ? agent?.name : customer?.name
+    router.push(`chat/${id}/${reference}/${name}`)
+  }
   return (
     <>
       <div className="w-full flex items-start justify-between border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">
@@ -70,7 +81,7 @@ const BookingItem = ({
         </div>
 
         <div className="w-[20%] flex items-center justify-center gap-[13px]">
-          <div className="w-auto bg-black rounded-full p-[5px] flex items-center justify-center">
+          <button onClick={chatNavigator} disabled={mode !== "text" && status === "pending" } className={`w-auto ${mode !== "text" ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
             <Image
               width={96}
               height={96}
@@ -78,8 +89,8 @@ const BookingItem = ({
               className="object-cover w-[10.85px] md:w-[16px]"
               alt="chat-conversation"
             />
-          </div>
-          <div className="w-auto bg-black rounded-full p-[5px] flex items-center justify-center">
+          </button>
+          <button onClick={callNavigator} disabled={mode !== "call" && status === "pending"} className={`w-auto ${mode !== "call" ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
             <Image
               width={96}
               height={96}
@@ -87,7 +98,7 @@ const BookingItem = ({
               className="object-cover w-[10.85px] md:w-[16px]"
               alt="hang-up"
             />
-          </div>
+          </button>
         </div>
 
         <div className="w-[10%] flex items-center justify-center">

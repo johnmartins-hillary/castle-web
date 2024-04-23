@@ -8,25 +8,29 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import React from "react";
+import React, { useEffect } from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { BanIcon, LinkIcon } from "@/components/icons/icons";
 import {IoIosArrowBack} from "react-icons/io"
 import {useRouter} from "next/router"
+import { useGetChatDetailsQuery } from "@/services/chat";
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 const ChatHeader = () => {
     const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
   const [showPanel, setShowPanel] = React.useState<Checked>(false)
   const router = useRouter()
+  const slugs:any = router.query.index;
+  const {data,isLoading}:any = useGetChatDetailsQuery({id:slugs?.[0],  booking_ref:slugs?.[1]})
+  const profileImage = data?.user?.profile_image
 
     return ( 
         <>
         <div className="w-full h-[70px] flex items-stretch justify-center" >
             <div className="w-3/5 flex items-center justify-start gap-5 " >
               <IoIosArrowBack className=" w-[23px] h-[23px] md:w-[34px] md:h-[34px]" onClick={()=>{  router.back()}} />
-                <AvatarWithBadge width={70} height={70} className="w-[45px] h-[45px] md:w-auto md:h-auto" />
-                <p className="font-bold text-sm md:text-xl" >Val Okafor</p>
+                <AvatarWithBadge profile_image={profileImage} width={70} height={70} className="w-[45px] h-[45px] rounded-full bg-faint_grey  shadow-md shadow-faint_grey flex items-center justify-center  md:w-auto md:h-auto " />
+                <p className="font-bold text-sm md:text-xl truncate " >{slugs?.[2]}</p>
             </div>
 
             <div className="w-2/5  flex items-center justify-end gap-5 px-3 " >

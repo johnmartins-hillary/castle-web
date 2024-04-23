@@ -80,7 +80,7 @@ const BookingInfoModal = ({ data, showModal, setShowModal }: any) => {
           <div className="w-full mt-[20px]">
             <div className="w-full mb-[12px] flex items-center justify-between ">
               <p className="text-left font-medium text-[16px]">Consultant:</p>
-              <p className="text-right font-medium text-[16px]">Consultant: {agent?.name}</p>
+              <p className="text-right font-medium text-[16px]">{agent?.name}</p>
             </div>
 
             <div className="w-full mb-[12px] flex items-center justify-between ">

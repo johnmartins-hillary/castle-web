@@ -13,6 +13,8 @@ import { circleApi } from "@/services/circle";
 import { countriesApi } from "@/services/countries";
 import { bookingApi } from "@/services/booking";
 import { withdrawalApi } from "@/services/withdrawal";
+import { chatApi } from "@/services/chat";
+import chats from "@/redux/slices/chats";
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -25,11 +27,13 @@ export const makeStore = () => {
       [countriesApi.reducerPath]: countriesApi.reducer,
       [bookingApi.reducerPath]: bookingApi.reducer,
       [withdrawalApi.reducerPath]: withdrawalApi.reducer,
+      [chatApi.reducerPath]:chatApi.reducer,
       userState: userReducer,
       userprofile: userProfileSlice,
       singleUser: singleUser,
       users: usersSlice,
-      wallet: walletSlice
+      wallet: walletSlice,
+      chat:chats
     },
     middleware: (getDefualtMiddleware) =>
       getDefualtMiddleware().concat(
@@ -42,6 +46,7 @@ export const makeStore = () => {
         countriesApi.middleware,
         bookingApi.middleware,
         withdrawalApi.middleware,
+        chatApi.middleware
 
       )
   });

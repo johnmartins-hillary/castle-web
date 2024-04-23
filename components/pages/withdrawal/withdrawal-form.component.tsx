@@ -46,7 +46,10 @@ const WithdrawalForm = ({ callBackFunction, setOpenModal }: any) => {
 
   useEffect(() => {
     if (isSuccess) {
+      if(data?.message !== "Insufficient Balance"){
       callBackFunction(true);
+        
+      }
       setOpenModal(false);
       toast({
         title: `${data?.message}`
