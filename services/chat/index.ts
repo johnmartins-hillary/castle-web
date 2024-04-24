@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const chatApi = createApi({
   reducerPath: "chatAPI",
+  tagTypes: ["messages"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}`,
     mode: "cors",
@@ -23,30 +24,36 @@ export const chatApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+      providesTags: ["messages"]
     }),
-    sendMessage : builder.mutation<void,{touserId:number,message:string,roomid:number}>({
-      query:(payload)=>({
-        mode:"cors",
-        url:"send-message",
-        method:"POST",
-        body:payload,
-          headers:{
-            'Accept':"application/json"
-          }
-      })
+
+    sendMessage: builder.mutation<
+      void,
+      { touserId: number; message: string; roomid: number }
+    >({
+      query: (payload) => ({
+        mode: "cors",
+        url: "send-message",
+        method: "POST",
+        body: payload,
+        headers: {
+          Accept: "application/json"
+        }
+      }),
+      // invalidatesTags: ["messages"]
     }),
-    inChat:builder.mutation<void,{booking_ref:string,user_id:number}>({
-      query:({booking_ref,user_id})=>({
-        mode:"cors",
-        url:"chat-room-get/inchat",
-        method:"POST",
-        body:{booking_ref,user_id},
-          headers:{
-            'Accept':"application/json"
-          }
+    inChat: builder.mutation<void, { booking_ref: string; user_id: number }>({
+      query: ({ booking_ref, user_id }) => ({
+        mode: "cors",
+        url: "chat-room-get/inchat",
+        method: "POST",
+        body: { booking_ref, user_id },
+        headers: {
+          Accept: "application/json"
+        }
       })
-    }),
+    })
     // messaging:builder.mutation<void,{reciever_id:string,room_id:number}>({
     //   query:({reciever_id,room_id})=>({
     //     mode:"cors",
@@ -60,4 +67,8 @@ export const chatApi = createApi({
   })
 });
 
-export const { useGetChatDetailsQuery,useInChatMutation,useSendMessageMutation } = chatApi;
+export const {
+  useGetChatDetailsQuery,
+  useInChatMutation,
+  useSendMessageMutation
+} = chatApi;

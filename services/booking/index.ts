@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const bookingApi = createApi({
   reducerPath: "bookingApi",
+  tagTypes: ["bookings"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}appointment/`,
     mode: "cors",
@@ -37,7 +38,11 @@ export const bookingApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(bookingApi.util.invalidateTags(["bookings"]));
+      }
     }),
     rejectBooking: builder.query<void, { ref: any }>({
       query: ({ ref }) => ({
@@ -47,7 +52,11 @@ export const bookingApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(bookingApi.util.invalidateTags(["bookings"]));
+      }
     }),
     cancelBooking: builder.query<void, { ref: any }>({
       query: ({ ref }) => ({
@@ -57,7 +66,11 @@ export const bookingApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(bookingApi.util.invalidateTags(["bookings"]));
+      }
     }),
     getBookingHistory: builder.query<void, void>({
       query: () => ({
@@ -67,11 +80,12 @@ export const bookingApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+      providesTags: ["bookings"]
     }),
     endAppointment: builder.mutation<void, { booking_ref: any }>({
       query: (payload) => ({
-        url: "appointment/end",
+        url: "end",
         method: "POST",
         body: payload,
         mode: "cors",

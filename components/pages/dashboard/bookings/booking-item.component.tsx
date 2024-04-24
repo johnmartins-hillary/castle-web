@@ -60,6 +60,9 @@ const BookingItem = ({
     const name =   title === "Recent Booking" ? agent?.name : customer?.name
     router.push(`chat/${id}/${reference}/${name}`)
   }
+
+  const disableChatBtn = mode !== "text" ? true :  status === "cancelled" || status === "rejected" ? true : false
+  const disableCallBtn = mode !== "call" ? true : status === "cancelled" || status === "rejected" ? true : false
   return (
     <>
       <div className="w-full flex items-start justify-between border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">
@@ -75,13 +78,13 @@ const BookingItem = ({
         </div>
 
         <div className="w-[20%] md:w-[25%]">
-          <p className={`text-[12.5px] text-center font-light lg:text-[14px] ${statusColorClass}`}>
+          <p className={`text-[12.5px] text-center font-light lg:text-[14px] capitalize ${statusColorClass}`}>
             {status}
           </p>
         </div>
 
         <div className="w-[20%] flex items-center justify-center gap-[13px]">
-          <button onClick={chatNavigator} disabled={mode !== "text" && status === "pending" } className={`w-auto ${mode !== "text" ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
+          <button onClick={chatNavigator} disabled={disableChatBtn} className={`w-auto ${ disableChatBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
             <Image
               width={96}
               height={96}
@@ -90,7 +93,7 @@ const BookingItem = ({
               alt="chat-conversation"
             />
           </button>
-          <button onClick={callNavigator} disabled={mode !== "call" && status === "pending"} className={`w-auto ${mode !== "call" ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
+          <button onClick={callNavigator} disabled={disableCallBtn} className={`w-auto ${disableCallBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
             <Image
               width={96}
               height={96}

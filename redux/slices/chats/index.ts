@@ -1,29 +1,33 @@
+import { MessageProp } from "@/lib/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { produce } from "immer";
 
 interface ChatState {
-  messages: Message[];
-  message: string;
+  messages:any;
+  message: MessageProp;
 }
 
 const initialState: ChatState = {
   messages: [],
-  message: ""
+  message: {
+    to_id: 0,
+    from_id:0,
+    message:"",
+    id:0
+  }
 };
-interface Message {
-  text: string;
-}
+// interface Messages {
+//   message: MessageProp;
+// }
 const chatSlice = createSlice({
   name: "chat-slice",
   initialState,
   reducers: {
-    messageHandler: (state, { payload }: PayloadAction<string>) => {
+    messageHandler: (state, { payload }: PayloadAction<MessageProp>) => {
       state.message = payload;
     },
-    setMessages: (state, action: PayloadAction<Message>) => {
-      state.messages = produce(state.messages, (draft) => {
-        draft.push(action.payload);
-      });
+    setMessages: (state, action: PayloadAction<MessageProp>) => {
+      state.messages.push(action.payload);
     }
   }
 });
