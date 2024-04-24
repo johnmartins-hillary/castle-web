@@ -24,8 +24,40 @@ export const chatApi = createApi({
           Accept: "application/json"
         }
       })
-    })
+    }),
+    sendMessage : builder.mutation<void,{touserId:number,message:string,roomid:number}>({
+      query:(payload)=>({
+        mode:"cors",
+        url:"send-message",
+        method:"POST",
+        body:payload,
+          headers:{
+            'Accept':"application/json"
+          }
+      })
+    }),
+    inChat:builder.mutation<void,{booking_ref:string,user_id:number}>({
+      query:({booking_ref,user_id})=>({
+        mode:"cors",
+        url:"chat-room-get/inchat",
+        method:"POST",
+        body:{booking_ref,user_id},
+          headers:{
+            'Accept':"application/json"
+          }
+      })
+    }),
+    // messaging:builder.mutation<void,{reciever_id:string,room_id:number}>({
+    //   query:({reciever_id,room_id})=>({
+    //     mode:"cors",
+    //     url:`message/${room_id}/${reciever_id}`,
+    //     method:"GET",
+    //       headers:{
+    //         'Accept':"application/json"
+    //       }
+    //   })
+    // }),
   })
 });
 
-export const { useGetChatDetailsQuery } = chatApi;
+export const { useGetChatDetailsQuery,useInChatMutation,useSendMessageMutation } = chatApi;

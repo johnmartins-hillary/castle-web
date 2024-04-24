@@ -23,13 +23,13 @@ const ChatHeader = () => {
   const slugs:any = router.query.index;
   const {data,isLoading}:any = useGetChatDetailsQuery({id:slugs?.[0],  booking_ref:slugs?.[1]})
   const profileImage = data?.user?.profile_image
-
+   const isVerified = data?.user?.verification_status === 1 ? true :false
     return ( 
         <>
         <div className="w-full h-[70px] flex items-stretch justify-center" >
             <div className="w-3/5 flex items-center justify-start gap-5 " >
               <IoIosArrowBack className=" w-[23px] h-[23px] md:w-[34px] md:h-[34px]" onClick={()=>{  router.back()}} />
-                <AvatarWithBadge profile_image={profileImage} width={70} height={70} className="w-[45px] h-[45px] rounded-full bg-faint_grey  shadow-md shadow-faint_grey flex items-center justify-center  md:w-auto md:h-auto " />
+                <AvatarWithBadge profile_image={profileImage} width={70} height={70} className="w-[45px] h-[45px] rounded-full bg-faint_grey  shadow-md shadow-faint_grey flex items-center justify-center  md:w-auto md:h-auto " isVerified={isVerified}  />
                 <p className="font-bold text-sm md:text-xl truncate " >{slugs?.[2]}</p>
             </div>
 

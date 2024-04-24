@@ -1,5 +1,4 @@
-
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
 import moment from "moment";
 export const getParameterByName = (name?: string, url?: string) => {
   if (!url) url = window.location.href;
@@ -28,5 +27,14 @@ export const TokenChecker = () => {
     return true;
   } else {
     return false;
+  }
+};
+
+export const getLocalStorageData = (key: string) => {
+  if (typeof window !== "undefined") {
+    const localData = localStorage?.getItem(key);
+    const parsedData = JSON?.parse(localData);
+
+    return parsedData;
   }
 };
