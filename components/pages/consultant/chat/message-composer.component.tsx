@@ -75,13 +75,13 @@ const MessageComposer = () => {
     eventSrc.onmessage = (event: any) => {
       const res = JSON.parse(event?.data);
       const inChat = res?.[0]?.inchat;
-      console.log(inChat);
       const message =  res?.[1]?.message_event;
-      console.log(message)
-      // if(message !== null || message !== undefined){
-      //   dispatch(setMessages(message))
+      console.log(res);
+      // if(message !== "undefined"){
+      //   const data = message
+      //   dispatch(setMessages(data))
       // }
-      if (         inChat?.agent_in?.includes("1") &&
+      if (inChat?.agent_in?.includes("1") &&
         inChat?.customer_in?.includes("1")
       ) {
         setShowModal(false);
@@ -105,10 +105,10 @@ const MessageComposer = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess ||  data?.appointment?.status === "active") {
       messagingCall();
     }
-  }, [inChatData, isSuccess]);
+  }, [inChatData, isSuccess, data?.appointment?.status]);
 
   const user = getLocalStorageData("user");
   const userId = user?.id;
@@ -132,9 +132,10 @@ const MessageComposer = () => {
     }
   };
 
+
   return (
     <div className="fixed bottom-[0px] bg-white left-0 w-[-webkit-fill-available] flex items-center justify-center lg:ml-[300px] shadow-md shadow-gray-400  p-4 ">
-      {showInput || data?.appointment?.status === "active" && (
+      {showInput && (
         <div className=" w-auto flex-1 md:w-[689px] md:max-w-[696px] flex items-center justify-between gap-2">
           <div className="bg-slate-100 shadow-lg px-4 py-3 rounded-3xl flex items-center gap-4 flex-1">
             <SmileIcon size={23} />
