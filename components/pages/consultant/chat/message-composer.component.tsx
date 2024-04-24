@@ -19,7 +19,7 @@ import { BASE_URL } from "@/constants";
 import { useEndAppointmentMutation } from "@/services/booking";
 import { setMessages } from "@/redux/slices/chats";
 import { useDispatch } from "react-redux";
-const MessageComposer = () => {
+const MessageComposer = ({scrollToBottom,eventSrc}:any) => {
   const [message, setMessage] = useState("");
   const router = useRouter();
   const storage = getLocalStorageData("user");
@@ -68,7 +68,7 @@ const MessageComposer = () => {
   };
 
   const messagingCall = async () => {
-    const eventSrc = new EventSource(
+   eventSrc = new EventSource(
       `${BASE_URL}message/${data?.room_id}/${data?.user?.id}/${booking_ref}`
     );
 
@@ -80,6 +80,7 @@ const MessageComposer = () => {
       if(res?.length > 1){
         const data = message
         dispatch(setMessages(data))
+        scrollToBottom()
       }
       if (inChat?.agent_in?.includes("1") &&
         inChat?.customer_in?.includes("1")
@@ -127,17 +128,12 @@ const MessageComposer = () => {
           id: Math.floor(Math.random() * 1000)
         })
       );
-      // dispatch(setMessages(reduxMessage))
+    
       setMessage("");
+      scrollToBottom()
     }
   };
 
-
-  useEffect(()=>{
-    if (endAppointmentASuccess) {
-      setShowBtn(true)
-    }
-  },[endAppointmentASuccess])
   return (
     <div className="fixed bottom-[0px] bg-white left-0 w-[-webkit-fill-available] flex items-center justify-center lg:ml-[300px] shadow-md shadow-gray-400  p-4 ">
       {showInput && (
@@ -186,7 +182,7 @@ const MessageComposer = () => {
       {showBtn && data?.appointment?.status === "pending" && (
         <Button className=" bg-orange-500 hover:bg-orange-400 cursor-default " >Still Pending</Button>
       )}
-      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer && (
+      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer && endAppointmentASuccess && (
         <Button onClick={()=>{
           router.replace(`/consultant/${data?.user?.id}`)
         }}>Book again</Button>

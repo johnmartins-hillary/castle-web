@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const ChatArea = () => {
+const ChatArea = ({chatRef,scrollToBottom}:any) => {
   const router = useRouter();
   const reduxMessages = useSelector(({ chat }: any) => chat?.messages);
   const slugs = router.query.index;
@@ -19,13 +19,16 @@ const ChatArea = () => {
     messages?.map((item: any) => {
       dispatch(setMessages(item));
     });
+    return()=>{
+      scrollToBottom()
+    }
   }, [data, isSuccess]);
 
   const user = getLocalStorageData("user");
   const userId = user?.id;
   return (
     <>
-      <div className=" flex flex-col flex-[1.2] overflow-y-scroll no-scrollbar  w-full  flex-grow-1  py-[30px] px-[25px]">
+      <div ref={chatRef} className=" flex flex-col flex-[1.2] overflow-y-scroll no-scrollbar  w-full  flex-grow-1  py-[30px] px-[25px]">
         {reduxMessages?.length > 0 ? (
           <>
             {reduxMessages?.map(({ message, id, from_id }: any) => (

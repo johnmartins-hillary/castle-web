@@ -7,12 +7,18 @@ import DashboardLayout from "@/pages/dashboard/layout";
 import { useGetChatDetailsQuery } from "@/services/chat";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 
 const Chat = () => {
     const router = useRouter()
     const slugs:any = router.query.index;
-    // const {data,isLoading}:any = useGetChatDetailsQuery({id:slugs?.[0],  booking_ref:slugs?.[1]})
-    // const chatStatus = data?.appointment?.status
+    const chatAreaRef = useRef<any>()
+    let eventSrc;
+    const scrollToBottom =()=>{
+        if (chatAreaRef.current) {
+            chatAreaRef.current.scrollToTop= chatAreaRef.current?.scrollHeight
+        }
+    }
     return ( 
         <>
         <Head>
@@ -20,10 +26,10 @@ const Chat = () => {
         </Head>
         <DashboardLayout>
          <div className="w-full overflow-y-hidden flex-col flex h-full  " >
-         <ChatHeader/>
-            <ChatArea/>
+         <ChatHeader eventSrc={eventSrc} />
+            <ChatArea chatRef={chatAreaRef} scrollToBottom={scrollToBottom} />
 
-             <MessageComposer/>
+             <MessageComposer  scrollToBottom={scrollToBottom} eventSrc={eventSrc}  />
               {/* <TestComposer/> */}
 
             {/* <div className=" bg-red-600 flex-1 p-9 " />

@@ -14,16 +14,23 @@ import { BanIcon, LinkIcon } from "@/components/icons/icons";
 import {IoIosArrowBack} from "react-icons/io"
 import {useRouter} from "next/router"
 import { useGetChatDetailsQuery } from "@/services/chat";
+import { useEndAppointmentMutation } from "@/services/booking";
 type Checked = DropdownMenuCheckboxItemProps["checked"]
-const ChatHeader = () => {
-    const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
-  const [showPanel, setShowPanel] = React.useState<Checked>(false)
+const ChatHeader = ({eventSrc}:any) => {
   const router = useRouter()
   const slugs:any = router.query.index;
   const {data,isLoading}:any = useGetChatDetailsQuery({id:slugs?.[0],  booking_ref:slugs?.[1]})
   const profileImage = data?.user?.profile_image
    const isVerified = data?.user?.verification_status === 1 ? true :false
+   const [endAppoiintment,{isSuccess:endAppointmentASuccess}]:any = useEndAppointmentMutation();
+
+  const booking_ref = data?.appointment?.booking_ref;
+
+  const endAppointmentHandler=(route:any)=>{
+    endAppoiintment({ booking_ref: booking_ref });
+    router.replace(route)
+    eventSrc.close()
+  }
     return ( 
         <>
         <div className="w-full h-[70px] flex items-stretch justify-center" >
@@ -39,7 +46,7 @@ const ChatHeader = () => {
 
      
      
-      <Button className=" bg-black w-[35px] h-[35px] rounded-[12px] p-[10px] md:p-[10px]  md:w-[46.11px] md:h-[46.11px]  md:rounded-2xl hover:bg-black rotate-45  " >
+      <Button onClick={()=>endAppointmentHandler(`/consultant/${data?.user?.id}`)} className=" bg-black w-[35px] h-[35px] rounded-[12px] p-[10px] md:p-[10px]  md:w-[46.11px] md:h-[46.11px]  md:rounded-2xl hover:bg-black rotate-45  " >
           <MdPhone size={50} className=" -rotate-45" />
           </Button>
  
@@ -50,16 +57,16 @@ const ChatHeader = () => {
             <Button variant="ghost" className="outline-none" ><PiSlidersHorizontalLight  className="cursor-pointer w-[23px] h-[23px] md:w-[35px] md:h-[35px] " /></Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56 bg-light_grey shadow-none ">
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
         style={{fontFamily:"Poppins"}}
         className=" font-normal gap-3 "
         >
        <LinkIcon color={'black'} onClick={()=>{}}  size={16} className="rotate-95" /> Attachments
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         <DropdownMenuItem
               style={{fontFamily:"Poppins"}}
               className=" font-normal gap-3 "
-          
+              onClick={()=>endAppointmentHandler(`/dashboard`)} 
         >
            <BanIcon color={'black'} className={''} onClick={()=>{}}  size={16} /> End Chat
         </DropdownMenuItem>
