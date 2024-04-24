@@ -32,7 +32,7 @@ const MessageComposer = () => {
     inChatHandler,
     { data: inChatData, isLoading: inChatloading, isSuccess, isError, error }
   ]: any = useInChatMutation();
-  const [endAppoiintment] = useEndAppointmentMutation();
+  const [endAppoiintment,{isSuccess:endAppointmentASuccess}]:any = useEndAppointmentMutation();
   const [showModal, setShowModal] = useState(false);
   const [btnText, setBtnText] = useState("Starting Chat");
   const { toast } = useToast();
@@ -77,10 +77,10 @@ const MessageComposer = () => {
       const inChat = res?.[0]?.inchat;
       const message =  res?.[1]?.message_event;
       console.log(res);
-      // if(message !== "undefined"){
-      //   const data = message
-      //   dispatch(setMessages(data))
-      // }
+      if(res?.length > 1){
+        const data = message
+        dispatch(setMessages(data))
+      }
       if (inChat?.agent_in?.includes("1") &&
         inChat?.customer_in?.includes("1")
       ) {
@@ -133,6 +133,11 @@ const MessageComposer = () => {
   };
 
 
+  useEffect(()=>{
+    if (endAppointmentASuccess) {
+      setShowBtn(true)
+    }
+  },[endAppointmentASuccess])
   return (
     <div className="fixed bottom-[0px] bg-white left-0 w-[-webkit-fill-available] flex items-center justify-center lg:ml-[300px] shadow-md shadow-gray-400  p-4 ">
       {showInput && (
