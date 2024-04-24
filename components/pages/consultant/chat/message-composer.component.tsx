@@ -89,7 +89,7 @@ const MessageComposer = () => {
         toast({
           title: "You have less than 2 minutes left"
         });
-      } else if (inChat?.time_left === 0 || inChat?.time_left < 0) {
+      } else if (inChat?.time_left === 0 && inChat?.time_left !== null ) {
         eventSrc.close();
         endAppoiintment({ booking_ref: booking_ref });
         toast({
@@ -176,7 +176,7 @@ const MessageComposer = () => {
       {showBtn && data?.appointment?.status === "pending" && (
         <Button className=" bg-orange-500 hover:bg-orange-400 cursor-default " >Still Pending</Button>
       )}
-      {data?.appointment?.status === "ended" && (
+      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer (
         <Button onClick={()=>{
           router.replace(`/consultant/${data?.user?.id}`)
         }}>Book again</Button>
