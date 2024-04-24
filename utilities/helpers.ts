@@ -32,7 +32,7 @@ export const TokenChecker = () => {
 
 export const getLocalStorageData = (key: string) => {
   if (typeof window !== "undefined") {
-    const localData = localStorage?.getItem(key);
+    const localData = localStorage?.getItem(key) || "";
     const parsedData = JSON?.parse(localData);
 
     return parsedData;
