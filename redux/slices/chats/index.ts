@@ -27,7 +27,6 @@ const chatSlice = createSlice({
       state.message = payload;
     },
     setMessages: (state, action: PayloadAction<MessageProp>) => {
-      console.log("messages payload",action.payload)
       state.messages.push(action.payload);
     }
   }

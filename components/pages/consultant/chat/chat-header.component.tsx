@@ -8,7 +8,7 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
 import { BanIcon, LinkIcon } from "@/components/icons/icons";
 import {IoIosArrowBack} from "react-icons/io"
@@ -22,15 +22,21 @@ const ChatHeader = ({eventSrc}:any) => {
   const {data,isLoading}:any = useGetChatDetailsQuery({id:slugs?.[0],  booking_ref:slugs?.[1]})
   const profileImage = data?.user?.profile_image
    const isVerified = data?.user?.verification_status === 1 ? true :false
-   const [endAppoiintment,{isSuccess:endAppointmentASuccess}]:any = useEndAppointmentMutation();
-
+   const [endAppoiintment,{isSuccess:endAppointmentSuccess}]:any = useEndAppointmentMutation();
+  const [route,setRoute] =useState("")
   const booking_ref = data?.appointment?.booking_ref;
 
   const endAppointmentHandler=(route:any)=>{
     endAppoiintment({ booking_ref: booking_ref });
+    setRoute(route)
+  }
+
+useEffect(()=>{
+  if (endAppointmentSuccess) {
     router.replace(route)
     eventSrc.close()
   }
+},[endAppointmentSuccess])
     return ( 
         <>
         <div className="w-full h-[70px] flex items-stretch justify-center" >

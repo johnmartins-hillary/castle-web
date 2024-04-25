@@ -1,5 +1,6 @@
 import { BASE_URL } from "@/constants";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { chatApi } from "../chat";
 
 export const bookingApi = createApi({
   reducerPath: "bookingApi",
@@ -92,7 +93,11 @@ export const bookingApi = createApi({
         headers: {
           Accept: "application/json"
         }
-      })
+      }),
+   async onQueryStarted(_,{dispatch,queryFulfilled}){
+      await queryFulfilled;
+      dispatch(chatApi.util.invalidateTags(['messages']))
+      }      
     })
   })
 });

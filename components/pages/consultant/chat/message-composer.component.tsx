@@ -76,7 +76,6 @@ const MessageComposer = ({scrollToBottom,eventSrc}:any) => {
       const res = JSON.parse(event?.data);
       const inChat = res?.[0]?.inchat;
       const message =  res?.[1]?.message_event;
-      console.log(res);
       if(res?.length > 1){
         const data = message
         dispatch(setMessages(data))
@@ -182,7 +181,7 @@ const MessageComposer = ({scrollToBottom,eventSrc}:any) => {
       {showBtn && data?.appointment?.status === "pending" && (
         <Button className=" bg-orange-500 hover:bg-orange-400 cursor-default " >Still Pending</Button>
       )}
-      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer && endAppointmentASuccess && (
+      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer && (
         <Button onClick={()=>{
           router.replace(`/consultant/${data?.user?.id}`)
         }}>Book again</Button>
