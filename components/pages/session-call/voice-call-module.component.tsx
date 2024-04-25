@@ -24,7 +24,6 @@ const VoiceCallModule = () => {
             navigator.mediaDevices.getUserMedia({audio:true}).then((stream:any)=>{
                 localStream = stream
                 currentStreamRef.current.srcObject = stream
-                currentStreamRef.current.muted=true
                 currentStreamRef.current.play()
               }).catch((err:any)=>{
                 console.log("Error getting ccurrent stream",err)
@@ -48,13 +47,11 @@ const VoiceCallModule = () => {
 
 
     const answerCall=()=>{
-        if (window.navigator !== undefined) {
-            
+        if ( window !== undefined) {
             const peerInstance = new Peer();
             let localStream:any;
             peerInstance.on("open",(id)=>{
-                console.log("peer id",id)
-                navigator.mediaDevices?.getUserMedia({audio:true}).then((stream:any)=>{
+                navigator.mediaDevices.getUserMedia({audio:true}).then((stream:any)=>{
                     localStream = stream
                     // currentStreamRef.current.srcObject = stream
                     // currentStreamRef.current.play()
