@@ -15,7 +15,7 @@ const VoiceCallModule = () => {
     },[])
 
     const callHandler =()=>{
-        if (window !==  undefined) {
+        if  (typeof window !==  undefined) {
             const peerInstance = new Peer(roomId);
             let localStream:any;
        
@@ -47,7 +47,7 @@ const VoiceCallModule = () => {
 
 
     const answerCall=()=>{
-        if ( window !== undefined) {
+        if (  typeof window !== undefined) {
             const peerInstance = new Peer();
             let localStream:any;
             peerInstance.on("open",(id)=>{
@@ -57,7 +57,7 @@ const VoiceCallModule = () => {
                     // currentStreamRef.current.play()
                     let call = peerInstance.call(roomId,stream)
                     call.on("stream",()=>{
-                        remoteStreamRef.current=stream
+                        remoteStreamRef.current.srcObject=stream
                         remoteStreamRef.current.play()
                     })
                     setCurrentPeer(call)
