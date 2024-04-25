@@ -54,11 +54,9 @@ const ChatArea = ({chatRef,scrollToBottom}:any) => {
               >
                 <div
                   style={{ wordWrap: "break-word" }}
-                  className={` min-w-[103px]  rounded py-[10px] px-[13px] ${
-                    from_id === userId ?  " bg-slate-200" : " bg-primary_color "
-                  } `}
+                  className={` min-w-[103px]  rounded py-[10px] px-[13px] bg-slate-200 `}
                 >
-                  <p className={` font-medium text-[15px] leadiing-[25px] text-left ${from_id === userId ? "text-primary_color" : "text-white"}`}>
+                  <p className={` font-medium text-[15px] leadiing-[25px] text-left text-primary_color`}>
                     {message}
                   </p>
                 </div>
