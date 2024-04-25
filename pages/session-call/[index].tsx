@@ -5,16 +5,13 @@ import CallTimer from "@/components/pages/session-call/timer.component"
 import EndCall from "@/components/pages/session-call/end-call.component"
 import Head from "next/head"
 import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component"
-import Script from "next/script"
+
 
 const SessionCall =()=>{
     return(
         <>
         <Head>
             <title>Session Call</title>
-            <Script
-                src="../../../public/peer.min.j"
-            ></Script>
         </Head>
         <DashboardLayout>
             <MobileNavbar/>
