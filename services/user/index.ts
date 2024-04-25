@@ -340,6 +340,18 @@ export const userApi = createApi({
         }
       }),
       invalidatesTags: ["categories"]
+    }),
+    updateModes: builder.mutation<void, { text: any; call: any }>({
+      query: ({ text, call }) => ({
+        url: "profile/mode/update",
+        method: "POST",
+        mode: "cors",
+        body: { text, call },
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json"
+        }
+      })
     })
   })
 });
@@ -362,5 +374,6 @@ export const {
   useDeleteUsersPortfoliosMutation,
   useDeleteUsersSocialsMutation,
   useAddCategoryMutation,
-  useGetUsersCategoriesQuery
+  useGetUsersCategoriesQuery,
+  useUpdateModesMutation
 } = userApi;
