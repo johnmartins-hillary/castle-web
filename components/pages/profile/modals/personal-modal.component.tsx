@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Country, State, City } from "country-state-city";
+import { useGetCategoryListQuery } from "@/services/category";
 
 const PersonalDataModal = ({ openModal, setOpenModal }: any) => {
   const { toast } = useToast();

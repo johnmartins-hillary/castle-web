@@ -56,6 +56,7 @@
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "@types/react-icons": "^3.0.0",
+    "@types/simple-peer": "^9.11.8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",

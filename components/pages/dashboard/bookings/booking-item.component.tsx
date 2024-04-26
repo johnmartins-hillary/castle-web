@@ -4,6 +4,7 @@ import { IoEllipsisVertical } from "react-icons/io5";
 import BookingInfoModal from "./booking-info-modal.component";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+// import { useVoiceCall } from "@/context/app-context";
 
 
 interface Props {
@@ -34,6 +35,9 @@ const BookingItem = ({
   const statusColorClass = getStatusColorClass(status);
   const router = useRouter();
   const data = {title,time,customer,agent,amount,duration,reference,status,mode}
+  // const {
+  //   callHandler,
+  // } = useVoiceCall();
   const [showModal,setShowModal] = useState<boolean>()
   function getStatusColorClass(status: string | undefined) {
     switch (status) {
@@ -55,14 +59,15 @@ const BookingItem = ({
     const name =   title === "Recent Booking" ? agent?.name : customer?.name
     router.push(`chat/${id}/${reference}/${name}`)
   }
-  const callNavigator =()=>{
-    const id =   title === "Recent Booking" ? agent?.id : customer?.id
-    const name =   title === "Recent Booking" ? agent?.name : customer?.name
-    router.push(`chat/${id}/${reference}/${name}`)
-  }
+  // const callNavigator =()=>{
+  //   const id =   title === "Recent Booking" ? agent?.id : customer?.id
+  //   const name =   title === "Recent Booking" ? agent?.name : customer?.name
+  //   // router.push(`chat/${id}/${reference}/${name}`)
+  //   callHandler({receiver_id:id,booking_ref:reference})
+  // }
 
   const disableChatBtn = mode !== "text" ? true :  status === "cancelled" || status === "rejected" ? true : false
-  const disableCallBtn = mode !== "call" ? true : status === "cancelled" || status === "rejected" ? true : false
+  // const disableCallBtn = mode !== "call" ? true : status === "cancelled" || status === "rejected" ? true : false
   return (
     <>
       <div className="w-full flex items-start justify-between border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">
@@ -93,7 +98,7 @@ const BookingItem = ({
               alt="chat-conversation"
             />
           </button>
-          <button onClick={callNavigator} disabled={disableCallBtn} className={`w-auto ${disableCallBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
+          {/* <button onClick={callNavigator} disabled={disableCallBtn} className={`w-auto ${disableCallBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
             <Image
               width={96}
               height={96}
@@ -101,7 +106,7 @@ const BookingItem = ({
               className="object-cover w-[10.85px] md:w-[16px]"
               alt="hang-up"
             />
-          </button>
+          </button> */}
         </div>
 
         <div className="w-[10%] flex items-center justify-center">

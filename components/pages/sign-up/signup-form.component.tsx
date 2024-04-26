@@ -51,12 +51,12 @@ const SignUpForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            dispatch(setUser({user:signUpData?.user}))
-            dispatch(setToken({authorization:signUpData?.authorization}))
+            // dispatch(setUser({user:signUpData?.user}))
+            // dispatch(setToken({authorization:signUpData?.authorization}))
             toast({
                 title:"Sign Up Successful",
             })
-            router.push("/profile")
+            router.push("/auth/email-verification")
         }
         else if (isError ) {
             toast({

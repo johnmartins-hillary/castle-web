@@ -4,19 +4,28 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 // import { useToast } from "@/components/ui/use-toast";
-import { useVerifyProfileMutation } from "@/services/user";
+import { useGetUserDetailsQuery, useVerifyProfileMutation } from "@/services/user";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const VerificationSteps =()=>{
     const [verifyProfile,{data,isLoading,isSuccess,isError,error}]:any = useVerifyProfileMutation()
+    const {data:userdata}:any = useGetUserDetailsQuery("")
     const [photo_id_front,setPhototFront] = useState("")
     const [photo_id_back,setPhototBack] = useState("");
     const router = useRouter()
     const {toast} = useToast()
     const handleSubmit=()=>{
-        verifyProfile({photo_id_back,photo_id_front})
+        if (userdata?.portfolio?.length >0 || userdata?.social?.length >0 ) {
+            verifyProfile({photo_id_back,photo_id_front})
+        }
+        else{
+            toast({
+                title:"Oops!",
+                description:"Fill all your profile fields before verifying"
+            })
+        }
     }
 
 
@@ -46,6 +55,7 @@ const VerificationSteps =()=>{
         }
 
     },[isLoading,isSuccess,isError,error])
+    const disableBtn = photo_id_front === "" && photo_id_back === "" ? true : false
 
     return(
         <>
@@ -100,7 +110,7 @@ const VerificationSteps =()=>{
                 </div>
                 </div>
                 <div className=" w-full flex items-center justify-center md:block md:w-2/5 mt-14 md:mt-0 md:max-lg:w-full md:max-lg:mt-8 " >
-                   <Button disabled={isLoading}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
+                   <Button disabled={isLoading || disableBtn}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
                         {isLoading ? "Submitting..." : "Submit Application"}
                     </Button>
                      

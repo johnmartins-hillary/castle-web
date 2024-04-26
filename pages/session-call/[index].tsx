@@ -1,11 +1,10 @@
 import AvatarWithBadge from "@/components/avatar/avatar.component"
 import DashboardLayout from "../dashboard/layout"
 import CallTimer from "@/components/pages/session-call/timer.component"
-// import VoiceCallModule from "@/components/pages/session-call/voice-call-module.component"
+import VoiceCallModule from "@/components/pages/session-call/voice-call-module.component"
 import EndCall from "@/components/pages/session-call/end-call.component"
 import Head from "next/head"
 import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component"
-
 
 const SessionCall =()=>{
     return(
@@ -22,8 +21,8 @@ const SessionCall =()=>{
             </div>
 
             <CallTimer/>
-            {/* <VoiceCallModule/> */}
-            <EndCall/>
+            <VoiceCallModule/>
+            {/* <EndCall/> */}
         </DashboardLayout>
         </>
     )

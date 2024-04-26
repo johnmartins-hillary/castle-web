@@ -15,6 +15,8 @@ import { bookingApi } from "@/services/booking";
 import { withdrawalApi } from "@/services/withdrawal";
 import { chatApi } from "@/services/chat";
 import chats from "@/redux/slices/chats";
+import { callApi } from "@/services/call";
+import { categoryApi } from "@/services/category";
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -27,13 +29,15 @@ export const makeStore = () => {
       [countriesApi.reducerPath]: countriesApi.reducer,
       [bookingApi.reducerPath]: bookingApi.reducer,
       [withdrawalApi.reducerPath]: withdrawalApi.reducer,
-      [chatApi.reducerPath]:chatApi.reducer,
+      [chatApi.reducerPath]: chatApi.reducer,
+      [callApi.reducerPath]: callApi.reducer,
+      [categoryApi.reducerPath]: categoryApi.reducer,
       userState: userReducer,
       userprofile: userProfileSlice,
       singleUser: singleUser,
       users: usersSlice,
       wallet: walletSlice,
-      chat:chats
+      chat: chats
     },
     middleware: (getDefualtMiddleware) =>
       getDefualtMiddleware().concat(
@@ -46,8 +50,9 @@ export const makeStore = () => {
         countriesApi.middleware,
         bookingApi.middleware,
         withdrawalApi.middleware,
-        chatApi.middleware
-
+        chatApi.middleware,
+        callApi.middleware,
+        categoryApi.middleware
       )
   });
 };

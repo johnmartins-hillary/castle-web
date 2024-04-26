@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import Portfolio from "./portfolio.component";
 import UserPhotographs from "./photographs.component";
@@ -6,14 +7,18 @@ import SocialMedia from "./social-media.component";
 import Head from "next/head";
 import ProfileLink from "./profile.component";
 import Links from "./links.component";
+import { useGetUserDetailsQuery } from "@/services/user";
 
 const UserProfile = () => {
+    const { data } = useGetUserDetailsQuery("");
+
+    const user = data?.user;
     return ( 
         <>
         <div className="w-full mt-3">
 
 
-        <ProfileLink/>
+        { user?.verification_status === "1"&& <ProfileLink/>}
         <Personal/>
         <Portfolio/>
         <SocialMedia/>

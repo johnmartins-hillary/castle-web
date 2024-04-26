@@ -38,7 +38,6 @@ const FundingCompleteModal = ({openModal,setOpenModal}:modalProps) => {
         return()=>{
         }
     },[])
-    console.log(isError)
     return (
         <>
             <Modal  onClose={()=>{

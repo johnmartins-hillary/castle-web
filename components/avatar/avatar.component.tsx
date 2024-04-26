@@ -6,6 +6,7 @@ interface Props {
   className?: string;
   profile_image?: string;
   height?: any;
+  badge_size?:any;
   isVerified?: boolean;
 }
 const AvatarWithBadge = ({
@@ -13,7 +14,8 @@ const AvatarWithBadge = ({
   height,
   className,
   isVerified,
-  profile_image
+  profile_image,
+  badge_size
 }: Props) => {
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
@@ -48,8 +50,8 @@ const AvatarWithBadge = ({
         {isVerified &&
           <RiVerifiedBadgeFill
             color="#3897F0"
-            size={20}
-            className="  size-[13px] md:size-[20px]"
+            size={badge_size ? badge_size :20}
+            className="  size-[18px] md:size-[20px]"
           />}
       </div>
     </div>

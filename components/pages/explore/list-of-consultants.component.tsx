@@ -25,7 +25,7 @@ const ListOfConsultants = () => {
     return ( 
         <>
         
-        <div className="w-full flex items-center gap-[14px] justify-center md:gap-0 md:justify-between flex-wrap " >
+        <div className="w-full flex items-center gap-[14px] justify-start md:gap-0 md:justify-between flex-wrap " >
             {!isError && !isLoading && usersList?.users?.data?.length >0 && 
             
             <>

@@ -58,7 +58,6 @@ export const userApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          console.log("user data 1.0", data);
           dispatch(setUser({ user: data?.user }));
           dispatch(setNameHandler(data?.user?.name));
           dispatch(setUserNameHandler(data?.user?.username));
@@ -341,7 +340,7 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["categories"]
     }),
-    updateModes: builder.mutation<void, { text: any; call: any }>({
+    updateModes: builder.mutation<void, { text?: any; call?: any }>({
       query: ({ text, call }) => ({
         url: "profile/mode/update",
         method: "POST",
@@ -351,8 +350,10 @@ export const userApi = createApi({
           "Content-type": "application/json",
           Accept: "application/json"
         }
-      })
-    })
+      }),
+      invalidatesTags: ["user-data"]
+    }),
+
   })
 });
 

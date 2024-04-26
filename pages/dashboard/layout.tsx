@@ -6,7 +6,7 @@ import "../../app/globals.css";
 import SideBar from "@/components/sidebar/sidebar";
 import StoreProvider from "@/app/StoreProvider";
 import { Toaster } from "@/components/ui/toaster";
-
+import { VoiceCallProvider } from "@/context/app-context";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -22,6 +22,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <StoreProvider>
+      <VoiceCallProvider>
         <div className={`${poppins.className}`}>
           <div className="hidden lg:block lg:fixed lg:left-0 lg:top-0 lg:bottom-0 lg:w-[300px] lg:bg-sidebar_bg lg:p-4  ">
             <SideBar />
@@ -31,6 +32,7 @@ export default function DashboardLayout({
           </div>
           <Toaster />
         </div>
+      </VoiceCallProvider>
     </StoreProvider>
   );
 }

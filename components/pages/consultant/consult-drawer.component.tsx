@@ -177,7 +177,7 @@ export const ChatOption = ({handleSubmitCall,handleSubmitChat,bill}:any) => {
 
   return (
     <div className="w-full flex items-center justify-center gap-5 mt-9">
-      <div className="w-20 ">
+      {/* <div className="w-20 ">
         <div
           className={` bg-primary_color rounded-md items-center justify-center py-4  flex cursor-pointer w-[48px] md:w-full m-auto mb-3 `}
         >
@@ -193,7 +193,7 @@ export const ChatOption = ({handleSubmitCall,handleSubmitChat,bill}:any) => {
         <div className=" w-full  ">
           <p className=" text-center font-normal text-xs">Voice Call</p>
         </div>
-      </div>
+      </div> */}
 
       <div className="w-20 ">
         <div

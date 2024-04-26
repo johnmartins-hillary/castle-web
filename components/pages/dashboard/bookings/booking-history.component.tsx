@@ -14,7 +14,7 @@ interface props{
 
 }
 const BookingHistory = () => {
-    const {data,isLoading,isError,isSuccess,}:any = useGetBookingHistoryQuery()
+    const {data,isFetching,isError,isSuccess,}:any = useGetBookingHistoryQuery()
     const  bookings = data?.appointments
     return (
         <>
@@ -24,7 +24,7 @@ const BookingHistory = () => {
             </div>
 
             <div className="w-full mt-[24px]" >
-                { isLoading ? <p>Loading...</p> :  bookings?.map(({title,time,status,reference,agent,amount,customer,mode,duration}:props)=>(
+                { isFetching ? <p>Loading...</p> :  bookings?.map(({title,time,status,reference,agent,amount,customer,mode,duration}:props)=>(
                       <BookingItem key={reference} time={time} title={title} status={status} reference={reference} agent={agent} amount={amount} customer={customer} mode={mode} duration={duration}  />
                 ))}
             </div>

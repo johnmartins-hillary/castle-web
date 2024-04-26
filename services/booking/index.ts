@@ -108,5 +108,6 @@ export const {
   useLazyCancelBookingQuery,
   useLazyRejectBookingQuery,
   useEndAppointmentMutation,
-  useGetBookingHistoryQuery
+  useGetBookingHistoryQuery,
+  useLazyGetBookingHistoryQuery,
 } = bookingApi;
