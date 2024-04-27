@@ -33,7 +33,7 @@ const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
             <button
               onClick={() => {
                 if (typeof navigator !== undefined) {
-                  navigator.clipboard.writeText("");
+                  navigator.clipboard.writeText(link);
                 }
               }}
               className="w-auto  text-center text-white sticky mx-[23px] "

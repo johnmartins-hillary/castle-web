@@ -32,8 +32,8 @@ const BookingHistory = () => {
                     ))}
                     </>
                     
-                    : <div className="w-full " >
-                    <p className="text-base text-left" >No bookings/appointments available</p>
+                    : <div className="w-full mt-5 " >
+                    <p className="text-sm text-gray-400 text-left" >No bookings/appointments available</p>
                     </div>}
 
             
