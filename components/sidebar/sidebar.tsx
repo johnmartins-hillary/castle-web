@@ -16,8 +16,6 @@ const {toast} = useToast()
 const {data}:any = useGetNotificationsQuery()
 const notifications = data?.notifications?.data;
 const unread = notifications?.filter((item:any) => item?.status === "unread");
-
-console.log(notifications,unread)
 const logOutHandler =()=>{
     logOutUser()
 }
