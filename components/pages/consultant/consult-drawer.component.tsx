@@ -12,7 +12,7 @@ import { useToast } from "@/components/ui/use-toast";
 
 const ConsultDrawer = () => {
   const params = useParams<any>();
-  const  {isLoading,isError,isSuccess,data:consultantData}:any = useGetSingleUserQuery({id:params?.id})
+  const  {isLoading,isError,isSuccess,data:consultantData}:any = useGetSingleUserQuery({id:params?.index?.[0]})
   const [bookConsultant,{data,isSuccess:consultIsSuccess,isError:consultIsError,error,isLoading:booking}]:any = useBookConsultantMutation()
   const { openDrawer, setOpenDrawer } = useDrawer();
   const [deviceType, setDeviceType] = React.useState(String);

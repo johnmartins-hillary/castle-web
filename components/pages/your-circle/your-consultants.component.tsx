@@ -22,8 +22,8 @@ const YourConsultants = () => {
         
         <div className={`w-full flex items-center ${circleData?.circles.length > 1 ? 'justify-center' :'justify-start'} gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 `} >
             {isLoading ? <p>Loading...</p> :  circleData?.circles?.length >0 ? <>
-                {circleData?.circles?.map(({name,username,id,verification_status}:any)=>(
-     <Consultant name={name} username={username} verification_status={verification_status} id={id} key={id} />
+                {circleData?.circles?.map(({name,username,id,verification_status,profile_image}:any)=>(
+     <Consultant name={name} username={username} verification_status={verification_status} profile_image={profile_image} id={id} key={id} />
                 ))}
             </> : <div className="w-full flex items-center justify-center mt-3 " >
                 <p className=" font-medium text-lg md:text-xl" >You do not have anyone in your circle</p>

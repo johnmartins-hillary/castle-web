@@ -13,7 +13,7 @@ interface Props{
 }
 const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
   const params = useParams<any>();
-  const  {isLoading,isError,isSuccess,data:consultantData}:any = useGetSingleUserQuery({id:params?.id})
+  const  {isLoading,isError,isSuccess,data:consultantData}:any = useGetSingleUserQuery({id:params?.index?.[0]})
   const [bookConsultant,{data,isSuccess:consultIsSuccess,isError:consultIsError,error,isLoading:booking}]:any = useBookConsultantMutation()
   const [bill,setBill] = useState(0)
   const [minute, setMinutes] = useState(0);

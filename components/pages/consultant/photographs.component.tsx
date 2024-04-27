@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const PhotoGraphs = () => {
   const params = useParams<any>();
   // const singleUser = useSelector(({singleUser}:any)=>singleUser?.data?.user)
-  const {data,isLoading,isSuccess}:any = useGetSingleUserQuery({id:params?.id})
+  const {data,isLoading,isSuccess}:any = useGetSingleUserQuery({id:params?.index?.[0]})
   return (
     <div className="w-full m-auto md:w-[90%] lg:w-4/5 mt-8 md:mt-16">
       <div className="w-1/2 flex items-center justify-start">

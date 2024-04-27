@@ -23,13 +23,16 @@ const SignUpForm = () => {
     const [googleLink,setGoogleLink] = useState("")
     const {data,isSuccess:googleAuthSuccess}:any = useGoogleAuthQuery()
     const [signUp,{isLoading,isSuccess,error,isError,data:signUpData}]:any = useSignUpMutation()
-
+    const [email,setEmail] = useState("")
     const onSubmit =async(values:any)=>{
+        if (typeof window !== "undefined") {
+            localStorage.setItem("email",JSON.stringify(values?.email))
+        }
         const data ={email:values?.email,password:values?.password,password_confirmation:values?.password,username:values?.username}
         signUp(data)
      
     }
-    const {handleSubmit,control,register,formState:{errors,}} = useForm(
+    const {handleSubmit,control,register,formState:{errors,defaultValues}} = useForm(
         {
             defaultValues:{
                 username:"",
