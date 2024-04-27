@@ -14,12 +14,10 @@ const pathname = usePathname()
 const [logOutUser,{isLoading,isSuccess,isError}] = useLogOutUserMutation()
 const {toast} = useToast()
 const {data}:any = useGetNotificationsQuery()
-const unread =    data?.notifications?.data?.map((item:any)=>{
-    if (item?.status === "unread") {
-        return item
-    }
-});
-console.log(unread)
+const notifications = data?.notifications?.data;
+const unread = notifications?.filter((item:any) => item?.status === "unread");
+
+console.log(notifications,unread)
 const logOutHandler =()=>{
     logOutUser()
 }
@@ -111,7 +109,7 @@ const logOutHandler =()=>{
                     <Link href={path} key={name} className={`  font-normal text-base cursor-pointer  p-0 mt-1  ${isActive ? "text-white" : " text-black"}`} > 
                         {name}
                     </Link>
-                    {name === "Notifications" && unread?.length >0 && <div className="bg-red-400 w-[10px] h-[10px] rounded-[10px] right-3" />}
+                    {name === "Notifications" && unread?.length > 0 && unread !== undefined && <div className="bg-red-400 w-[10px] h-[10px] rounded-[10px] right-3" />}
                     </div>
                 )
             })}
