@@ -21,7 +21,7 @@ const Actions = ({setOpenModal}:any) => {
   const [added,setAdded] = useState(false)
   const {data:isInCircleData,isLoading:checkingCircle,isSuccess:circleSuccess}:any = useIsInCircleQuery({user_id:singleUser?.id})
   const [addToCricle,{isLoading,isError,isSuccess,data:circleData,error}]:any = useAddToCricleMutation()
-  const [removeFromCircle,{isLoading:removing,isError:IsRemoveError,isSuccess:removeSuccess,removeError,removeData}]:any = useRemoveFromCricleMutation()
+  const [removeFromCircle,{isLoading:removing,isError:IsRemoveError,isSuccess:removeSuccess,error:removeError,data:removeData}]:any = useRemoveFromCricleMutation()
   const user = getLocalStorageData("user")
   const userId = user?.id
   const params = useParams<any>();
@@ -67,7 +67,7 @@ const Actions = ({setOpenModal}:any) => {
       if (isSuccess) {
         setAdded(true)
         toast({
-          title:`Removed from circle`
+          title:`Added to circle`
         })
       }
       
@@ -135,7 +135,7 @@ const Actions = ({setOpenModal}:any) => {
             </div>
             }
             { !socialSuccess ? <Skeleton className="w-[33.33%] h-[11px] rounded-none " /> : <div className=" flex-flex_2 md:w-1/3 flex items-center justify-start gap-3 " >
-                { added ? <UsersRound onClick={handleremoveFromCirlce} color="black" size={24} /> :  <Image onClick={handleAddtoCirlce} width={24} height={24} alt="user-plus-icon" src="/images/user-plus-icon.png" className=" object-contain w-6 h-6 md:w-8 md:h-8 " />}
+                {  singleUser?.id !== userId &&  added ? <UsersRound onClick={handleremoveFromCirlce} color="black" size={24} /> :  <Image onClick={handleAddtoCirlce} width={24} height={24} alt="user-plus-icon" src="/images/user-plus-icon.png" className=" object-contain w-6 h-6 md:w-8 md:h-8 " />}
                 <div className={` w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full  `} />
             <p className={` text-xs font-light text-primary_color`}>Online</p>
             </div>}
