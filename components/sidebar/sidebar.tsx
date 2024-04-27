@@ -12,6 +12,7 @@ const route = useRouter()
 const pathname = usePathname()
 const [logOutUser,{isLoading,isSuccess,data,isError}] = useLogOutUserMutation()
 const {toast} = useToast()
+
 const logOutHandler =()=>{
     logOutUser()
 }
@@ -19,21 +20,25 @@ const logOutHandler =()=>{
         {
             name:"Home",
             icon:"/images/home-icon.png",
+            activeIcon: "",
             path:"/dashboard"
         },
         {
             name:"Explore",
             icon:"/images/gps-icon.png",
+            activeIcon: "",
             path:"/explore"
         },
         {
             name:"Profile",
             icon:"/images/user-icon.png",
+            activeIcon: "",
             path:"/profile"
         },
         {
             name:"Notifications",
             icon:"/images/bell-icon.png",
+            activeIcon: "",
             path:"/notifications"
         },
         {
@@ -44,16 +49,19 @@ const logOutHandler =()=>{
         {
             name:"Your Circle",
             icon:"/images/user-plus-icon.png",
+            activeIcon: "",
             path:"/your-circle"
         },
         {
             name:"Get Verified",
             icon:"/images/check-icon.png",
+            activeIcon: "",
             path:"/get-verified"
         },
         {
             name:"Settings",
             icon:"/images/setting-icon.png",
+            activeIcon: "",
             path:"/settings"
         },
     ]
