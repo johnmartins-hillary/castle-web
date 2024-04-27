@@ -3,13 +3,13 @@ import Image from "next/image";
 const DashboardBanner = () => {
   return (
     <>
-      <div className="w-full rounded-[24px] flex items-center justify-between md:rounded-xl bg-primary_color 2xl:w-[65%] 2xl:mx-auto ">
-        <div className="w-[70%] py-[40px] px-[23px] md:p-14 md:max-lg:w-[70%]">
+      <div className="w-full rounded-[24px] flex items-center justify-between md:rounded-xl bg-primary_color 2xl:w-[80%] 2xl:mx-auto ">
+        <div className="flex-[0.5] py-[40px] px-[15px] md:p-14 ">
           <p className="text-white text-xs font-light md:max-lg:text-xl lg:text-2xl">
             Want to make more valuable<br />connections today?
           </p>
         </div>
-        <div className="w-[30%] flex justify-center">
+        <div className="flex-[0.4] flex justify-center">
           {/* Adjust the Image component with a larger size while preserving aspect ratio */}
           <div style={{ maxWidth: "100%", maxHeight: "100%", width: "100%" }}>
             <Image
