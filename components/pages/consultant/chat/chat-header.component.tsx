@@ -60,7 +60,7 @@ const ChatHeader = ({ eventSrc }: any) => {
           />
           <p className="font-bold text-sm md:text-xl truncate ">{slugs?.[2]}</p>
         </div>
-        {data?.appointment?.status === "accepted" && (
+        {data?.appointment?.status === "accepted"   || data?.appointment?.status === "active"   && (
         <div className="w-2/5  flex items-center justify-end gap-5 px-3 ">
           {/* <Button onClick={()=>endAppointmentHandler(`/consultant/${data?.user?.id}`)} className=" bg-black w-[35px] h-[35px] rounded-[12px] p-[10px] md:p-[10px]  md:w-[46.11px] md:h-[46.11px]  md:rounded-2xl hover:bg-black rotate-45  " >
           <MdPhone size={50} className=" -rotate-45" />
