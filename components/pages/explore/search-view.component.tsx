@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { searchUsersHandler } from "@/redux/slices/users";
-import { useSearchUsersQuery } from "@/services/search/get-users";
+import { useLazyGetUsersQuery, useSearchUsersQuery } from "@/services/search/get-users";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchView = () => {
   const keyword = useSelector(({users}:any)=>users?.keyword)
-  const {} = useSearchUsersQuery({keyword:keyword})
+  const [text,setText] = useState("") 
+  const [trigger] = useLazyGetUsersQuery()
   const dispatch = useDispatch()
 const handleSubmit=()=>{
-  dispatch(searchUsersHandler(keyword))
+  // dispatch(searchUsersHandler(keyword))
+  trigger({keyword:text})
+  setText("")
 }
   return (
     <div className="w-full items-stretch justify-end mt-4 flex">
@@ -18,6 +21,8 @@ const handleSubmit=()=>{
         value={keyword}
         onChange={({target})=>{
        dispatch(searchUsersHandler(target.value))
+      // trigger({keyword:target.value})
+      setText(target.value)
         }}
           type="text"
           className=" w-[70%] md:w-3/4 outline-none py-[12px] px-[23px]  border-none text-primary_color bg-none bg-transparent md:p-3 "

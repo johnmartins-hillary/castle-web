@@ -52,13 +52,15 @@ const FundWallet = () => {
                 <PayWithCard setOpenFundingMethod={setOpenFundingMethod} setOpenWithdrawal={setOpenWithdrawal} />
                 </div>
             </div> 
-            <TransactionHistory/>
+
+
+            {/* <TransactionHistory/> */}
             <FundWalletModal openModal={openFundWallet} setOpenModal={setOpenFundWallet} callBackFunction={setOpenFundingComplete} />
-            <SaveCardModal openModal={opensaveCard} setOpenModal={setOpenSaveCard}  />
-            <FundingCompleteModal openModal={openFundingComplete} setOpenModal={setOpenFundingComplete} />
-            <FundingMethodModal openModal={openFundingMethod} setOpenModal={setOpenFundingMethod} />
-            <WithdrawalModal openModal={openWithdrawal} setOpenModal={setOpenWithdrawal} />
-            <WithdrawalCompleteModal openModal={openWithdrawalComplete} setOpenModal={setOpenWithdrawalComplete} />
+        <SaveCardModal openModal={opensaveCard} setOpenModal={setOpenSaveCard}  />
+        <FundingCompleteModal openModal={openFundingComplete} setOpenModal={setOpenFundingComplete} />
+        <FundingMethodModal openModal={openFundingMethod} setOpenModal={setOpenFundingMethod} />
+        <WithdrawalModal openModal={openWithdrawal} setOpenModal={setOpenWithdrawal} callBackFunction      ={setOpenWithdrawalComplete} />
+        <WithdrawalCompleteModal openModal={openWithdrawalComplete} setOpenModal={setOpenWithdrawalComplete} />
         </DashboardLayout>
         </>
       );

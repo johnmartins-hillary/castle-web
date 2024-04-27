@@ -42,6 +42,19 @@ export const circleApi = createApi({
                 }),
                 invalidatesTags: ['my-circle']
             }),
+            removeFromCricle: builder.mutation<void, { user_id: string }>({
+                query: ({ user_id }) => ({
+                    url: "remove",
+                    mode: "cors",
+                    method: "DELETE",
+                    body: { user_id: user_id },
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8',
+                        'Accept': 'application/json'
+                    }
+                }),
+                invalidatesTags: ['my-circle']
+            }),
             isInCircle: builder.query<void, { user_id: any }>({
                 query: ({ user_id }) => ({
                     url: `check?user_id=${user_id}`,
@@ -58,4 +71,4 @@ export const circleApi = createApi({
 })
 
 
-export const { useGetCircleQuery, useAddToCricleMutation, useIsInCircleQuery } = circleApi
+export const { useGetCircleQuery, useAddToCricleMutation, useIsInCircleQuery,useRemoveFromCricleMutation } = circleApi

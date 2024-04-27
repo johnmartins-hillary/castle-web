@@ -13,7 +13,7 @@ const WithdrawalCompleteModal = ({openModal,setOpenModal}:modalProps) => {
             <Modal  onClose={()=>{
                 setOpenModal(false)
             }}  open={openModal} >
-                <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] py-[60px] h-[auto] md:w-[655px] md:h-[654px] md:flex md:flex-col md:items-center md:justify-center  " >
+                <div className=" bg-white rounded-[24px] shadow-[#00000040] shadow-lg w-[375px] p-[23px] py-[60px] h-[auto] md:w-[655px] md:h-[654px] md:flex md:flex-col md:items-center md:justify-center  lg:h-auto lg:py-[48px]  " >
 
             <div className="w-full flex flex-1 items-center justify-center" >
                 <CheckIcon color={'black'} onClick={()=>{}}  size={115.5} className={'m-auto'} />

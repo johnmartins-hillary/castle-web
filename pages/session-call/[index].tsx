@@ -22,7 +22,7 @@ const SessionCall =()=>{
 
             <CallTimer/>
             <VoiceCallModule/>
-            <EndCall/>
+            {/* <EndCall/> */}
         </DashboardLayout>
         </>
     )

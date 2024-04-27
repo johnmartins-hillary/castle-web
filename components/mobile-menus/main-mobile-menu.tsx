@@ -28,7 +28,7 @@ useEffect(()=>{
             title:"Logout Successful"
         })
     }
-},[isSuccess])
+},[isSuccess,router])
 
 useEffect(()=>{
     if (isError) {
@@ -37,7 +37,7 @@ useEffect(()=>{
             title:"Logout Successful"
         })
     }
-},[isError])
+},[isError,router])
 
     const routes=[
         {

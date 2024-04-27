@@ -1,23 +1,78 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useVerifyProfileMutation } from "@/services/user";
+import { useToast } from "@/components/ui/use-toast";
+// import { useToast } from "@/components/ui/use-toast";
+import { useGetUserDetailsQuery, useVerifyProfileMutation } from "@/services/user";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const VerificationSteps =()=>{
-    const [verifyProfile,{data,isLoading,isSuccess}] = useVerifyProfileMutation()
-    const [photo_id_front,setPhototFront] = useState("")
+    const [verifyProfile,{data,isLoading,isSuccess,isError,error}]:any = useVerifyProfileMutation()
+    const {data:userdata}:any = useGetUserDetailsQuery("")
+    const [photo_id_front,setPhototFront] = useState<any>()
     const [photo_id_back,setPhototBack] = useState("");
+    const [couponCode,setCouponCode] = useState("");
     const router = useRouter()
-    const handleSubmit=()=>{
-        const formData = new FormData();
-        formData.append("photo_id_front",photo_id_front)
-        formData.append("photo_id_back",photo_id_back)
-        verifyProfile(formData)
+    const {toast} = useToast()
+
+    const handlePhoto=(e:any)=>{
+        const [file] = e.target.files;
+        setPhototFront(e.target.files[0])
+        if (e.target.files[0]) {
+            toast({
+                title:"File Selected",
+            })
+        }
     }
+    const handleSubmit=()=>{
+        if (userdata?.portfolio?.length >0 && userdata?.social?.length >0 && userdata?.user?.bio !== null && userdata?.user?.category !== null && userdata?.user?.profile_image !== null && userdata?.user?.name !== null ) {
+            verifyProfile({photo_id_front,code:couponCode})
+            setCouponCode("")
+            setPhototFront("")
+        }
+        else{
+            toast({
+                title:"Oops!",
+                description:"Fill all your profile fields before verifying"
+            })
+            router.push("/profile")
+        }
+    }
+
+
+    useEffect(()=>{
+
+        if (isSuccess) {
+            if (data?.message?.includes("Insufficient")) {
+                toast({
+                    title:"Oops",
+                    description:`${data?.message}`,
+                })
+            }
+
+            else{
+                toast({
+                    title:`${data?.message}`,
+                })
+                router.push("/get-verified/verification-submitted")
+            }
+        }
+        else if(isError){
+            toast({
+                title:"Oops",
+
+             description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
+})
+        }
+
+    },[isLoading,isSuccess,isError,error])
+    const disableBtn = photo_id_front === ""  ? true : false
+
     return(
         <>
         <div className="w-full mt-9">
@@ -30,23 +85,25 @@ const VerificationSteps =()=>{
                 <div className="w-full mt-4 md:w-2/5 md:mt-0" >
                 <div className="w-full" >
                 <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 1</p>
-                <p className="font-normal text-xs md:text-sm mt-5 " >Go to your <span className="font-bold cursor-pointer underline">profile</span> and correctly fill all the fields </p>
+                <p className="font-normal text-xs md:text-sm mt-5 " >Go to your <Link href={'/profile'} className="font-bold text-black cursor-pointer underline">profile</Link> and correctly fill all the fields </p>
                 <p className="font-normal text-[10px] md:text-xs mt-3 " >Make sure to sell yourself using images and lots of information </p>
                 </div>
                 </div>
                 <div className="w-full mt-4 md:w-2/5 md:mt-0" >
                 <div className="w-full" >
                 <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base" >Step 2</p>
-                    <div className="flex items-start justify-start gap-4 w-full mt-5" >
+                    <Label htmlFor="photo-front" className="flex items-start justify-start gap-4 w-full mt-5" >
+                    <input onChange={(e)=>{handlePhoto(e)}}  type="file" className="hidden" id="photo-front"/>
                         <Image src={'/images/upload-icon.png'} width={100} height={89} alt="upload" />
                         <div className=" w-auto" >
                         <p className="font-normal text-xs md:text-sm" >Upload a valid ID card</p>
                         <p className="font-normal text-[10px] md:text-xs mt-3 " >Your data is safe with us.</p>
+                        <p className="font-normal text-[10px] md:text-xs mt-3 " >Your ID: {photo_id_front?.name}</p>
                         </div>
                    
-                    </div>
+                    </Label>
                 </div>
-                <Indicator setPhototBack={setPhototBack} setPhototFront={setPhototFront} photo_id_back={photo_id_back} photo_id_front={photo_id_front} />
+                {/* <Indicator setPhototBack={setPhototBack} setPhototFront={setPhototFront} photo_id_back={photo_id_back} photo_id_front={photo_id_front} /> */}
                 </div>
             </div>
             
@@ -60,9 +117,9 @@ const VerificationSteps =()=>{
                     <Button className="w-[142px] text-xs bg-primary_color rounded-[12px] p-3" >
                         Pay from Wallet
                     </Button>
-                    <Button className="w-[142px] text-xs bg-white rounded-[12px] px-9 border-primary_color border-[0.6px] " variant="outline" >
-                    Enter Coupon Code
-                    </Button>
+                    <Input placeholder="Enter Coupon Code" value={couponCode} onChange={({target})=>{
+                            setCouponCode(target.value)
+                    }}  className="w-[142px] text-xs bg-white rounded-[12px] px-3 border-primary_color border-[0.6px] " />
                         </div>
 
                         <div className="w-full mt-12 " >
@@ -71,7 +128,7 @@ const VerificationSteps =()=>{
                 </div>
                 </div>
                 <div className=" w-full flex items-center justify-center md:block md:w-2/5 mt-14 md:mt-0 md:max-lg:w-full md:max-lg:mt-8 " >
-                   <Button disabled={isLoading}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
+                   <Button disabled={isLoading || disableBtn}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
                         {isLoading ? "Submitting..." : "Submit Application"}
                     </Button>
                      
@@ -111,7 +168,6 @@ const Indicator = ({photo_id_front,photo_id_back,setPhototFront,setPhototBack}:a
         <>
         <div className="w-full flex items-center justify-between mt-[25px] " >
             <div className="w-1/2 flex items-center justify-start gap-[12px]" >
-                <input onChange={(e)=>{handlePhoto(e,"ptf")}}  type="file" className="hidden" id="photo-front"/>
                 <Checkbox checked={ptfCheck} />
                 <Label htmlFor="photo-front" className="text-xs md:text-sm" >Photo Id Front</Label>
             </div>

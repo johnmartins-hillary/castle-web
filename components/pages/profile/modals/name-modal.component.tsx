@@ -1,24 +1,15 @@
 // import { Button } from "@/components/ui/button";
 "use client";
 import Modal from "@/components/modal/modal.component";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
-import { useAppSelector } from "@/lib/hooks";
+import Select from "react-select";
 import {
   setNameHandler,
   setUserNameHandler
 } from "@/redux/slices/user/user-profile.slice";
+import { useGetCategoryListQuery } from "@/services/category";
 import {
   useAddCategoryMutation,
   useUpdateUserProfileMutation
@@ -32,7 +23,9 @@ const UsernameModal = ({ openModal, setOpenModal }: any) => {
   const profileState = useSelector(({ userprofile }: any) => userprofile);
   const username = useSelector(({ userprofile }: any) => userprofile.username);
   const [category, setCategory] = useState("");
+  const { data: category_list_data }: any = useGetCategoryListQuery();
   const { toast } = useToast();
+  const [category_list, setCategorylist] = useState<any>();
   const [
     updateUserProfile,
     { data, isLoading, isError, isSuccess, error }
@@ -76,8 +69,35 @@ const UsernameModal = ({ openModal, setOpenModal }: any) => {
     categoryError,
     categoryLoading
   ]);
+
+  useEffect(() => {
+    const formattedCategries = category_list_data?.categories?.map(
+      (category: any) => ({
+        label: category.category_name,
+        value: category.category_name?.toLowerCase()
+      })
+    );
+
+    setCategorylist(formattedCategries);
+  }, [category_list_data]);
   const disableBtn =
     name === "" && username === "" && category === "" ? true : false;
+
+  const customStyles = {
+    control: (provided: any) => ({
+      ...provided,
+      background: "#EFEFEF",
+      border: "none",
+      borderRadius: 21,
+      width: 246,
+      padding: 0
+    }),
+    indicatorSeparator: (provided: any) => ({
+      ...provided,
+      display: "none"
+    })
+  };
+
   return (
     <>
       <Modal
@@ -104,12 +124,19 @@ const UsernameModal = ({ openModal, setOpenModal }: any) => {
               </Label>
             </div>
             <div className="w-full lg:w-[45%] mt-[30px]">
-              <Input
+              {/* <Input
                 value={category}
                 onChange={(e: any) => {
                   setCategory(e.target.value);
                 }}
                 className="w-[246px] bg-light_grey rounded-[21px] p-[12px] "
+              /> */}
+              <Select
+                styles={customStyles}
+                onChange={({ label, value }: any) => {
+                  setCategory(value);
+                }}
+                options={category_list}
               />
               <Label className=" text-[14px] text-left font-light  top-[14px] relative left-[15px] ">
                 Category
