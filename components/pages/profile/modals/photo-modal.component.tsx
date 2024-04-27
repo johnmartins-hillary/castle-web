@@ -30,6 +30,8 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
                 toast({
                     title:"Photo Uploaded Successfully "
                 })
+                setImage("")
+                setImg(null)
             }
 
             else if (isError) {
@@ -39,8 +41,21 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
 
                  description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
     })
+
+    setImage("")
+    setImg(null)
             }
+
+            // return()=>{
+            //     setImage("")
+            //     setImg(null)
+            // }
         },[isLoading,isLoading,error,isSuccess])
+        const handleCancel =()=>{
+            setOpenModal(false)
+            setImage("")
+            setImg(null)
+        }
     return (
         <> 
             <Modal
@@ -58,16 +73,12 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
                         type="file" id="picture-upload"  className="hidden"/>
 
                           <div className="md:w-1/2" >
-                          {image  ? 
-                            <Image src={image} width={161} height={161} alt="photograph" className=" w-[161px] h-[161px] rounded-full mx-auto mb-4  md:rounded-none md:w-[245px] md:h-[281px]" />
-                         : 
-                        <div className="w-full flex items-center justify-center my-[23px]" >
-                            <CiImageOn size={136} color="#7e7e7e"  />
-                        </div>}
+                          {image  &&
+                            <Image src={image} width={161} height={161} alt="photograph" className=" w-[161px] h-[161px] rounded-full mx-auto mb-4  md:rounded-none md:w-[245px] md:h-[281px]" />}
                           </div>
 
                      
-                      <div className="md:w-1/2 md:flex md:flex-col-reverse" >
+                      <div className=" w-full md:w-1/2 md:flex md:flex-col-reverse" >
                       {image ? <button onClick={handleSubmit} disabled={isLoading || disableBtn} className="w-[135px] bg-black rounded-[22px] py-[13px] text-center text-white text-[17px] mx-auto " >
                            {isLoading ? "Saving..." : "Save"}
                         </button> :  
@@ -76,7 +87,7 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
                         Upload a picture
                     </label>}
 
-                    <p onClick={()=>{setOpenModal(false)}} className="text-center  text-[20px] font-normal mt-5 cursor-pointer md:mb-3 " >
+                    <p onClick={handleCancel} className="text-center  text-[20px] font-normal mt-5 cursor-pointer md:mb-3 " >
                         Cancel
                     </p>
                       </div>

@@ -85,6 +85,8 @@
   h5,
   h6,
   span,
+  a,
+  li,
   label {
     font-family: var(--font-poppins);
   }

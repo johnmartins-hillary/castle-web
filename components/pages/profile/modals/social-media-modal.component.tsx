@@ -25,7 +25,19 @@ const SocialMediaModal = ({openModal,setOpenModal}:any) => {
         {
             label:'LinkedIn',
             value:'linkedIn'
-        }
+        },
+        {
+            label:'Youtube',
+            value:'youtube'
+        },
+        {
+            label:'Tiktok',
+            value:'tiktok'
+        },
+        {
+            label:'Twitter',
+            value:'twitter'
+        },
     ]
 
     const [uploadSocialLink,{isLoading,isError,isSuccess,error}]:any = useUploadSocialLinkMutation()
@@ -51,6 +63,10 @@ const SocialMediaModal = ({openModal,setOpenModal}:any) => {
                 description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
             })
             
+        }
+        return()=>{
+            setPlatForm("")
+            setSocialLink("")
         }
     },[isSuccess,isLoading,isError])
     const customStyles ={

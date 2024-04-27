@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Linkedin, UserRound, UsersRound, X } from "lucide-react";
 import { RiFacebookLine, RiInstagramLine } from "react-icons/ri";
-import { FaFacebook, FaInstagramSquare, FaLinkedin} from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare, FaLinkedin, FaTiktok, FaYoutube} from "react-icons/fa";
 import { FaSquareXTwitter} from "react-icons/fa6";
 import { useParams, } from "next/navigation";
 import Link from "next/link"
@@ -46,6 +46,16 @@ const Actions = ({setOpenModal}:any) => {
     {
       icon:<FaFacebook color="black" size={30}  />,
       name:"facebook",
+       id:4
+    },
+    {
+      icon:<FaYoutube color="black" size={30}  />,
+      name:"youtube",
+       id:4
+    },
+    {
+      icon:<FaTiktok color="black" size={30}  />,
+      name:"tiktok",
        id:4
     },
 ]
