@@ -1,14 +1,14 @@
 import React from "react";
 import AuthLayout from "../auth/layout";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import FAQComponent from "./FAQComponent";
+import Link from "next/link"
 
 const About = () => {
   return (
     <AuthLayout>
-      <div className="flex flex-col gap-24 p-12">
-        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
+      <div className="flex flex-col gap-28 p-4 md:p-12 w-full">
+        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start w-full">
           <div className="flex-1 text-[14px] sm:text-[24px] ">
             In today&apos;s digital age, leaders, experts, influencers, and creators
             find themselves navigating a sea of cross-platform inboxes, while a
@@ -27,7 +27,7 @@ const About = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-6 items-start justify-start">
+        <div className="flex flex-col sm:flex-row gap-6 items-start justify-start w-full">
           <div className="flex-1 text-2xl relative flex items-center justify-center w-full h-full">
             <Image
               className="rounded relative"
@@ -37,7 +37,7 @@ const About = () => {
               alt=""
             />
             <Image
-              className="rounded relative top-[-40%"
+              className="rounded relative top-[-60px]"
               width={150}
               height={300}
               src="/images/mockup 1.png"
@@ -51,23 +51,23 @@ const About = () => {
               with expert consultants who can provide personalized advice and
               solutions to their most pressing questions and challenges.
             </p>
-            <Button className="bg-black text-white rounded-full w-[272px] h-[67px] text-[24px]">
+            <Link href="/auth/sign-up" className="bg-black flex items-center justify-center text-white rounded-full w-[203px] h-[50px] md:w-[272px] md:h-[67px] text-[24px]">
               Start Carsling
-            </Button>
+            </Link>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
+        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start w-full">
           <div className="flex-1 text-2xl flex-col flex gap-8 text-[14px] sm:text-[24px]">
-          <h3 className="font-bold">Who&apos;s Carsle for?</h3>
+            <h3 className="font-bold">Who&apos;s Carsle for?</h3>
             <p>
               <strong>CARSLE</strong> is open to anyone, with a focus on serving
               the African community. It is particularly beneficial for leaders,
               experts, influencers, creators, and anyone seeking mentorship or
               consultation.
             </p>
-            <Button className="bg-black text-white rounded-full w-[272px] h-[67px] text-[24px]">
+            <Link href="/auth/sign-up" className="bg-black flex items-center justify-center text-white rounded-full w-[203px] h-[50px] md:w-[272px] md:h-[67px] text-[24px]">
               Start Carsling
-            </Button>
+            </Link>
           </div>
           <div className="flex-1 flex items-end justify-end">
             <Image
@@ -79,7 +79,7 @@ const About = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
+        <div className="flex flex-col sm:flex-row gap-6  items-start justify-start w-full">
           <div className="flex-1 text-2xl relative flex items-center justify-center w-full h-full">
             <Image
               className="rounded relative "
@@ -89,7 +89,7 @@ const About = () => {
               alt=""
             />
             <Image
-              className="rounded relative top-[-40%]"
+              className="rounded relative top-[-60px]"
               width={150}
               height={300}
               src="/images/mockup3 1.png"
@@ -105,14 +105,14 @@ const About = () => {
               both grant and receive consultations, while unverified users can
               only receive consultations.
             </p>
-            <Button className="bg-black text-white rounded-full w-[272px] h-[67px] text-[24px]">
+            <Link href="/auth/sign-up" className="bg-black flex items-center justify-center text-white rounded-full w-[203px] h-[50px] md:w-[272px] md:h-[67px] text-[24px]">
               Start Carsling
-            </Button>
+            </Link>
           </div>
         </div>
 
         <div className="flex flex-col w-full p-10 items-center justify-center gap-8">
-        <div className="text-[64px] font-very-bold">FAQS</div>
+        <div className="text-[50px] md:text-[64px] font-very-bold">FAQS</div>
         <FAQComponent question="What types of consultations are available on CARSLE?" answer="Consultations on CARSLE cover a wide range of topics and industries, including business, entrepreneurship, career development, personal growth, health, finance, and more. Users can find experts in their desired field and request consultations accordingly."/>
         <FAQComponent question="How do users pay for consultations?" answer="Users pay for consultations by the minute at rates set by experts, with payments processed securely through the platform."/>
         <FAQComponent question="Can users leave reviews or ratings?" answer="Yes, users can leave reviews and ratings to maintain quality standards and assist others in selecting the right expert."/>
