@@ -1,10 +1,11 @@
 "use client";
 import Modal from "@/components/modal/modal.component";
+import { useToast } from "@/components/ui/use-toast";
 import { useGetUserDetailsQuery } from "@/services/user";
 
 const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
   const { data } = useGetUserDetailsQuery("");
-
+  const {toast} = useToast()
   const user = data?.user;
   const link = `https://carsle.com/consultant/${user?.id}/${encodeURIComponent(
     user?.name
@@ -33,7 +34,12 @@ const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
             <button
               onClick={() => {
                 if (typeof navigator !== undefined) {
-                  navigator.clipboard.writeText(link);
+                  navigator.clipboard.writeText(link).then(()=>{
+                    toast({
+                      title:"Copied"
+                    })
+                  })
+                  
                 }
               }}
               className="w-auto  text-center text-white sticky mx-[23px] "
