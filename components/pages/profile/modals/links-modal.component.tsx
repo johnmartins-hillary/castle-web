@@ -35,6 +35,10 @@ const LinksModal = ({openModal,setOpenModal}:any) => {
                 description:`${error?.data?.message ? error?.data?.message : 'Something went wrong' }`
             })
         }
+        return()=>{
+            setLink("")
+            setPlatForm("")
+        }
     },[isSuccess,isLoading,isError])
     const disableBtn = platform ==="" && link === "" ? true : false
     return (

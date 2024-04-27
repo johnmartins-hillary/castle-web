@@ -7,17 +7,6 @@ const BioData = () => {
     const params = useParams<any>();
     const {data,isSuccess}:any = useGetSingleUserQuery({id:params?.id})
     const portfolios = data?.portfolio
-    // const data = [ "Chief Executive Officer at The Val Okafor Company",
-    // "Global Change Ambassador at Inspiring Youths Africa Magazine & Awards",
-    // "Programs Officer at GOTNI Leadership Centre",
-    // "2023 Innovative Young Africans Awardee at International Internship University - IIU",
-    // "Official member at International Model United Nations",
-    // "Communications Lead at Angel of Hope Empowerment Foundation",
-    // "Fellow at YALI Regional Leadership Center West Africa",
-    // "2020 Hundred Most Influential Young People Awardee at Opportunities Hub",
-    // "Fellow at African ChangeMakers Initiative - #ACi",
-    // "Studied at University of Nigeria, Nsukka",
-    // "Lives in Abuja, Nigeria"]
     return ( 
         <>
         <div className={`w-full mt-9 ${!isSuccess ? 'px-0' : 'px-5'} `} >

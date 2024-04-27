@@ -24,6 +24,8 @@ const ProfilePicModal = ({ openModal, setOpenModal }) => {
     const [image, setImage] = useState(null)
     const onClose = () => {
         setOpenModal(false)
+        dispatch(setProfilePicHandler(""))
+        setImage("")
     }
     const profileImageHandler = async (e) => {
         const [file] = e.target.files;
@@ -47,6 +49,8 @@ const ProfilePicModal = ({ openModal, setOpenModal }) => {
             toast({
                 title: "Profile Image Uploaded Successfully "
             })
+            dispatch(setProfilePicHandler(""))
+            setImage("")
         }
 
         else if (isError) {
@@ -56,7 +60,12 @@ const ProfilePicModal = ({ openModal, setOpenModal }) => {
 
                 description: `${error?.data?.message ? error?.data?.message : 'Something went wrong'}`
             })
+            dispatch(setProfilePicHandler(""))
+            setImage("")
         }
+        // return () => {
+     
+        // }
     }, [isLoading, isLoading, error, isSuccess])
     const disbleBtn = image === "" ? true : false
     return (

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Linkedin, UserRound, UsersRound, X } from "lucide-react";
 import { RiFacebookLine, RiInstagramLine } from "react-icons/ri";
-import { FaFacebook, FaInstagramSquare, FaLinkedin} from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare, FaLinkedin, FaTiktok, FaYoutube} from "react-icons/fa";
 import { FaSquareXTwitter} from "react-icons/fa6";
 import { useParams, } from "next/navigation";
 import Link from "next/link"
@@ -9,7 +9,7 @@ import { useGetSingleUserQuery } from "@/services/search/get-users";
 import { useDrawer } from "@/context/drawer-context";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { useAddToCricleMutation, useIsInCircleQuery } from "@/services/circle";
+import { useAddToCricleMutation, useIsInCircleQuery, useRemoveFromCricleMutation } from "@/services/circle";
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +20,7 @@ const Actions = ({setOpenModal}:any) => {
   const [added,setAdded] = useState(false)
   const {data:isInCircleData,isLoading:checkingCircle,isSuccess:circleSuccess}:any = useIsInCircleQuery({user_id:singleUser?.id})
   const [addToCricle,{isLoading,isError,isSuccess,data:circleData,error}]:any = useAddToCricleMutation()
+  const [removeFromCircle,{isLoading:removing,isError:IsRemoveError,isSuccess:removeSuccess,removeError,removeData}]:any = useRemoveFromCricleMutation()
 
   const params = useParams<any>();
     const {data,isSuccess:socialSuccess}:any = useGetSingleUserQuery({id:params?.id})
@@ -47,6 +48,16 @@ const Actions = ({setOpenModal}:any) => {
       name:"facebook",
        id:4
     },
+    {
+      icon:<FaYoutube color="black" size={30}  />,
+      name:"youtube",
+       id:4
+    },
+    {
+      icon:<FaTiktok color="black" size={30}  />,
+      name:"tiktok",
+       id:4
+    },
 ]
 
 
@@ -69,6 +80,28 @@ const Actions = ({setOpenModal}:any) => {
       }
     },[isSuccess,isLoading,circleData,isError,error])
 
+
+
+
+    useEffect(()=>{
+      if (removeSuccess) {
+        setAdded(false)
+        toast({
+          title:`${removeData?.message}`
+        })
+      }
+      
+     else if (IsRemoveError) {
+        toast({
+          title:'Oops!',
+          description:`${removeError?.data?.message ? removeError?.data?.message : 'Something went wrong' }`
+        })
+      }
+      return()=>{
+        setAdded(false)
+      }
+    },[removeSuccess,IsRemoveError,removeData,removing,removeError])
+
     useEffect(()=>{
         if (isInCircleData?.status) {
           setAdded(true)
@@ -80,6 +113,9 @@ const Actions = ({setOpenModal}:any) => {
     },[isInCircleData,checkingCircle,circleSuccess])
     const handleAddtoCirlce=()=>{
       addToCricle({user_id:singleUser?.id})
+    }
+    const handleremoveFromCirlce=()=>{
+      removeFromCircle({user_id:singleUser?.id})
     }
     return ( 
         <>
@@ -96,7 +132,7 @@ const Actions = ({setOpenModal}:any) => {
             </div>
             }
             { !socialSuccess ? <Skeleton className="w-[33.33%] h-[11px] rounded-none " /> : <div className=" flex-flex_2 md:w-1/3 flex items-center justify-start gap-3 " >
-                { added ? <UsersRound color="black" size={24} /> :  <Image onClick={handleAddtoCirlce} width={24} height={24} alt="user-plus-icon" src="/images/user-plus-icon.png" className=" object-contain w-6 h-6 md:w-8 md:h-8 " />}
+                { added ? <UsersRound onClick={handleremoveFromCirlce} color="black" size={24} /> :  <Image onClick={handleAddtoCirlce} width={24} height={24} alt="user-plus-icon" src="/images/user-plus-icon.png" className=" object-contain w-6 h-6 md:w-8 md:h-8 " />}
                 <div className={` w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full  `} />
             <p className={` text-xs font-light text-primary_color`}>Online</p>
             </div>}

@@ -49,20 +49,20 @@ const FundWallet = () => {
             </div>
             {/* <AmountSetter/> */}
 
-{/* 
+
             <div className="w-full flex flex-col items-stretch justify-between mt-10 md:flex-row " >
                 <div className="w-full md:w-1/2" >
             <PayWithCard setOpenFundingMethod={setOpenFundingMethod} setOpenWithdrawal={setOpenWithdrawal} />
                 </div>
-            </div> */}
+            </div> 
 
 
-            <TransactionHistory/>
+            {/* <TransactionHistory/> */}
             <FundWalletModal openModal={openFundWallet} setOpenModal={setOpenFundWallet} callBackFunction={setOpenFundingComplete} />
         <SaveCardModal openModal={opensaveCard} setOpenModal={setOpenSaveCard}  />
         <FundingCompleteModal openModal={openFundingComplete} setOpenModal={setOpenFundingComplete} />
         <FundingMethodModal openModal={openFundingMethod} setOpenModal={setOpenFundingMethod} />
-        <WithdrawalModal openModal={openWithdrawal} setOpenModal={setOpenWithdrawal} />
+        <WithdrawalModal openModal={openWithdrawal} setOpenModal={setOpenWithdrawal} callBackFunction      ={setOpenWithdrawalComplete} />
         <WithdrawalCompleteModal openModal={openWithdrawalComplete} setOpenModal={setOpenWithdrawalComplete} />
         </DashboardLayout>
         

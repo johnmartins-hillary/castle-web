@@ -70,11 +70,13 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    font-family:var(--font-poppins) ;
+    font-family: var(--font-poppins);
     min-height: 100vh;
   }
+
   p,
   h1,
   h2,
@@ -82,7 +84,19 @@
   h4,
   h5,
   h6,
-  span,label {
-    font-family:var(--font-poppins) ;
+  span,
+  a,
+  li,
+  label {
+    font-family: var(--font-poppins);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none
   }
 }

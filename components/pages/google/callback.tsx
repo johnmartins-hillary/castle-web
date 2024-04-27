@@ -24,7 +24,7 @@ useEffect(()=>{
             toast({
                 title:"Sign In Successful",
             })
-            router.replace("/dashboard")
+            router.replace("/profile")
             
         }
     },[isSuccess])
