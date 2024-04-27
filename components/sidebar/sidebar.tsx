@@ -7,12 +7,18 @@ import { usePathname } from 'next/navigation'
 import { useLogOutUserMutation } from "@/services/auth";
 import { useEffect } from "react";
 import { useToast } from "../ui/use-toast";
+import { useGetNotificationsQuery } from "@/services/notifications";
 const SideBar = () => {
 const route = useRouter()
 const pathname = usePathname()
-const [logOutUser,{isLoading,isSuccess,data,isError}] = useLogOutUserMutation()
+const [logOutUser,{isLoading,isSuccess,isError}] = useLogOutUserMutation()
 const {toast} = useToast()
-
+const {data}:any = useGetNotificationsQuery()
+const unread =    data?.notifications?.data?.map(({status}:any,item:any)=>{
+    if (status === "unread") {
+        return item
+    }
+});
 const logOutHandler =()=>{
     logOutUser()
 }
@@ -103,6 +109,7 @@ const logOutHandler =()=>{
                     <Link href={path} key={name} className={` text-black font-normal text-base cursor-pointer  p-0 mt-1`} > 
                         {name}
                     </Link>
+                    {name === "Notifications" && unread?.length >0 && <div className="bg-red-400 w-[10px] h-[10px] rounded-[10px] right-3" />}
                     </div>
                 )
             })}

@@ -1,11 +1,16 @@
-import { useGetNotificationsQuery } from "@/services/notifications";
+import { useGetNotificationsQuery, useLazyMarkAllReadQuery } from "@/services/notifications";
 import NotificationItem from "./notification-item.component";
+import { useEffect } from "react";
 
 const NotificationView = () => {
-    const {data,isLoading,isError,error}:any = useGetNotificationsQuery()
-    console.log("notification data",data)
+    const {data,isLoading,isError,error,isSuccess}:any = useGetNotificationsQuery()
     const notifications = data?.notifications?.data;
-    console.log(notifications)
+    const [trigger] = useLazyMarkAllReadQuery() 
+    useEffect(()=>{
+        if (isSuccess) {
+            trigger()
+        }
+    },[isSuccess])
     return ( 
         <>
         <div className="w-full mt-8" >

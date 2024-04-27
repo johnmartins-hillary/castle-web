@@ -39,10 +39,10 @@ const ConsultMobileMenu = ({showModal,setShowModal}:Props) => {
   },[consultIsSuccess,consultIsError,error,isLoading,booking])
 
   const handleSubmitCall =()=>{
-    bookConsultant({agentId:params?.id,timeInMin:minute,mode:"call"})
+    bookConsultant({agentId:params?.index?.[0],timeInMin:minute,mode:"call"})
   }
   const handleSubmitChat =()=>{
-    bookConsultant({agentId:params?.id,timeInMin:minute,mode:"text"})
+    bookConsultant({agentId:params?.index?.[0],timeInMin:minute,mode:"text"})
   }
 
 
