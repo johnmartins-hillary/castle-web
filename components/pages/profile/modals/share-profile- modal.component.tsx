@@ -2,10 +2,11 @@
 import Modal from "@/components/modal/modal.component";
 import { useToast } from "@/components/ui/use-toast";
 import { useGetUserDetailsQuery } from "@/services/user";
+import { useState } from "react";
 
 const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
   const { data } = useGetUserDetailsQuery("");
-  const {toast} = useToast()
+  const [copyText,setCopyText] = useState("Copy")
   const user = data?.user;
   const link = `https://carsle.com/consultant/${user?.id}/${encodeURIComponent(
     user?.name
@@ -35,16 +36,14 @@ const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
               onClick={() => {
                 if (typeof navigator !== undefined) {
                   navigator.clipboard.writeText(link).then(()=>{
-                    toast({
-                      title:"Copied"
-                    })
+                    setCopyText("Copied")
                   })
                   
                 }
               }}
               className="w-auto  text-center text-white sticky mx-[23px] "
             >
-              Copy
+            {copyText}
             </button>
           </div>
           <div className="w-full flex items-center justify-end mt-[50px]">
