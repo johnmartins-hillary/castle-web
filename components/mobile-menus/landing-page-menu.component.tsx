@@ -13,8 +13,8 @@ const LandingPageMenu = ({showModal,setShowModal}:Props) => {
     const router = useRouter();
     const routes = [
         { name: "Home", link: "/" },
-        { name: "About", link: "/" },
-        { name: "Contact", link: "/" }
+        { name: "About", link: "/about" },
+        { name: "Contact", link: "/contact" }
       ];
 
     return ( 
@@ -25,7 +25,6 @@ const LandingPageMenu = ({showModal,setShowModal}:Props) => {
           setShowModal(false)
          }}
     >
-
         <div className=" bg-white shadow-[#00000040] shadow-lg z-20 rounded-[18px] p-[13px] h-[365px] w-[392px] flex flex-col items-center justify-center ">
         <CloseIcon  color={'black'} className={'absolute z-10 right-[34px] top-[71px]'} size={24}  onClick={()=>{setShowModal(false)}}/>
         <div className='w-full flex flex-[3] mt-14 flex-col items-center justify-center ' >
@@ -41,12 +40,13 @@ const LandingPageMenu = ({showModal,setShowModal}:Props) => {
 
         <div className="flex flex-[0.5] items-end  w-full justify-center">
         <ul className="flex items-center justify-center gap-4">
-          {routes.map(({ name }, index) =>
+          {routes.map(({ name, link }, index) =>
             <li
               key={index}
               className="font-light text-sm cursor-pointer  mx-2"
+              
             >
-              {name}
+              <a href={link}>{name}</a>
             </li>
           )}
         </ul>

@@ -43,7 +43,7 @@ export default function AuthLayout({
 <StoreProvider>
   <div className={poppins.className}>
       <NavBar/>
-    <main   className="w-full flex items-center justify-center  bg-no-repeat  bg-bottom h-screen  " >
+    <main   className="w-full flex items-center justify-center  bg-no-repeat  bg-bottom h-auto  sticky pt-[140px]" >
     {children}
     </main>
     <Toaster/>

@@ -57,7 +57,7 @@ useEffect(()=>{
 },[emailLoading,isEmailError,isEmailSuccess])
     return ( 
         <>
-        <div  className=" w-[85%] lg:w-1/3 flex flex-col items-center justify-center mt-10  md:max-lg:w-2/5 " >
+        <div  className=" w-[85%] lg:w-1/3 flex flex-col items-center justify-center mt-5  md:max-lg:w-2/5 " >
                {isLoading ? <div className="w-full flex flex-col items-center justify-center" >
                 <Image src={'/images/loader.gif'} alt="loader" width={120} height={120} />
                 <p className="font-semibold text-lg" >Verifying Account</p>
