@@ -18,7 +18,6 @@ const Explore = () => {
             <ListOfConsultants/>
         </DashboardLayput>
         </>
-     );
+    );
 }
- 
 export default Explore;

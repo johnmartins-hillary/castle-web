@@ -11,7 +11,7 @@ const MobileNavbar = ({title,icon}:Props) => {
     // "w-full pt-[100px] pb-[35px] md:pt-[13px]  flex md:px-[13px] items-stretch justify-between h-[140px] overflow-hidden
     return ( 
         <>
-        <div className=" flex items-center justify-between pt-[35px] pb-[35px] md:pt-[13px]  w-full ">
+        <div className=" flex items-center justify-between pt-[35px] pb-[35px] md:pt-[13px]  w-full z-100" style={{zIndex: 100}}>
             <div className={`w-1/2 items-center justify-start gap-2 ${title || icon ? 'flex' : 'hidden'} `} >
                 {icon}
                 <p className="text-lg font-bold" >{title}</p>
