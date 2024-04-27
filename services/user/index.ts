@@ -126,13 +126,19 @@ export const userApi = createApi({
     }),
     verifyProfile: builder.mutation<
       void,
-      { photo_id_front: any; photo_id_back: any }
+      { photo_id_front: any; photo_id_back: any; code?: any }
     >({
-      query: ({ photo_id_back, photo_id_front }: any) => {
+      query: ({ photo_id_back, photo_id_front, code }: any) => {
         const formData = new FormData();
         formData.append("photo_id_front", photo_id_front);
         formData.append("Content-Type", photo_id_front.type);
         formData.append("photo_id_back", photo_id_back);
+        if (code !== "") {
+          formData.append("code", code);
+          formData.append("type", "coupon");
+        } else {
+          formData.append("type", "balance");
+        }
         return {
           url: "user/verification/request",
           method: "POST",
@@ -352,8 +358,7 @@ export const userApi = createApi({
         }
       }),
       invalidatesTags: ["user-data"]
-    }),
-
+    })
   })
 });
 

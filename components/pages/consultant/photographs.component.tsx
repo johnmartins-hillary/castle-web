@@ -29,7 +29,7 @@ const PhotoGraphs = () => {
           height={26}
           width={118}
           alt="photographs"
-          className=" object-contain  "/>
+          className=" object-cover h-[100px] "/>
         ))}
       </div>
     </div>
