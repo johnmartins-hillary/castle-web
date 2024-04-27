@@ -30,14 +30,14 @@ const About = () => {
         <div className="flex flex-col sm:flex-row gap-6 items-start justify-start">
           <div className="flex-1 text-2xl relative flex items-center justify-center w-full h-full">
             <Image
-              className="rounded relative    rounded"
+              className="rounded relative"
               width={150}
               height={300}
               src="/images/mockup2 1.png"
               alt=""
             />
             <Image
-              className="rounded relative top-[-40%]   rounded"
+              className="rounded relative top-[-40%"
               width={150}
               height={300}
               src="/images/mockup 1.png"
@@ -61,7 +61,7 @@ const About = () => {
             <h3 className="font-bold">Who's Carsle for?</h3>
             <p>
               <strong>CARSLE</strong> is open to anyone, with a focus on serving
-              the African community. It is particularly beneficial  for leaders,
+              the African community. It is particularly beneficial for leaders,
               experts, influencers, creators, and anyone seeking mentorship or
               consultation.
             </p>
@@ -82,14 +82,14 @@ const About = () => {
         <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
           <div className="flex-1 text-2xl relative flex items-center justify-center w-full h-full">
             <Image
-              className="rounded relative    rounded"
+              className="rounded relative "
               width={150}
               height={300}
               src="/images/mockup4 1.png"
               alt=""
             />
             <Image
-              className="rounded relative top-[-40%]   rounded"
+              className="rounded relative top-[-40%]"
               width={150}
               height={300}
               src="/images/mockup3 1.png"

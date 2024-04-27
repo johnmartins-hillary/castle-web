@@ -16,6 +16,7 @@ interface props{
 const BookingHistory = () => {
     const {data,isFetching,isError,isSuccess,}:any = useGetBookingHistoryQuery()
     const  bookings = data?.appointments
+    console.log(bookings)
     return (
         <>
         <div className="w-full mt-[30px]" >
@@ -24,7 +25,7 @@ const BookingHistory = () => {
             </div>
             { isFetching ?  <div className="w-full " >
                     <p className="text-base text-center" >Loading</p>
-                    </div>: data?.bookings?.length > 0 ?   
+                    </div>:bookings?.length > 0 ?   
                     <>
                     
                     {bookings?.map(({title,time,status,reference,agent,amount,customer,mode,duration}:any)=>(
@@ -32,8 +33,8 @@ const BookingHistory = () => {
                     ))}
                     </>
                     
-                    : <div className="w-full " >
-                    <p className="text-base text-left" >No bookings/appointments available</p>
+                    : <div className="w-full mt-5 " >
+                    <p className="text-sm text-gray-400 text-left" >No bookings/appointments available</p>
                     </div>}
 
             

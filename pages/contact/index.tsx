@@ -1,7 +1,7 @@
 import React from 'react'
 import AuthLayout from '../auth/layout'
 import Head from 'next/head'
-import ContactForm from './../../components/pages/contact/contact-form.component';
+import ContactForm from '../../components/pages/contact/contact-form.component';
 
 const Contact = () => {
   return (

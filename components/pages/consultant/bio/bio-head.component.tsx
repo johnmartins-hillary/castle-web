@@ -9,7 +9,7 @@ import { useGetSingleUserQuery } from "@/services/search/get-users";
 import { Skeleton } from "@/components/ui/skeleton";
 const BioHead = () => {
   const params = useParams<any>();
-    const {data,isLoading,isSuccess}:any = useGetSingleUserQuery({id:params?.id})
+    const {data,isLoading,isSuccess}:any = useGetSingleUserQuery({id:params?.index?.[0]})
     const categories = data?.category
     const socialLinks = data?.social
     const socialMedia =[

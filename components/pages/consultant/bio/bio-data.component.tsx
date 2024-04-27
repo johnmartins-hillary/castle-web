@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const BioData = () => {
     // const portfolios = useSelector(({singleUser}:any)=>singleUser?.data?.portfolio)
     const params = useParams<any>();
-    const {data,isSuccess}:any = useGetSingleUserQuery({id:params?.id})
+    const {data,isSuccess}:any = useGetSingleUserQuery({id:params?.index?.[0]})
     const portfolios = data?.portfolio
     return ( 
         <>

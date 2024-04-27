@@ -11,7 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 const ProfileSummary = () => {
     const params = useParams<any>();
     const singleUser = useSelector(({singleUser}:any)=>singleUser?.data?.user)
-    const {data,isLoading,isSuccess} = useGetSingleUserQuery({id:params?.id})
+    const {data,isLoading,isSuccess} = useGetSingleUserQuery({id:params?.index?.[0]})
     const isVerified = singleUser?.verification_status === "0" ? false : true
     return ( 
         <>

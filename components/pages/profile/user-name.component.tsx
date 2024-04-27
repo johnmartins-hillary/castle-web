@@ -36,7 +36,7 @@ const UserName = () => {
 
 
             <div className=" w-[70%] flex items-center justify-start gap-1 md:w-[90%] " >
-            {!isSuccess ? <Skeleton className="h-5 w-[130px]" /> :<><h3 className="font-normal text-[18px] md:text-xl lg:text-3xl " >{name ? name : username}</h3>
+            {!isSuccess ? <Skeleton className="h-5 w-[130px]" /> :<><h3 className="font-normal text-[18px] md:text-xl lg:text-3xl " >{name ? name : "Fullname"}</h3>
             <Image width={35} height={35} src={'/images/edit-icon.png'} alt="edit-icon" className={' w-[22px] h-[22px]   md:w-[35px] md:h-[35px] cursor-pointer '} onClick={()=>{setNameModal(true)}}  /></>}
             </div>
 

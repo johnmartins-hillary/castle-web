@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useLazyVerifyEmailQuery } from "@/services/auth";
-import { getParameterByName } from "@/utilities/helpers";
+import { useLazyVerifyEmailQuery, useResendEmailMutation } from "@/services/auth";
+import { getLocalStorageData, getParameterByName } from "@/utilities/helpers";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -9,7 +9,8 @@ import { useEffect } from "react";
 const EmailVerv = () => {
     const token = getParameterByName('token');
     const [trigger,{isLoading,isError,isSuccess,error}]:any  = useLazyVerifyEmailQuery()
-    const router = useRouter()
+    const [resendEmail,{isLoading:emailLoading,isError:isEmailError,error:emailError,isSuccess:isEmailSuccess}] = useResendEmailMutation()
+     const router = useRouter()
     const {toast} = useToast()
     useEffect(()=>{
        if (token) {
@@ -29,9 +30,34 @@ const EmailVerv = () => {
             })   
         }
     },[isError])
+    const email = getLocalStorageData("email")
+    console.log(email)
+    const openEmailHandler =()=>{
+        if (typeof window !== "undefined") {
+                    window.open("mailto:")
+    }
+}
+
+const resendEmailHandler =()=>{
+    resendEmail({email:email})
+}
+
+useEffect(()=>{
+    if (isEmailSuccess) {
+        toast({
+            title:`Email Sent`
+        })   
+    }
+    else if(isEmailError){
+        toast({
+            title:`Oopss!`,
+            description:"Something is wrong"
+        })   
+    }
+},[emailLoading,isEmailError,isEmailSuccess])
     return ( 
         <>
-        <div  className=" w-[85%] lg:w-1/3 flex flex-col items-center justify-center mt-10  md:max-lg:w-2/5 " >
+        <div  className=" w-[85%] lg:w-1/3 flex flex-col items-center justify-center mt-5  md:max-lg:w-2/5 " >
                {isLoading ? <div className="w-full flex flex-col items-center justify-center" >
                 <Image src={'/images/loader.gif'} alt="loader" width={120} height={120} />
                 <p className="font-semibold text-lg" >Verifying Account</p>
@@ -50,13 +76,13 @@ const EmailVerv = () => {
                 </p>
                </div>
                <div className="w-full mt-10" >
-                <Button className="bg-primary_color rounded-3xl py-7 text-white w-full " >
+                <Button onClick={openEmailHandler} className="bg-primary_color rounded-3xl py-7 text-white w-full " >
                     Open Email
                 </Button>
                </div>
 
                <div className="w-full mt-10 pb-5 " >
-                <p className=" text-center text-xs text-primary_color font-normal cursor-pointer"  >Resend Email</p>
+                <p onClick={resendEmailHandler} className=" text-center text-xs text-primary_color font-normal cursor-pointer"  >Resend Email</p>
                </div> </>}
             </div>
         </>

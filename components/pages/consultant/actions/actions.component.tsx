@@ -13,6 +13,7 @@ import { useAddToCricleMutation, useIsInCircleQuery, useRemoveFromCricleMutation
 import { useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getLocalStorageData } from "@/utilities/helpers";
 
 const Actions = ({setOpenModal}:any) => {
   const { openDrawer, setOpenDrawer } = useDrawer();
@@ -21,9 +22,10 @@ const Actions = ({setOpenModal}:any) => {
   const {data:isInCircleData,isLoading:checkingCircle,isSuccess:circleSuccess}:any = useIsInCircleQuery({user_id:singleUser?.id})
   const [addToCricle,{isLoading,isError,isSuccess,data:circleData,error}]:any = useAddToCricleMutation()
   const [removeFromCircle,{isLoading:removing,isError:IsRemoveError,isSuccess:removeSuccess,removeError,removeData}]:any = useRemoveFromCricleMutation()
-
+  const user = getLocalStorageData("user")
+  const userId = user?.id
   const params = useParams<any>();
-    const {data,isSuccess:socialSuccess}:any = useGetSingleUserQuery({id:params?.id})
+    const {data,isSuccess:socialSuccess}:any = useGetSingleUserQuery({id:params?.index?.[0]})
     const socialLinks = data?.social
   const {toast} = useToast()
   const isVerified = singleUser?.verification_status === "0" ? false : true
@@ -65,7 +67,7 @@ const Actions = ({setOpenModal}:any) => {
       if (isSuccess) {
         setAdded(true)
         toast({
-          title:`${circleData?.message}`
+          title:`Removed from circle`
         })
       }
       
@@ -117,10 +119,11 @@ const Actions = ({setOpenModal}:any) => {
     const handleremoveFromCirlce=()=>{
       removeFromCircle({user_id:singleUser?.id})
     }
+    console.log(userId)
     return ( 
         <>
         <div className=" w-full gap-4 m-auto mt-5 flex items-center  justify-between md:max-lg:w-[60%] lg:m-auto lg:w-3/5 " >
-        { !socialSuccess ? <Skeleton className="w-[33.33%] h-[11px] rounded-none " /> : isVerified &&    <div className=" flex-1 md:w-1/3 " > 
+        { !socialSuccess ? <Skeleton className="w-[33.33%] h-[11px] rounded-none " /> : singleUser?.id !== userId &&    <div className=" flex-1 md:w-1/3 " > 
            <>
             <Button onClick={()=>{setOpenModal(true)}} className=" w-full bg-primary_color py-3  rounded-[11px] text-white md:w-1/2  md:hidden md:max-lg:w-[119px] lg:w-full " >
                 Consult

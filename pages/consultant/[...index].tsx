@@ -1,18 +1,15 @@
+
 "use client"
+import { DrawerProvider } from "@/context/drawer-context";
+import { useState } from "react";
+import DashboardLayout from "../dashboard/layout";
+import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component";
+import ProfileSummary from "@/components/pages/consultant/profile-summary/profile-summary.component";
 import Actions from "@/components/pages/consultant/actions/actions.component";
 import Bio from "@/components/pages/consultant/bio/bio.component";
+import PhotoGraphs from "@/components/pages/consultant/photographs.component";
 import ConsultDrawer from "@/components/pages/consultant/consult-drawer.component";
 import ConsultMobileMenu from "@/components/pages/consultant/consult-mobile-menu.component";
-import PhotoGraphs from "@/components/pages/consultant/photographs.component";
-import ProfileSummary from "@/components/pages/consultant/profile-summary/profile-summary.component";
-import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component";
-import { Drawer } from "@/components/ui/drawer";
-import { DrawerProvider } from "@/context/drawer-context";
-import DashboardLayout from "@/pages/dashboard/layout";
-import { useGetSingleUserQuery } from "@/services/search/get-users";
-import Head from "next/head";
-import { useParams } from "next/navigation";
-import { useState } from "react";
 
 const ConsultantProfile = () => {
     const  [openConsultModal, setOpenConsultModal] = useState(false)

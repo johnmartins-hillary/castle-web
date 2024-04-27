@@ -119,7 +119,18 @@ export const authApi = createApi({
         }
       }
     }),
-
+    resendEmail: builder.mutation<void, { email: string }>({
+      query: ({ email }) => ({
+        url: `resend-mail`,
+        method: "POST",
+        body: { email:email},
+        mode: "cors",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Accept: "application/json"
+        }
+      })
+    }),
     logOutUser: builder.mutation<void, void>({
       query: () => ({
         url: "logout",
@@ -152,4 +163,5 @@ export const {
   useLogOutUserMutation,
   useVerifyEmailQuery,
   useLazyVerifyEmailQuery,
+  useResendEmailMutation
 } = authApi;

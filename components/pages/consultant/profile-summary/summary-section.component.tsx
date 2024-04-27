@@ -9,7 +9,7 @@ const SummarySection = () => {
    const [openMenu,setOpenMenu] = useState(false)
    const singleUser = useSelector(({singleUser}:any)=>singleUser?.data?.user)
    const params = useParams<any>();
-   const {data,isSuccess}:any = useGetSingleUserQuery({id:params?.id})
+   const {data,isSuccess}:any = useGetSingleUserQuery({id:params?.index?.[0]})
    const name =  singleUser?.name;
    const username = singleUser?.username
    const bio = singleUser?.bio;
