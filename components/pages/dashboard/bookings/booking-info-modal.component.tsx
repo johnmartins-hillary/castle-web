@@ -22,8 +22,9 @@ const BookingInfoModal = ({ data, showModal, setShowModal }: any) => {
       setShowModal(false);
       toast({ title: rejectData?.message });
     } else if (acceptSuccess) {
+      const name  = customer?.name === null ? customer?.username : customer?.name
       setShowModal(false);
-      router.push(`chat/${customer?.id}/${reference}/${customer?.name}`)
+      router.push(`chat/${customer?.id}/${reference}/${name}`)
       toast({ title: acceptData?.message });
     }
 

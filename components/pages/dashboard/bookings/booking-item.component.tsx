@@ -56,7 +56,7 @@ const BookingItem = ({
 
   const chatNavigator =()=>{
     const id =   title === "Recent Booking" ? agent?.id : customer?.id
-    const name =   title === "Recent Booking" ? agent?.name : customer?.name
+    const name =   title === "Recent Booking" ? agent?.name ? agent?.name : agent?.username : customer?.name ? customer?.name : customer?.username
     router.push(`chat/${id}/${reference}/${name}`)
   }
   // const callNavigator =()=>{

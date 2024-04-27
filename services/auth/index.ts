@@ -133,7 +133,7 @@ export const authApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          await dispatch(clearUser());
+          dispatch(clearUser());
           localStorage.clear();
         } catch (error) {
           console.log("Logout User error", error);

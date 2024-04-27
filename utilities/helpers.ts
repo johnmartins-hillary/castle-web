@@ -35,9 +35,19 @@ export const TokenChecker = () => {
 
 export const getLocalStorageData = (key: string) => {
   if (typeof window !== "undefined") {
-    const localData = localStorage?.getItem(key) || "";
-    const parsedData = JSON?.parse(localData);
-
-    return parsedData;
+    const localData = localStorage?.getItem(key);
+    
+    if (localData) {
+      try {
+        const parsedData = JSON.parse(localData);
+        return parsedData;
+      } catch (error) {
+        console.error("Error parsing JSON data:", error);
+        return null; // Or handle the error in another way
+      }
+    } else {
+      console.warn(`No data found in localStorage for key: ${key}`);
+      return null; // Or handle the absence of data in another way
+    }
   }
 };
