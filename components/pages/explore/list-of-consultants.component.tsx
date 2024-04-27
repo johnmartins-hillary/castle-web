@@ -30,24 +30,27 @@ const ListOfConsultants = () => {
     } else {
         displayData = usersList?.users?.data || [];
     }
+    console.log(categorySuccess)
 
     return (
         <>
             <div className="w-full flex items-center gap-[14px] justify-start md:gap-0 md:justify-between flex-wrap">
-                {!isError && !isLoading && displayData.length > 0 &&
+                {!isError && !isLoading && displayData.length > 0 ? (
                     displayData.map(({ name, username, id, verification_status, profile_image }: any) => (
                         <Consultant profile_image={profile_image} name={name} username={username} verification_status={verification_status} id={id} key={id} />
                     ))
-                }
+                ) : (
+                    <p className="font-medium text-sm text-center text-gray-400 " >No users available</p>
+                )}
 
-                <div className={`mt-[30px] flex items-center ${usersList?.users?.next_page_url ? "justify-between" : "justify-start"} w-full md:w-[200px] md:mx-auto`}>
-                    {usersList?.users?.prev_page_url &&
+                <div className={`mt-[30px] flex items-center ${displayData?.users?.next_page_url ? "justify-between" : "justify-start"} w-full md:w-[200px] md:mx-auto`}>
+                    {displayData?.users?.prev_page_url &&
                         <div className="w-auto flex items-center justify-between gap-[4px]">
                             <IoMdArrowBack onClick={decrementMemo} size={23} className="cursor-pointer" />
                             <p className="font-medium text-sm">Prev</p>
                         </div>
                     }
-                    {usersList?.users?.next_page_url &&
+                    {displayData?.users?.next_page_url &&
                         <div className="w-auto flex items-center justify-between gap-[4px]">
                             <p className="font-medium text-sm">Next</p>
                             <IoMdArrowForward onClick={incrementMemo} size={23} className="cursor-pointer" />

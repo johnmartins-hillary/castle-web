@@ -22,14 +22,14 @@ const NotificationItem = ({action,notice,title,id,status,created_at}:Props) => {
             </div>
         </div>
             
-            <div className="w-full flex items-center justify-start gap-4 mt-8 " >
+            {/* <div className="w-full flex items-center justify-start gap-4 mt-8 " >
                    {   status?.includes("unread") && <Button className="w-[142px] text-xs bg-primary_color rounded-[12px] p-3  relative left-[50px]" >
                    Mark as read
                     </Button>}
-                    {/* <Button className="w-[142px] text-xs bg-white rounded-[12px] px-9 border-primary_color border-[0.6px] " variant="outline" >
+                    <Button className="w-[142px] text-xs bg-white rounded-[12px] px-9 border-primary_color border-[0.6px] " variant="outline" >
                Decline
-                    </Button> */}
-                        </div>
+                    </Button>
+                        </div> */}
         </div>
       
         </>

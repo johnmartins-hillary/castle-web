@@ -87,5 +87,6 @@ export const {
   useGetUsersQuery,
   useGetSingleUserQuery,
   useSearchUsersQuery,
+  useLazyGetUsersQuery,
   useLazySearchUsersByCategoryQuery
 } = usersApi;

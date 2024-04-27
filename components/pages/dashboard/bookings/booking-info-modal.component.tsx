@@ -2,13 +2,14 @@ import Modal from "@/components/modal/modal.component";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useEndAppointmentMutation, useLazyAcceptBookingQuery, useLazyCancelBookingQuery, useLazyRejectBookingQuery } from "@/services/booking";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const BookingInfoModal = ({ data, showModal, setShowModal }: any) => {
   const { title, agent, customer, reference, duration, status }: any = data;
   const statusColorClass = getStatusColorClass(status);
   const { toast } = useToast();
-
+  const router = useRouter()
   const [cancelbtnTrigger, { isError: cancelIsError, isLoading: cancelLoading, isSuccess: cancelSuccess, data: cancelData, error: cancelError }]: any = useLazyCancelBookingQuery();
   const [rejectBtnTrigger, { isError: rejectIsError, isLoading: rejectLoading, isSuccess: rejectSuccess, data: rejectData, error: rejectError }]: any = useLazyRejectBookingQuery();
   const [acceptbtnTrigger, { isError: acceptIsError, isLoading: acceptLoading, isSuccess: acceptSuccess, data: acceptData, error: acceptError }]: any = useLazyAcceptBookingQuery();
@@ -22,6 +23,7 @@ const BookingInfoModal = ({ data, showModal, setShowModal }: any) => {
       toast({ title: rejectData?.message });
     } else if (acceptSuccess) {
       setShowModal(false);
+      router.push(`chat/${customer?.id}/${reference}/${customer?.name}`)
       toast({ title: acceptData?.message });
     }
 

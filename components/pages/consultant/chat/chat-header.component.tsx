@@ -38,7 +38,7 @@ const ChatHeader = ({ eventSrc }: any) => {
   useEffect(() => {
     if (endAppointmentSuccess) {
       router.replace(route);
-      eventSrc.close();
+      eventSrc?.close();
     }
   }, [endAppointmentSuccess]);
   return (

@@ -94,10 +94,10 @@ export const bookingApi = createApi({
           Accept: "application/json"
         }
       }),
-   async onQueryStarted(_,{dispatch,queryFulfilled}){
-      await queryFulfilled;
-      dispatch(chatApi.util.invalidateTags(['messages']))
-      }      
+  //  async onQueryStarted(_,{dispatch,queryFulfilled}){
+  //     await queryFulfilled;
+  //     dispatch(chatApi.util.invalidateTags(['messages']))
+  //     }      
     })
   })
 });

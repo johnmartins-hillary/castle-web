@@ -132,7 +132,7 @@ export const VoiceCallProvider: React.FC<{ children: React.ReactNode }> = ({
     incomingNotifications.onmessage = (event: any) => {
       const response = JSON.parse(event?.data);
       const notification = response?.notification;
-      notifySound.current.play();
+      notifySound?.current?.play();
       if (notification) {
         toast({
           title: notification?.title,
@@ -185,7 +185,7 @@ export const VoiceCallProvider: React.FC<{ children: React.ReactNode }> = ({
       {children}
       <audio
         ref={notifySound}
-        src={"https://bigsoundbank.com/UPLOAD/ogg/0253.ogg"}
+        src={"https://bigsoundbank.com/UPLOAD/ogg/1416.ogg"}
         className=" hidden"
       />
     </VoiceCallContext.Provider>

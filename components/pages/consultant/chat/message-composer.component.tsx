@@ -94,7 +94,7 @@ const MessageComposer = ({scrollToBottom,eventSrc}:any) => {
           title: "You have less than 2 minutes left"
         });
       } else if (inChat?.time_left === 0 && inChat?.time_left !== null || inChat?.time_left < 0 ) {
-        eventSrc.close();
+        eventSrc?.close();
         endAppoiintment({ booking_ref: booking_ref });
         toast({
           title: "Chat ended"
