@@ -10,7 +10,7 @@ const About = () => {
       <div className="flex flex-col gap-24 p-12">
         <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
           <div className="flex-1 text-[14px] sm:text-[24px] ">
-            In today's digital age, leaders, experts, influencers, and creators
+            In today&apos;s digital age, leaders, experts, influencers, and creators
             find themselves navigating a sea of cross-platform inboxes, while a
             burgeoning demand for mentorship, particularly among the youth,
             remains unmet. Traditional media channels offer a mere 5% likelihood
@@ -58,7 +58,7 @@ const About = () => {
         </div>
         <div className="flex flex-col sm:flex-row gap-6  items-start justify-start">
           <div className="flex-1 text-2xl flex-col flex gap-8 text-[14px] sm:text-[24px]">
-            <h3 className="font-bold">Who's Carsle for?</h3>
+          <h3 className="font-bold">Who&apos;s Carsle for?</h3>
             <p>
               <strong>CARSLE</strong> is open to anyone, with a focus on serving
               the African community. It is particularly beneficial for leaders,
