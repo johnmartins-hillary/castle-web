@@ -2,7 +2,7 @@
 import Modal from "@/components/modal/modal.component";
 import { useToast } from "@/components/ui/use-toast";
 import { useGetUserDetailsQuery } from "@/services/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
   const { data } = useGetUserDetailsQuery("");
@@ -11,6 +11,13 @@ const ShareProfileModal = ({ openModal, setOpenModal }: any) => {
   const link = `https://carsle.com/consultant/${user?.id}/${encodeURIComponent(
     user?.name
   )}`;
+
+  useEffect(()=>{
+
+   return()=>{
+    setCopyText("Copy")
+   }
+  },[])
   return (
     <>
       <Modal

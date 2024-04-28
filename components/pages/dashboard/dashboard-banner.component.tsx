@@ -13,12 +13,12 @@ const DashboardBanner = () => {
           {/* Adjust the Image component with a larger size while preserving aspect ratio */}
           <div style={{ maxWidth: "100%", maxHeight: "100%", width: "100%" }}>
             <Image
-              src="/images/banner-image.png"
+              src="/images/home-img.png"
               width={548} // Increase the width by 1.5 times
               height={187} // Increase the height by 1.5 times
               alt="banner-image"
      // Ensure responsive image behavior
-              className="object-cover h-[187px] "
+              className="object-cover w-[270px] h-[121px] md:h-[187px] "
             />
           </div>
         </div>
