@@ -7,6 +7,7 @@ import SideBar from "@/components/sidebar/sidebar";
 import StoreProvider from "@/app/StoreProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { VoiceCallProvider } from "@/context/app-context";
+import BottomTabBar from "@/components/bottom_nav/bottom_nav.component";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -29,6 +30,7 @@ export default function DashboardLayout({
           </div>
           <div className=" w-full m-0 min-h-screen p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative   ">
             {children}
+            <BottomTabBar/>
           </div>
           <Toaster />
         </div>

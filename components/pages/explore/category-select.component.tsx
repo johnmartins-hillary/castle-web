@@ -23,12 +23,16 @@ const SelectCategory = () => {
       background: "none",
       border: "none",
       // borderRadius: 21,
-      width: "100%",
       padding: 0
     }),
     indicatorSeparator: (provided: any) => ({
       ...provided,
       display: "none"
+    }),
+    dropDown:(provided:any)=>({
+    ...provided,
+          width: 227,
+    
     })
   };
 
