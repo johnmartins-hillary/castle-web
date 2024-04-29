@@ -17,9 +17,9 @@ const ConsultantProfile = () => {
         <>
         <DrawerProvider>
         <DashboardLayout>
-            <div className="block md:hidden"  >
+            {/* <div className="block md:hidden"  >
             <MobileNavbar/>
-            </div>
+            </div> */}
             <div className="w-full xl:w-[70%]" >
             <ProfileSummary/>
         <Actions setOpenModal={setOpenConsultModal} />
