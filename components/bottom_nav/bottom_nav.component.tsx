@@ -55,8 +55,8 @@ const BottomTabBar = () => {
                   href={path}
                   key={name}
                   className={` ${
-                    pathname === path ? "font-bold " : " font-normal"
-                  } font-normal text-xs cursor-pointer  p-0 mt-1`}
+                    isActive?  " font-bold"  : " font-normal"
+                  } text-xs cursor-pointer  p-0 mt-1`}
                 >
                   {name}
                 </Link>
