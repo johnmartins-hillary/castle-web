@@ -75,7 +75,7 @@ const VerificationSteps =()=>{
 
     return(
         <>
-        <div className="w-full mt-9">
+        <div className="w-full mt-9 pb-[75px] ">
 
             <div className="w-full" >
                 <p className="font-bold text-sm md:text-lg text-left" >Steps</p>
