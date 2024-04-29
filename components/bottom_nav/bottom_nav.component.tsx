@@ -34,7 +34,7 @@ const BottomTabBar = () => {
   ];
   return (
     <>
-      <div className="w-full fixed left-0 right-0 z-[999] bg-white shadow shadow-black p-[23px] bottom-0  md:hidden">
+      <div className="w-full fixed left-0 right-0 z-[999] bg-white shadow shadow-black p-[15px] bottom-0  md:hidden">
         <div className="w-full flex items-center justify-between" >
           {routes.map(({ name, icon, path, activeIcon }) => {
             const isActive = pathname === path;

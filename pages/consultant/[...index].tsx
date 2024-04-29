@@ -20,7 +20,7 @@ const ConsultantProfile = () => {
             {/* <div className="block md:hidden"  >
             <MobileNavbar/>
             </div> */}
-            <div className="w-full xl:w-[70%]" >
+            <div className="w-full xl:w-[70%] pb-[75px] " >
             <ProfileSummary/>
         <Actions setOpenModal={setOpenConsultModal} />
         <Bio/>
