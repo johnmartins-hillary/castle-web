@@ -15,7 +15,7 @@ const UserProfile = () => {
     const user = data?.user;
     return ( 
         <>
-        <div className="w-full mt-3">
+        <div className="w-full mt-3 pb-[75px] ">
 
 
         { user?.verification_status === "1"&& <ProfileLink/>}
