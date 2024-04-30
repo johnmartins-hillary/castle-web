@@ -39,7 +39,7 @@ const Hello = () => {
       </div>
         </div>
         <div className="flex flex-1 w-[230px] " >
-            <h3 className="font-bold text-base lg:text-3xl truncate leading-[1.2rem]  md:max-lg:text-xl" ><span className="font-normal" >Hello,</span><br className="md:hidden" /> {user?.name ? user?.name : user?.username}</h3>
+            <h3 className="font-bold text-base lg:text-3xl truncate leading-[.9rem]  md:max-lg:text-xl" ><span className="font-normal" >Hello,</span><br className="md:hidden" /> {user?.name ? user?.name : user?.username}</h3>
         </div>
 
         <div className=" items-center hidden md:flex justify-center lg:hidden " >
