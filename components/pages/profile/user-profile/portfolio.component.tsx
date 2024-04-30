@@ -43,10 +43,10 @@ const Portfolio = () => {
                 <div key={id} className="w-full mt-[12px]" >
                   <p className="font-bold text-[14px] text-primary_color" >{role}</p>
                   <p className="font-bold text-[13px] text-gray-500" >@{company}</p>
-                 <div className="w-auto md:justify-start md:gap-4 flex items-center justify-between" >
+                 <div key={id} className="w-auto md:justify-start md:gap-4 flex items-center justify-between" >
                  <p className="font-normal text-[13px] text-gray-500"> Started from  {dateFormatter(start)} - {still_works_there === "0" ? dateFormatter(endDate) : "present" } </p>
                  </div>
-                 <div className="mt-[5px] flex items-center justify-start gap-[5px] " >
+                 <div key={id} className="mt-[5px] flex items-center justify-start gap-[5px] " >
                  <Edit2 color="green"
                 size={13}
                 cursor={"pointer"}
