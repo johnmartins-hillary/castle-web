@@ -20,7 +20,7 @@ const YourConsultants = () => {
     return ( 
         <>
         
-        <div className={`w-full flex items-center ${circleData?.circles.length > 1 ? 'justify-center' :'justify-start'} gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 `} >
+        <div className={`w-full flex items-center ${circleData?.circles.length > 1 ? 'justify-center' :'justify-start'} gap-[16px] flex-wrap  mt-14 md:justify-between md:gap-0 pb-[75px] `} >
             {isLoading ? <p>Loading...</p> :  circleData?.circles?.length >0 ? <>
                 {circleData?.circles?.map(({name,username,id,verification_status,profile_image}:any)=>(
      <Consultant name={name} username={username} verification_status={verification_status} profile_image={profile_image} id={id} key={id} />

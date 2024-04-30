@@ -34,7 +34,7 @@ const ListOfConsultants = () => {
 
     return (
         <>
-            <div className="w-full flex items-center gap-[14px] justify-start md:gap-0 md:justify-between flex-wrap">
+            <div className="w-full flex items-center gap-[14px] justify-start md:gap-0 md:justify-between flex-wrap pb-[75px] ">
                 {!isError && !isLoading && displayData.length > 0 ? (
                     displayData.map(({ name, username, id, verification_status, profile_image }: any) => (
                         <Consultant profile_image={profile_image} name={name} username={username} verification_status={verification_status} id={id} key={id} />

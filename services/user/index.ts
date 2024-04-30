@@ -282,6 +282,23 @@ export const userApi = createApi({
       },
       invalidatesTags: ["links"]
     }),
+    editUsersLink: builder.mutation<void, { id: any; platform: any; url: any }>(
+      {
+        query: (payload) => {
+          return {
+            url: "profile/link/edit",
+            mode: "cors",
+            body: payload,
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+              Accept: "application/json"
+            }
+          };
+        },
+        invalidatesTags: ["links"]
+      }
+    ),
     getUsersPhotos: builder.query<void, void>({
       query: () => ({
         url: "profile/photograph",
@@ -381,5 +398,6 @@ export const {
   useDeleteUsersSocialsMutation,
   useAddCategoryMutation,
   useGetUsersCategoriesQuery,
-  useUpdateModesMutation
+  useUpdateModesMutation,
+  useEditUsersLinkMutation
 } = userApi;

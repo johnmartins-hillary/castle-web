@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import YourAreVerified from "./your-are-verified.component";
 
 const VerificationSteps =()=>{
     const [verifyProfile,{data,isLoading,isSuccess,isError,error}]:any = useVerifyProfileMutation()
@@ -19,7 +20,7 @@ const VerificationSteps =()=>{
     const [couponCode,setCouponCode] = useState("");
     const router = useRouter()
     const {toast} = useToast()
-
+    const isVerified = userdata?.user?.verification_status === "1" ? true : false;
     const handlePhoto=(e:any)=>{
         const [file] = e.target.files;
         setPhototFront(e.target.files[0])
@@ -75,71 +76,71 @@ const VerificationSteps =()=>{
 
     return(
         <>
-        <div className="w-full mt-9 pb-[75px] ">
+       {isVerified && <YourAreVerified/> }
+       {!isVerified &&  <div className="w-full mt-9 pb-[75px] ">
 
-            <div className="w-full" >
-                <p className="font-bold text-sm md:text-lg text-left" >Steps</p>
+<div className="w-full" >
+    <p className="font-bold text-sm md:text-lg text-left" >Steps</p>
+</div>
+
+<div className="w-full flex flex-col items-center justify-between mt-1 md:mt-9 md:flex-row " >
+    <div className="w-full mt-4 md:w-2/5 md:mt-0" >
+    <div className="w-full" >
+    <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 1</p>
+    <p className="font-normal text-xs md:text-sm mt-5 " >Go to your <Link href={'/profile'} className="font-bold text-black cursor-pointer underline">profile</Link> and correctly fill all the fields </p>
+    <p className="font-normal text-[10px] md:text-xs mt-3 " >Make sure to sell yourself using images and lots of information </p>
+    </div>
+    </div>
+    <div className="w-full mt-4 md:w-2/5 md:mt-0" >
+    <div className="w-full" >
+    <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base" >Step 2</p>
+        <Label htmlFor="photo-front" className="flex items-start justify-start gap-4 w-full mt-5" >
+        <input onChange={(e)=>{handlePhoto(e)}}  type="file" className="hidden" id="photo-front"/>
+            <Image src={'/images/upload-icon.png'} width={100} height={89} alt="upload" />
+            <div className=" w-auto" >
+            <p className="font-normal text-xs md:text-sm" >Upload a valid ID card</p>
+            <p className="font-normal text-[10px] md:text-xs mt-3 " >Your data is safe with us.</p>
+            <p className="font-normal text-[10px] md:text-xs mt-3 " >Your ID: {photo_id_front?.name}</p>
             </div>
-            
-            <div className="w-full flex flex-col items-center justify-between mt-1 md:mt-9 md:flex-row " >
-                <div className="w-full mt-4 md:w-2/5 md:mt-0" >
-                <div className="w-full" >
-                <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 1</p>
-                <p className="font-normal text-xs md:text-sm mt-5 " >Go to your <Link href={'/profile'} className="font-bold text-black cursor-pointer underline">profile</Link> and correctly fill all the fields </p>
-                <p className="font-normal text-[10px] md:text-xs mt-3 " >Make sure to sell yourself using images and lots of information </p>
-                </div>
-                </div>
-                <div className="w-full mt-4 md:w-2/5 md:mt-0" >
-                <div className="w-full" >
-                <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base" >Step 2</p>
-                    <Label htmlFor="photo-front" className="flex items-start justify-start gap-4 w-full mt-5" >
-                    <input onChange={(e)=>{handlePhoto(e)}}  type="file" className="hidden" id="photo-front"/>
-                        <Image src={'/images/upload-icon.png'} width={100} height={89} alt="upload" />
-                        <div className=" w-auto" >
-                        <p className="font-normal text-xs md:text-sm" >Upload a valid ID card</p>
-                        <p className="font-normal text-[10px] md:text-xs mt-3 " >Your data is safe with us.</p>
-                        <p className="font-normal text-[10px] md:text-xs mt-3 " >Your ID: {photo_id_front?.name}</p>
-                        </div>
-                   
-                    </Label>
-                </div>
-                {/* <Indicator setPhototBack={setPhototBack} setPhototFront={setPhototFront} photo_id_back={photo_id_back} photo_id_front={photo_id_front} /> */}
-                </div>
-            </div>
-            
-            <div className="w-full flex flex-col items-center justify-between mt-12 md:flex-row md:max-lg:flex-col md:max-lg:items-start " >
-                <div className=" w-full md:w-2/5 md:max-lg:w-full" >
-                <div className="w-full" >
-                <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 3</p>
-                <p className="font-normal text-xs md:text-sm mt-5 " >Pay Verification fee of NGN 2, 000</p>
+       
+        </Label>
+    </div>
+    </div>
+</div>
 
-                        <div className="w-full flex items-center justify-start gap-[43px] mt-8 md:max-lg:justify-start md:max-lg:gap-8 " >
-                    <Button className="w-[142px] text-xs bg-primary_color rounded-[12px] p-3" >
-                        Pay from Wallet
-                    </Button>
-                    <Input placeholder="Enter Coupon Code" value={couponCode} onChange={({target})=>{
-                            setCouponCode(target.value)
-                    }}  className="w-[142px] text-xs bg-white rounded-[12px] px-3 border-primary_color border-[0.6px] " />
-                        </div>
+<div className="w-full flex flex-col items-center justify-between mt-12 md:flex-row md:max-lg:flex-col md:max-lg:items-start " >
+    <div className=" w-full md:w-2/5 md:max-lg:w-full" >
+    <div className="w-full" >
+    <p className="font-normal text-sm md:text-lg text-left md:max-lg:text-base " >Step 3</p>
+    <p className="font-normal text-xs md:text-sm mt-5 " >Pay Verification fee of NGN 2, 000</p>
 
-                        <div className="w-full mt-12 " >
-                            <p className="text-xs font-normal underline text-center cursor-pointer md:max-lg:text-start" >Fund Wallet</p>
-                        </div>
-                </div>
-                </div>
-                <div className=" w-full flex items-center justify-center md:block md:w-2/5 mt-14 md:mt-0 md:max-lg:w-full md:max-lg:mt-8 " >
-                   <Button disabled={isLoading || disableBtn}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
-                        {isLoading ? "Submitting..." : "Submit Application"}
-                    </Button>
-                     
-           
-                </div>
+            <div className="w-full flex items-center justify-start gap-[43px] mt-8 md:max-lg:justify-start md:max-lg:gap-8 " >
+        <Button className="w-[142px] text-xs bg-primary_color rounded-[12px] p-3" >
+            Pay from Wallet
+        </Button>
+        <Input placeholder="Enter Coupon Code" value={couponCode} onChange={({target})=>{
+                setCouponCode(target.value)
+        }}  className="w-[142px] text-xs bg-white rounded-[12px] px-3 border-primary_color border-[0.6px] " />
             </div>
 
+            <div className="w-full mt-12 " >
+                <p className="text-xs font-normal underline text-center cursor-pointer md:max-lg:text-start" >Fund Wallet</p>
+            </div>
+    </div>
+    </div>
+    <div className=" w-full flex items-center justify-center md:block md:w-2/5 mt-14 md:mt-0 md:max-lg:w-full md:max-lg:mt-8 " >
+       <Button disabled={isLoading || disableBtn}  onClick={handleSubmit}  className="w-[248px] m-auto md:m-0 bg-primary_color rounded-[12px] py-3" >
+            {isLoading ? "Submitting..." : "Submit Application"}
+        </Button>
+         
+
+    </div>
+</div>
 
 
-            
-        </div>
+
+
+</div>}
         </>
     )
 }

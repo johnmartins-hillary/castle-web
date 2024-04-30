@@ -19,7 +19,7 @@ const Hello = () => {
     return ( 
         <>
         
-        <div className="w-full  flex items-start justify-start gap-4  pt-[20px] pb-[25px]  h-[80px] md:px-[4px] lg:pt-[50px] md:mb-[35px] lg-[140px]  "  >
+        <div className="w-full  flex items-start justify-start gap-4 md:items-center  pt-[20px] pb-[25px]  h-[80px] md:px-[4px] lg:pt-[50px] md:mb-[35px] lg-[140px]  "  >
     <div  className=" relative w-[27.5px] h-[27.5px] md:w-[71.65px] md:h-[71.65px] lg:w-14 lg:h-14 rounded-full flex items-center justify-center bg-faint_grey  shadow-md shadow-faint_grey" >
             <Image className="w-full h-full rounded-full object-cover "  src={ user?.profile_image ? user?.profile_image : '/images/user-icon.png'} width={34.84} height={17.42} alt="user-placeholder" />
             <div
@@ -39,7 +39,7 @@ const Hello = () => {
       </div>
         </div>
         <div className="flex flex-1 w-[230px] " >
-            <h3 className="font-bold text-base lg:text-3xl truncate leading-[.9rem]  md:max-lg:text-xl" ><span className="font-normal" >Hello,</span><br className="md:hidden" /> {user?.name ? user?.name : user?.username}</h3>
+            <h3 className="font-bold text-base lg:text-3xl truncate leading-[1.2rem]  md:max-lg:text-xl" ><span className="font-normal" >Hello,</span><br className="md:hidden" /> {user?.name ? user?.name : user?.username}</h3>
         </div>
 
         <div className=" items-center hidden md:flex justify-center lg:hidden " >

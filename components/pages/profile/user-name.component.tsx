@@ -35,16 +35,16 @@ const UserName = () => {
             </div>
 
 
-            <div className=" w-[70%] flex items-center justify-start gap-1 md:w-[90%] " >
+            <div className=" w-[80%] flex items-center justify-start gap-1 md:w-[90%] " >
             {!isSuccess ? <Skeleton className="h-5 w-[130px]" /> :<><h3 className="font-normal text-[18px] md:text-xl lg:text-3xl " >{name ? name : "Your fullname"}</h3>
             <Image width={35} height={35} src={'/images/edit-icon.png'} alt="edit-icon" className={' w-[22px] h-[22px]   md:w-[35px] md:h-[35px] cursor-pointer '} onClick={()=>{setNameModal(true)}}  /></>}
             </div>
 
-            <div className=" flex w-[10%] items-center justify-center lg:hidden " >
+            {/* <div className=" flex w-[10%] items-center justify-center lg:hidden " >
             <MenuIcon  size={24} onClick={()=>{
                        setOpenNav(true)
             }} color={''} className="cursor-pointer w-[24px] h-[24px] "/>
-        </div>
+        </div> */}
 
         </div>
         <div className="w-[60%] flex items-center justify-start mx-auto gap-[13px] mt-1 md:w-[80%]" >

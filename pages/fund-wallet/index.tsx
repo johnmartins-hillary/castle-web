@@ -47,7 +47,7 @@ const FundWallet = () => {
                  </Button> */}
             </div>
             {/* <AmountSetter/> */}
-            <div className="w-full flex flex-col items-stretch justify-between mt-10 md:flex-row " >
+            <div className="w-full flex flex-col items-stretch justify-between mt-10 md:flex-row  pb-[75px]" >
                 <div className="w-full md:w-1/2" >
                 <PayWithCard setOpenFundingMethod={setOpenFundingMethod} setOpenWithdrawal={setOpenWithdrawal} />
                 </div>

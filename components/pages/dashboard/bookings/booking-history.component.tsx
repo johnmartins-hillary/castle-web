@@ -19,7 +19,7 @@ const BookingHistory = () => {
     console.log(bookings)
     return (
         <>
-        <div className="w-full mt-[30px]" >
+        <div className="w-full mt-[30px] pb-[75px] " >
             <div className="w-full m " >
             <h3 className="font-medium text-[16px] border-b-[1px] border-b-light_grey text-left lg:text-[20px] pb-[12px] " >Booking History</h3>
             </div>

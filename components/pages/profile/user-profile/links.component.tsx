@@ -1,5 +1,5 @@
 
-import { CirclePlus, Trash2 } from "lucide-react";
+import { CirclePlus, Edit2, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import LinksModal from "../modals/links-modal.component";
 import {
@@ -8,8 +8,10 @@ import {
 } from "@/services/user";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
+import EditlinksModal from "../modals/edit-link-modal.component";
 const Links = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const { data: links, isLoading }: any = useGetUsersLinksQuery();
   const [
     deleteUsersLink,
@@ -60,10 +62,18 @@ const Links = () => {
               <Link
                 target="_blank"
                 href={url}
-                className="font-light text-[13px] text-gray-500 underline"
+                className="font-light text-[13px] text-gray-500 underline truncate w-[290px] "
               >
                 {url}
               </Link>
+              <Edit2 color="green"
+                size={13}
+                cursor={"pointer"}
+                onClick={()=>{
+                  setOpenEdit(true)
+                }}
+               />
+
               <Trash2
                 color="red"
                 size={13}
@@ -71,11 +81,14 @@ const Links = () => {
                 onClick={() => handleDelete(id)}
               />
             </div>
+            <EditlinksModal openModal={openEdit} setOpenModal={setOpenEdit} url={url} text={platform} id={id} />
           </div>
+           
         ))}
       </div>
       <LinksModal openModal={openModal} setOpenModal={setOpenModal} />
-    </>
+ 
+    </> 
   );
 };
 
