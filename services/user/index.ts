@@ -195,6 +195,31 @@ export const userApi = createApi({
       },
       invalidatesTags: ["portfolios"]
     }),
+    editUsersPortfolios: builder.mutation<
+      void,
+      {
+        id: any;
+        role: any;
+        start: any;
+        endDate: any;
+        still_works_there: any;
+        company: any;
+      }
+    >({
+      query: (payload) => {
+        return {
+          url: "profile/portfolio/edit",
+          mode: "cors",
+          body: payload,
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json"
+          }
+        };
+      },
+      invalidatesTags: ["portfolios"]
+    }),
 
     // User's Socials
     getUserSocials: builder.query<void, void>({
@@ -232,6 +257,24 @@ export const userApi = createApi({
           mode: "cors",
           body: { id: id },
           method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            Accept: "application/json"
+          }
+        };
+      },
+      invalidatesTags: ["socials"]
+    }),
+    editUsersSocials: builder.mutation<
+      void,
+      { id: any; platform: any; url: any }
+    >({
+      query: (payload) => {
+        return {
+          url: "profile/social/edit",
+          mode: "cors",
+          body: payload,
+          method: "POST",
           headers: {
             "Content-type": "application/json",
             Accept: "application/json"
@@ -399,5 +442,7 @@ export const {
   useAddCategoryMutation,
   useGetUsersCategoriesQuery,
   useUpdateModesMutation,
-  useEditUsersLinkMutation
+  useEditUsersLinkMutation,
+  useEditUsersPortfoliosMutation,
+  useEditUsersSocialsMutation
 } = userApi;

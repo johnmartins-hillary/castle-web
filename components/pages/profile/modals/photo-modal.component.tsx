@@ -79,7 +79,7 @@ const PhotoModal = ({openModal,setOpenModal}:any) => {
 
                      
                       <div className=" w-full md:w-1/2 md:flex md:flex-col-reverse" >
-                      {image ? <button onClick={handleSubmit} disabled={isLoading || disableBtn} className="w-[135px] bg-black rounded-[22px] py-[13px] text-center text-white text-[17px] mx-auto " >
+                      {image ? <button onClick={handleSubmit} disabled={isLoading || disableBtn} className="w-[135px] bg-black rounded-[22px] py-[13px] text-center text-white text-[17px] block mx-auto " >
                            {isLoading ? "Saving..." : "Save"}
                         </button> :  
                         <label htmlFor="picture-upload" className=" bg-[#E8E8E8] rounded-[21px] w-full flex items-center justify-center gap-2 py-[15px] ">

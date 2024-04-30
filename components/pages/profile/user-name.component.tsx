@@ -20,9 +20,9 @@ const UserName = () => {
     // console.log(categories)
     return ( 
         <>
-       <div className="w-full my-4" >
+       <div className="w-full mb-0 mt-4 md:my-4" >
 
-        <div className="w-full flex items-center justify-between" >
+        <div className="w-full flex items-start md:items-center justify-between" >
 
 
             <div className="w-[20%] md:w-[10%]" >
@@ -35,9 +35,11 @@ const UserName = () => {
             </div>
 
 
-            <div className=" w-[80%] flex items-center justify-start gap-1 md:w-[90%] " >
+            <div className=" w-[80%] top-[-5px] relative md:top-[initial] flex items-center justify-start gap-1 md:w-[90%] " >
             {!isSuccess ? <Skeleton className="h-5 w-[130px]" /> :<><h3 className="font-normal text-[18px] md:text-xl lg:text-3xl " >{name ? name : "Your fullname"}</h3>
-            <Image width={35} height={35} src={'/images/edit-icon.png'} alt="edit-icon" className={' w-[22px] h-[22px]   md:w-[35px] md:h-[35px] cursor-pointer '} onClick={()=>{setNameModal(true)}}  /></>}
+            <Image width={35} height={35} src={'/images/edit-icon.png'} alt="edit-icon" className={' w-[22px] h-[22px]   md:w-[35px] md:h-[35px] cursor-pointer hidden md:block '} onClick={()=>{setNameModal(true)}}  />
+            <p onClick={()=>{setNameModal(true)}}  className=" text-[#0A5091] underline font-[300] text-[10px] md:hidden " >Edit</p>
+            </>}
             </div>
 
             {/* <div className=" flex w-[10%] items-center justify-center lg:hidden " >
@@ -47,7 +49,7 @@ const UserName = () => {
         </div> */}
 
         </div>
-        <div className="w-[60%] flex items-center justify-start mx-auto gap-[13px] mt-1 md:w-[80%]" >
+        <div className="w-[60%] relative top-[-20px] md:top-[initial] flex items-center justify-start mx-auto gap-[13px] mt-1 md:w-[80%]" >
             {!isSuccess ? 
             <>
             <Skeleton className="h-4 w-[70px]" />

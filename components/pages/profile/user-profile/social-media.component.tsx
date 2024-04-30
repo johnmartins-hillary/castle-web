@@ -1,16 +1,18 @@
 "use client"
-import { CirclePlus, Trash2 } from "lucide-react";
+import { CirclePlus, Edit2, Trash2 } from "lucide-react";
 import SocialMediaModal from "../modals/social-media-modal.component";
 import { useEffect, useState } from "react";
 import { useDeleteUsersSocialsMutation, useGetUserSocialsQuery } from "@/services/user";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
+import EditSocialMediaModal from "../modals/edit-social-media-modal.component";
 
 const SocialMedia = () => {
   const [openModal,setOpenModal] = useState(false)
   const {data:socials,isLoading}:any = useGetUserSocialsQuery()
   const [deleteUsersSocials, {isLoading:deleting,isError:isDeleteError,isSuccess:deleteSuccess,error:deleteError} ]:any = useDeleteUsersSocialsMutation()
   const {toast} = useToast()
+  const [openEdit, setOpenEdit] = useState(false);
 
   useEffect(()=>{
     if (deleteSuccess) {
@@ -41,10 +43,18 @@ const SocialMedia = () => {
 
                 <div className="w-auto flex items-center justify-between md:justify-start gap-4" >
                 <Link target="_blank" href={url} className="font-light text-[13px] text-gray-500 underline" >{url}</Link>
-                <Trash2 color="red" size={13} cursor={'pointer'} onClick={()=>handleDelete(id)} />
                 </div>
-                
-
+                <div className="mt-[5px] flex items-center justify-start gap-[5px] " >
+                 <Edit2 color="green"
+                size={13}
+                cursor={"pointer"}
+                onClick={()=>{
+                  setOpenEdit(true)
+                }}
+               />
+                 <Trash2 color="red" cursor={'pointer'} size={13} onClick={()=>handleDelete(id)}  />
+                 </div>
+                <EditSocialMediaModal openModal={openEdit} setOpenModal={setOpenEdit} platformValue={platform} url={url} id={id} />
                 </div>
               ))
             }

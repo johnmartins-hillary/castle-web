@@ -9,7 +9,7 @@ const UserBio = () => {
     const bio = useSelector(({userprofile}:any)=>userprofile.bio)
     return ( 
         <>
-        <div className="w-full mt-14" >
+        <div className="w-full mt-[10px] md:mt-[44px]" >
 
         <div className=" mb-1 flex items-center justify-start gap-2 " >
         <p className=" font-semibold text-left text-sm md:text-lg lg:text-[20px]" >Bio</p>

@@ -19,7 +19,7 @@ const Personal = () => {
     const [openModal,setOpenModal] = useState(false)
     return (
         <>
-            <div className="w-full mt-12">
+            <div className="w-full mt-0 md:mt-12">
                 <div className="mb-1 flex items-center justify-start gap-2 ">
                     <p className="font-semibold text-left text-[20px]">Personal</p>
                     {/* <p className="font-light text-left text-sm mt-2">This information is not available to the public</p> */}

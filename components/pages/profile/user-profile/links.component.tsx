@@ -66,21 +66,17 @@ const Links = () => {
               >
                 {url}
               </Link>
-              <Edit2 color="green"
+            </div>
+            <div className="mt-[5px] flex items-center justify-start gap-[5px] " >
+                 <Edit2 color="green"
                 size={13}
                 cursor={"pointer"}
                 onClick={()=>{
                   setOpenEdit(true)
                 }}
                />
-
-              <Trash2
-                color="red"
-                size={13}
-                cursor={"pointer"}
-                onClick={() => handleDelete(id)}
-              />
-            </div>
+                 <Trash2 color="red" cursor={'pointer'} size={13} onClick={()=>handleDelete(id)}  />
+                 </div>
             <EditlinksModal openModal={openEdit} setOpenModal={setOpenEdit} url={url} text={platform} id={id} />
           </div>
            
