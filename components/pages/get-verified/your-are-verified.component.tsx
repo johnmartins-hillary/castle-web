@@ -5,7 +5,7 @@ const YourAreVerified = () => {
         <>
         <div className="w-full  flex flex-col items-center justify-center h-[50vh] " >
             <div className="w-full flex items-center justify-start gap-[5px] " >
-                <h3 className=" font-bold text-left leading-[30px] text-[20px]" >You're verified</h3>
+                <h3 className=" font-bold text-left leading-[30px] text-[20px]" >You&apos;re verified</h3>
                 <RiVerifiedBadgeFill
             color="#3897F0"
             size={20}
