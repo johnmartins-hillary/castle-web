@@ -43,7 +43,7 @@ const UserPhotographs = () => {
         <PhotoProvider >
         <div className="w-full flex items-center justify-start gap-3 flex-wrap" >
             {photos?.photos?.map(({id,image_url}:any)=>(
-              <div className="relative" >
+              <div className="relative" key={id} >
               <PhotoView  src={image_url} key={id} >
                 <Image src={image_url} width={100} height={100} className=" rounded-[12px]  h-[100px]" key={id} alt={`user-photo${id}`}  />
                 </PhotoView>
