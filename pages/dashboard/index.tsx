@@ -21,7 +21,7 @@ const Dashboard = () => {
             </div> */}
            <DashboardBanner/>
         </div>
-        {/* <BookingHistory/> */}
+        <BookingHistory/>
         </DashboardLayput>
         </>
      );
