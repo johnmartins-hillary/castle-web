@@ -16,7 +16,6 @@ interface props{
 const BookingHistory = () => {
     const {data,isFetching,isError,isSuccess,}:any = useGetBookingHistoryQuery()
     const  bookings = data?.appointments
-    console.log(bookings)
     return (
         <>
         <div className="w-full mt-[30px] pb-[75px] " >
