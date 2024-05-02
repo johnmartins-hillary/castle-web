@@ -2,7 +2,7 @@ const AboutUs = () => {
     const options=["Who we are","Privacy policy"]
     return ( 
         <>
-        <div className="w-full mt-14" >
+        <div className="w-full mt-14 pb-[75px] md:pb-[initial]" >
         <p className="font-medium text-[13px] md:text-lg text-left">About Us</p>
         <div className="w-full flex items-center justify-start gap-4 mt-5 "  >
             {options.map((item)=>(

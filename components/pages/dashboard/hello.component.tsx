@@ -21,7 +21,9 @@ const Hello = () => {
         
         <div className="w-full  flex items-start justify-start gap-4 md:items-center  pt-[20px] pb-[25px]  h-[80px] md:px-[4px] lg:pt-[50px] md:mb-[35px] lg-[140px]  "  >
     <div  className=" relative w-[27.5px] h-[27.5px] md:w-[71.65px] md:h-[71.65px] lg:w-14 lg:h-14 rounded-full flex items-center justify-center bg-faint_grey  shadow-md shadow-faint_grey" >
-            <Image className="w-full h-full rounded-full object-cover "  src={ user?.profile_image ? user?.profile_image : '/images/user-icon.png'} width={34.84} height={17.42} alt="user-placeholder" />
+            <Image onClick={()=>{
+              router.push("/profile")
+            }} className="w-full h-full rounded-full object-cover "  src={ user?.profile_image ? user?.profile_image : '/images/user-icon.png'} width={34.84} height={17.42} alt="user-placeholder" />
             <div
         // style={{
         //   position: "absolute",

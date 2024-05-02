@@ -44,7 +44,7 @@ const ChatHeader = ({ eventSrc }: any) => {
   return (
     <>
       <div className="w-full h-[70px] flex items-stretch justify-center">
-        <div className={`${ data?.appointment?.status === "accepted"  ?  "w-3/5" : "w-full" } flex items-center justify-start gap-5 `}>
+        <div className={`${ data?.appointment?.status === "accepted" && data?.appointment?.status === "active"   ?  "w-3/5" : "w-full" } flex items-center justify-start gap-5 `}>
           <IoIosArrowBack
             className=" w-[23px] h-[23px] md:w-[34px] md:h-[34px] cursor-pointer"
             onClick={() => {

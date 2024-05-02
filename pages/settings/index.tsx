@@ -7,6 +7,7 @@ import ReachOut from "@/components/pages/settings/reach-out.component";
 import AboutUs from "@/components/pages/settings/about-us.component";
 import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component";
 import Image from "next/image"
+import GetVeified from "@/components/pages/settings/get-veriied.component";
 const Settings = () => {
     return ( 
         <>
@@ -14,9 +15,10 @@ const Settings = () => {
             <title>Settings</title>
         </Head>
         <DashboardLayout>
-            <MobileNavbar title="Settings" icon={<Image src={"/images/setting-icon.png"} height={5} width={25} className=" object-contain" alt="icon" />} />
+            <MobileNavbar title="Settings" iconStyles={"hidden md:block"} icon={<Image src={"/images/setting-icon.png"} height={5} width={25} className=" object-contain" alt="icon" />} />
             <div className="w-full md:max-lg:my-12" />
             <ModeOfCommunication/>
+            <GetVeified/>
             <Referrall/>
             <Rate/>
             <ReachOut/>
