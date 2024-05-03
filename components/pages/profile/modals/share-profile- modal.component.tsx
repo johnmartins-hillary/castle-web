@@ -42,7 +42,7 @@ const ShareProfileModal = ({ openModal, setOpenModal,cons_id,const_name }: any) 
             <button
               onClick={() => {
                 if (typeof navigator !== undefined) {
-                  navigator.clipboard.writeText(link).then(()=>{
+                  navigator.clipboard?.writeText(link).then(()=>{
                     setCopyText("Copied")
                   })
                   

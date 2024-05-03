@@ -4,7 +4,7 @@ import { IGenericResponse, SignInProps, SignUpProps } from "@/redux/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userApi } from "../user";
 import { clearUser } from "@/redux/slices/user";
-
+import Cookie from "js-cookie"
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
@@ -145,7 +145,8 @@ export const authApi = createApi({
         try {
           await queryFulfilled;
           dispatch(clearUser());
-          localStorage.clear();
+          // localStorage.clear();
+          // Cookie.remove("")
         } catch (error) {
           console.log("Logout User error", error);
         }

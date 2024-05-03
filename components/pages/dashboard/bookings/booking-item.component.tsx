@@ -1,11 +1,11 @@
-import { dateFormatter } from "@/utilities/helpers";
+import { dateFormatter, formatDate } from "@/utilities/helpers";
 import Image from "next/image";
 import { IoEllipsisVertical } from "react-icons/io5";
 import BookingInfoModal from "./booking-info-modal.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-// import { useVoiceCall } from "@/context/app-context";
-
+import AvatarWithBadge from "@/components/avatar/avatar.component";
+import { useLazyGetBookingHistoryQuery } from "@/services/booking";
 
 interface Props {
   title?: string;
@@ -17,7 +17,7 @@ interface Props {
   mode?: any;
   duration?: string;
   time?: string;
-  data?:any
+  profile_pic?: any;
 }
 
 const BookingItem = ({
@@ -30,90 +30,141 @@ const BookingItem = ({
   reference,
   status,
   mode,
+  profile_pic
 }: Props) => {
-
   const statusColorClass = getStatusColorClass(status);
   const router = useRouter();
-  const data = {title,time,customer,agent,amount,duration,reference,status,mode}
-  // const {
-  //   callHandler,
-  // } = useVoiceCall();
-  const [showModal,setShowModal] = useState<boolean>()
+  const data = {
+    title,
+    time,
+    customer,
+    agent,
+    amount,
+    duration,
+    reference,
+    status,
+    mode
+  };
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [triggerHistory, { data: historyData, isSuccess }]: any =
+    useLazyGetBookingHistoryQuery();
+  const [modalData, setModalData] = useState(data);
   function getStatusColorClass(status: string | undefined) {
     switch (status) {
       case "pending":
-        return "text-orange-500";
+        return "bg-orange-500";
       case "rejected":
-        return "text-red-500";
+        return "bg-[#FE534C]";
       case "accepted":
-        return "text-green-500"; 
+        return "bg-[#209841]";
       case "ended":
-        return "text-blue-500"; 
+        return "bg-[#676565]";
       default:
-        return "text-gray-500";
+        return "bg-[#676565]";
     }
   }
 
-  const chatNavigator =()=>{
-    const id =   title === "Recent Booking" ? agent?.id : customer?.id
-    const name =   title === "Recent Booking" ? agent?.name ? agent?.name : agent?.username : customer?.name ? customer?.name : customer?.username
-    router.push(`chat/${id}/${reference}/${name}`)
-  }
-  // const callNavigator =()=>{
-  //   const id =   title === "Recent Booking" ? agent?.id : customer?.id
-  //   const name =   title === "Recent Booking" ? agent?.name : customer?.name
-  //   // router.push(`chat/${id}/${reference}/${name}`)
-  //   callHandler({receiver_id:id,booking_ref:reference})
-  // }
+  const chatNavigator = () => {
+    const id = title === "Recent Booking" ? agent?.id : customer?.id;
+    const name =
+      title === "Recent Booking"
+        ? agent?.name
+          ? agent?.name
+          : agent?.username
+        : customer?.name
+        ? customer?.name
+        : customer?.username;
+    router.push(`chat/${id}/${reference}/${name}`);
+  };
 
-  const disableChatBtn = mode !== "text" ? true :  status === "cancelled" || status === "rejected" ? true : false
-  // const disableCallBtn = mode !== "call" ? true : status === "cancelled" || status === "rejected" ? true : false
+  const disableChatBtn =
+    mode !== "text" || status === "cancelled" || status === "rejected";
+  useEffect(() => {
+    if (isSuccess) {
+      const latestElement = historyData?.appointment?.slice(0, 0);
+      setModalData(latestElement);
+    }
+  }, [isSuccess]);
+
+  const y = [0, 1, 2, 3];
   return (
     <>
-      <div className="w-full flex items-start justify-between border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">
-        <div className="w-[50%] md:w-[25%]">
-          <p className="text-[12.5px] text-left font-light lg:text-[14px]">
-            {`${title} with ${
-              title === "Recent Booking" ? agent?.name : customer?.name
-            }`}
-          </p>
-          <p className="text-[11px] text-light text-faint_grey font-light mt-[5px] lg:text-[12.5px]">
-            {dateFormatter(time)}
-          </p>
+      <div className="w-full flex items-center mt-[23px] justify-between gap-[3.6px] border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">
+        <div className="flex items-center justify-between w-full md:w-auto">
+          <div className="flex-shrink-0 mr-4">
+            <AvatarWithBadge
+              className="w-[59px] h-[59px] rounded-full"
+              profile_image={profile_pic}
+              isVerified
+            />
+          </div>
+          <div className="flex flex-col">
+            <p className=" text-[11px] leading-[12px] md:text-sm text-left font-light">
+              {`${title} with`}{" "}
+              <span className="m-0 p-0 font-bold">{`${
+                title === "Recent Booking" ? agent?.name : customer?.name
+              }`}</span>
+            </p>
+            <p className=" text-[10px] md:text-xs text-light  font-light mt-1">
+              {formatDate(time)}
+            </p>
+          </div>
         </div>
 
-        <div className="w-[20%] md:w-[25%]">
-          <p className={`text-[12.5px] text-center font-light lg:text-[14px] capitalize ${statusColorClass}`}>
+        <div className="flex items-center justify-center w-1/4">
+          <p
+            className={` text-[11px] md:text-sm text-center font-light p-[5px] rounded-[6px] text-white ${statusColorClass}`}
+          >
             {status}
           </p>
         </div>
 
-        <div className="w-[20%] flex items-center justify-center gap-[13px]">
-          <button onClick={chatNavigator} disabled={disableChatBtn} className={`w-auto ${ disableChatBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
+        <div className="flex items-center justify-center w-1/4 gap-3">
+          <button
+            onClick={chatNavigator}
+            disabled={disableChatBtn}
+            className={`w-auto ${
+              disableChatBtn ? "bg-light_grey" : "bg-primary_color"
+            } rounded-full p-[5px] flex items-center justify-center left-[9.5px] relative`}
+          >
             <Image
-              width={96}
-              height={96}
+              width={16}
+              height={16}
               src={"/images/chat-conversation.png"}
-              className="object-cover w-[10.85px] md:w-[16px]"
               alt="chat-conversation"
             />
           </button>
-          {/* <button onClick={callNavigator} disabled={disableCallBtn} className={`w-auto ${disableCallBtn ?  ' bg-light_grey' : 'bg-primary_color'} rounded-full p-[5px] flex items-center justify-center`}>
+          {/* <button
+            onClick={callNavigator}
+            disabled={disableCallBtn}
+            className={`w-auto ${
+              disableCallBtn ? "bg-light_grey" : "bg-primary_color"
+            } rounded-full p-[5px] flex items-center justify-center`}
+          >
             <Image
-              width={96}
-              height={96}
+              width={16}
+              height={16}
               src={"/images/hang-up.png"}
-              className="object-cover w-[10.85px] md:w-[16px]"
               alt="hang-up"
             />
           </button> */}
         </div>
 
-        <div className="w-[10%] flex items-center justify-center">
-          <IoEllipsisVertical onClick={()=>{setShowModal(true)}} size={14} className="cursor-pointer lg:size-[18px]" />
+        <div className="flex items-end justify-center w-1/4">
+          <IoEllipsisVertical
+            onClick={() => {
+              setShowModal(true);
+            }}
+            size={18}
+            className="cursor-pointer"
+          />
         </div>
       </div>
-      <BookingInfoModal data={data} showModal={showModal}  setShowModal={setShowModal} />
+      <BookingInfoModal
+        data={modalData}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
     </>
   );
 };
