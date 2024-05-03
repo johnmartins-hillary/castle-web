@@ -41,7 +41,7 @@ const Rate = () => {
     return ( 
         <>
         <div className="w-full mt-12" >
-            <p className="font-medium text-[13px] md:text-lg text-left" >Referral (For verified users only)</p>
+            <p className="font-medium text-[13px] md:text-lg text-left" >Rate (For verified users only)</p>
             <div className="w-full flex items-baseline justify-start gap-2" >
                 <div className=" w-[238px] rounded-md bg-light_grey p-2 flex items-center justify-between gap-2 "  >
                     <p className="text-[13px] md:text-sm" >NGN</p>

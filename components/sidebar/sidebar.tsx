@@ -81,9 +81,9 @@ const logOutHandler =()=>{
 
     useEffect(()=>{
         if (isError) {
-            route.push("/auth/sign-in")
             toast({
-                title:"Logout Successful"
+                title:"Oops!",
+                description:"Logout unSuccessful"
             })
         }
     },[isError])

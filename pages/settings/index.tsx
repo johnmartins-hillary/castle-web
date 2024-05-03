@@ -8,6 +8,7 @@ import AboutUs from "@/components/pages/settings/about-us.component";
 import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component";
 import Image from "next/image"
 import GetVeified from "@/components/pages/settings/get-veriied.component";
+import SettingsLogOut from "@/components/pages/settings/logout.component";
 const Settings = () => {
     return ( 
         <>
@@ -23,6 +24,7 @@ const Settings = () => {
             <Rate/>
             <ReachOut/>
             <AboutUs/>
+            <SettingsLogOut/>
         </DashboardLayout>
         </>
      );
