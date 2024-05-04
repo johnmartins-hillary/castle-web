@@ -166,7 +166,7 @@ const Actions = ({ setOpenModal }: any) => {
                 <Button
                   onClick={() => {
                     if (token) {
-                      setOpenDrawer(true);
+                      setOpenModal(true);
                     } else {
                       router.replace("/auth/sign-in");
                     }
