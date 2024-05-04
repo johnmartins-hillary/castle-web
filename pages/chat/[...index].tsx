@@ -7,20 +7,26 @@ import DashboardLayout from "@/pages/dashboard/layout";
 import { useGetChatDetailsQuery } from "@/services/chat";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import EmojiPicker from "emoji-picker-react";
+import ChatTimer from "@/components/pages/consultant/chat/chat-timer.component";
 const Chat = () => {
   const router = useRouter();
   const slugs: any = router.query.index;
   const chatAreaRef = useRef<any>();
   const [showEmoji, setShowEmoji] = useState(false);
   const [message, setMessage] = useState("");
+  const [showChatActions,setShowChatActions] = useState(false)
+  const [startTime,setStartTime] = useState(false)
   let eventSrc;
   const scrollToBottom = () => {
     if (chatAreaRef.current) {
       chatAreaRef.current.scrollToTop = chatAreaRef.current?.scrollHeight;
     }
   };
+  useEffect(()=>{
+    scrollToBottom()
+  },[])
   return (
     <>
       <Head>
@@ -28,13 +34,15 @@ const Chat = () => {
       </Head>
       <DashboardLayout showBottomTab={false}>
         <div className="w-full overflow-y-hidden flex-col flex h-full  ">
-          <ChatHeader eventSrc={eventSrc} />
+          <ChatHeader eventSrc={eventSrc} showChatActions={showChatActions} />
           <ChatArea chatRef={chatAreaRef} scrollToBottom={scrollToBottom} />
 
           <MessageComposer
+          setShowChatActions={setShowChatActions}
             scrollToBottom={scrollToBottom}
             eventSrc={eventSrc}
             showEmoji={showEmoji}
+            setStartTime={setStartTime}
             setShowEmoji={setShowEmoji}
             message={message}
             setMessage={setMessage}
@@ -49,7 +57,7 @@ const Chat = () => {
             />
           )}
           {/* <TestComposer/> */}
-
+          <ChatTimer startTime={startTime} />
           {/* <div className=" bg-red-600 flex-1 p-9 " />
             <div className=" bg-green-600 flex-[2] p-9 "/>
             <div className=" bg-blue-600 flex-1 p-9 " /> */}

@@ -1,8 +1,8 @@
 "use client";
-import { Input } from "@/components/ui/input";
-import { MicIcon, SmileIcon } from "lucide-react";
-import { RiChatNewLine } from "react-icons/ri";
-import { AiFillInstagram } from "react-icons/ai";
+// import { Input } from "@/components/ui/input";
+import { SmileIcon } from "lucide-react";
+// import { RiChatNewLine } from "react-icons/ri";
+// import { AiFillInstagram } from "react-icons/ai";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { IoMdSend } from "react-icons/io";
@@ -20,11 +20,16 @@ import { useEndAppointmentMutation } from "@/services/booking";
 import { setMessages } from "@/redux/slices/chats";
 import { useDispatch } from "react-redux";
 
-
-
-
-const MessageComposer = ({scrollToBottom,eventSrc,showEmoji,setShowEmoji,setMessage,message}:any) => {
-
+const MessageComposer = ({
+  scrollToBottom,
+  eventSrc,
+  showEmoji,
+  setShowEmoji,
+  setMessage,
+  message,
+  setShowChatActions,
+  setStartTime
+}: any) => {
   const router = useRouter();
   const storage = getLocalStorageData("user");
   const slugs: any = router.query.index;
@@ -36,7 +41,8 @@ const MessageComposer = ({scrollToBottom,eventSrc,showEmoji,setShowEmoji,setMess
     inChatHandler,
     { data: inChatData, isLoading: inChatloading, isSuccess, isError, error }
   ]: any = useInChatMutation();
-  const [endAppoiintment,{isSuccess:endAppointmentASuccess}]:any = useEndAppointmentMutation();
+  const [endAppoiintment, { isSuccess: endAppointmentASuccess }]: any =
+    useEndAppointmentMutation();
   const [showModal, setShowModal] = useState(false);
   const [btnText, setBtnText] = useState("Starting Chat");
   const { toast } = useToast();
@@ -72,23 +78,26 @@ const MessageComposer = ({scrollToBottom,eventSrc,showEmoji,setShowEmoji,setMess
   };
 
   const messagingCall = async () => {
-   eventSrc = new EventSource(
+    eventSrc = new EventSource(
       `${BASE_URL}message/${data?.room_id}/${data?.user?.id}/${booking_ref}`
     );
 
     eventSrc.onmessage = (event: any) => {
       const res = JSON.parse(event?.data);
       const inChat = res?.[0]?.inchat;
-      const message =  res?.[1]?.message_event;
-      if(res?.length > 1){
-        const data = message
-        dispatch(setMessages(data))
-        scrollToBottom()
+      const message = res?.[1]?.message_event;
+      if (res?.length > 1) {
+        const data = message;
+        dispatch(setMessages(data));
+        scrollToBottom();
       }
-      if (inChat?.agent_in?.includes("1") &&
+      if (
+        inChat?.agent_in?.includes("1") &&
         inChat?.customer_in?.includes("1")
       ) {
         setShowModal(false);
+        setStartTime(true)
+        setShowChatActions(true);
         setShowInput(true);
         setShowBtn(false);
       }
@@ -97,19 +106,23 @@ const MessageComposer = ({scrollToBottom,eventSrc,showEmoji,setShowEmoji,setMess
         toast({
           title: "You have less than 2 minutes left"
         });
-      } else if (inChat?.time_left === 0 && inChat?.time_left !== null || inChat?.time_left < 0 ) {
+      } else if (
+        (inChat?.time_left === 0 && inChat?.time_left !== null) ||
+        inChat?.time_left < 0
+      ) {
         eventSrc?.close();
         endAppoiintment({ booking_ref: booking_ref });
         toast({
           title: "Chat ended"
         });
+        setStartTime(false)
         setShowInput(false);
       }
     };
   };
 
   useEffect(() => {
-    if (isSuccess ||  data?.appointment?.status === "active") {
+    if (isSuccess || data?.appointment?.status === "active") {
       messagingCall();
     }
   }, [inChatData, isSuccess, data?.appointment?.status]);
@@ -131,63 +144,69 @@ const MessageComposer = ({scrollToBottom,eventSrc,showEmoji,setShowEmoji,setMess
           id: Math.floor(Math.random() * 1000)
         })
       );
-    
+
       setMessage("");
-      scrollToBottom()
+      scrollToBottom();
     }
   };
 
   return (
     <div className="fixed bottom-[0px] bg-white left-0 w-[-webkit-fill-available] flex items-center justify-center lg:ml-[300px] shadow-md shadow-gray-400  p-4 ">
       {showInput && (
-      <div className=" w-auto flex-1 md:w-[689px] md:max-w-[696px] flex items-center justify-between gap-2">
-      <div className="bg-slate-100 shadow-lg px-4 py-3 rounded-3xl flex items-center gap-4 flex-1">
-        <SmileIcon size={23} onClick={()=>{setShowEmoji(!showEmoji)}} />
-        <input
-          value={message}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              messengerHandler();
-            }
-          }}
-          onChange={(e) => setMessage(e.target.value)}
-          className="flex-1 outline-none border-none bg-transparent text-sm"
-          placeholder="Type your message..."
-        />
-        {
-          message?.length > 0 && (
-            <IoMdSend
-              onClick={messengerHandler}
+        <div className=" w-auto flex-1 md:w-[689px] md:max-w-[696px] flex items-center justify-between gap-2">
+          <div className="bg-slate-100 shadow-lg px-4 py-3 rounded-3xl flex items-center gap-4 flex-1">
+            <SmileIcon
               size={23}
-              className="cursor-pointer"
+              onClick={() => {
+                setShowEmoji(!showEmoji);
+              }}
             />
-          )
-
-    
-        }
-      </div>
-    </div>
-
+            <input
+              value={message}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  messengerHandler();
+                }
+              }}
+              onChange={(e) => setMessage(e.target.value)}
+              className="flex-1 outline-none border-none bg-transparent text-sm"
+              placeholder="Type your message..."
+            />
+            {message?.length > 0 && (
+              <IoMdSend
+                onClick={messengerHandler}
+                size={23}
+                className="cursor-pointer"
+              />
+            )}
+          </div>
+        </div>
       )}
 
       {showBtn && data?.appointment?.status === "accepted" && (
         <Button onClick={inChatFunction}>Start Chat</Button>
       )}
       {showBtn && data?.appointment?.status === "pending" && (
-        <Button className=" bg-orange-500 hover:bg-orange-400 cursor-default " >Still Pending</Button>
+        <Button className=" bg-orange-500 hover:bg-orange-400 cursor-default ">
+          Still Pending
+        </Button>
       )}
-      {data?.appointment?.status === "ended" && userId ===  data?.appointment?.customer && (
-        <Button onClick={()=>{
-          router.replace(`/consultant/${data?.user?.id}`)
-        }}>Book again</Button>
-      )}
+      {data?.appointment?.status === "ended" &&
+        userId === data?.appointment?.customer && (
+          <Button
+            onClick={() => {
+              router.replace(`/consultant/${data?.user?.id}`);
+            }}
+          >
+            Book again
+          </Button>
+        )}
       <ChatModal
         showModal={showModal}
         setShowModal={setShowModal}
         isLoading={inChatloading}
         btnText={btnText}
       />
-  
     </div>
   );
 };

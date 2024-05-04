@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AvatarWithBadge from "@/components/avatar/avatar.component";
 import { useLazyGetBookingHistoryQuery } from "@/services/booking";
+import { useVoiceCall } from "@/context/app-context";
 
 interface Props {
   title?: string;
@@ -49,6 +50,7 @@ const BookingItem = ({
   const [triggerHistory, { data: historyData, isSuccess }]: any =
     useLazyGetBookingHistoryQuery();
   const [modalData, setModalData] = useState(data);
+  const {new_booking} = useVoiceCall()
   function getStatusColorClass(status: string | undefined) {
     switch (status) {
       case "pending":
@@ -80,13 +82,13 @@ const BookingItem = ({
   const disableChatBtn =
     mode !== "text" || status === "cancelled" || status === "rejected";
   useEffect(() => {
-    if (isSuccess) {
+    if (new_booking) {
       const latestElement = historyData?.appointment?.slice(0, 0);
       setModalData(latestElement);
     }
-  }, [isSuccess]);
+  }, [new_booking]);
 
-  const y = [0, 1, 2, 3];
+
   return (
     <>
       <div className="w-full flex items-center mt-[23px] justify-between gap-[3.6px] border-b-[1px] border-b-light_grey mb-[12px] pb-[12px]">

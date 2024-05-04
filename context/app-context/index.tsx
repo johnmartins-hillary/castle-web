@@ -37,6 +37,7 @@ export const VoiceCallProvider: React.FC<{ children: React.ReactNode }> = ({
   const notifySound = useRef<any>();
   const [playSound, setPlaySound] = useState(false);
   const [triggerHistory] = useLazyGetBookingHistoryQuery()
+  const [new_booking,setNewBooking] = useState(false)
   const callHandler = async ({ receiver_id, booking_ref }: any) => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -142,8 +143,12 @@ export const VoiceCallProvider: React.FC<{ children: React.ReactNode }> = ({
 
       if (notification?.notice?.toLowerCase()?.includes("session")) {
         triggerHistory()
+        setNewBooking(true)
       }
     };
+    return()=>{
+      setNewBooking(false)
+    }
   };
 
   // useEffect(()=>{
@@ -174,6 +179,7 @@ export const VoiceCallProvider: React.FC<{ children: React.ReactNode }> = ({
   const contextValue = {
     isCalling,
     isMuted,
+    new_booking,
     callHandler,
     answerCallHandler,
     endCallHandler,

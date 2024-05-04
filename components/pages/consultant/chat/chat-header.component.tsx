@@ -17,7 +17,7 @@ import { useGetChatDetailsQuery, useInChatMutation } from "@/services/chat";
 import { useEndAppointmentMutation } from "@/services/booking";
 import { chatTimer } from "@/utilities/helpers";
 type Checked = DropdownMenuCheckboxItemProps["checked"];
-const ChatHeader = ({ eventSrc }: any) => {
+const ChatHeader = ({ eventSrc,showChatActions }: any) => {
   const router = useRouter();
   const slugs: any = router.query.index;
   const { data, isLoading, isSuccess }: any = useGetChatDetailsQuery({
@@ -28,21 +28,8 @@ const ChatHeader = ({ eventSrc }: any) => {
   const isVerified = data?.user?.verification_status === 1 ? true : false;
   const [endAppoiintment, { isSuccess: endAppointmentSuccess }]: any =
     useEndAppointmentMutation();
-  const [
-    inChatHandler,
-    {
-      data: inChatData,
-      isLoading: inChatloading,
-      isSuccess: inChatiIsSuccess,
-      isError,
-      error
-    }
-  ]: any = useInChatMutation();
   const [route, setRoute] = useState("");
   const appointment = data?.appointment;
-  const [time, setTime] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
   const booking_ref = appointment?.booking_ref;
 
   const endAppointmentHandler = (route: any) => {
@@ -56,32 +43,7 @@ const ChatHeader = ({ eventSrc }: any) => {
       eventSrc?.close();
     }
   }, [endAppointmentSuccess]);
-  useEffect(() => {
-    if (isSuccess) {
-      setTime(appointment?.duration);
-    }
-  }, [isSuccess]);
-  useEffect(() => {
-    if (appointment?.duration === undefined) return;
-    let interval: any;
-    if (inChatiIsSuccess) {
-      interval = setInterval(() => {
-        if (time === 0 && seconds === 0) {
-          clearInterval(interval);
-        } else if (seconds === 0) {
-          if (time === 0 && seconds !== 0) {
-            clearInterval(interval);
-          } else {
-            setTime((prev) => prev - 1);
-            setSeconds(59);
-          }
-        } else {
-          setSeconds((prev) => prev - 1);
-        }
-      }, 1000);
-    }
-    return () => clearInterval(interval);
-  }, [time, seconds, appointment?.duration, inChatiIsSuccess]);
+
   return (
     <>
       <div className="w-full h-[70px] flex items-stretch justify-center">
@@ -112,7 +74,7 @@ const ChatHeader = ({ eventSrc }: any) => {
           />
           <p className="font-bold text-sm md:text-xl truncate ">{slugs?.[2]}</p>
         </div>
-        {data?.appointment?.status === "active" && (
+        {showChatActions && (
           <div className="w-2/5  flex items-center justify-end gap-5 px-3 ">
             {/* <Button onClick={()=>endAppointmentHandler(`/consultant/${data?.user?.id}`)} className=" bg-black w-[35px] h-[35px] rounded-[12px] p-[10px] md:p-[10px]  md:w-[46.11px] md:h-[46.11px]  md:rounded-2xl hover:bg-black rotate-45  " >
           <MdPhone size={50} className=" -rotate-45" />
@@ -140,10 +102,6 @@ const ChatHeader = ({ eventSrc }: any) => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            <p className=" w-max flex text-[11.5px] md:text-[13px] lg:text-[14px] ">
-              {time} :{seconds}
-            </p>
           </div>
         )}
       </div>
