@@ -8,7 +8,9 @@ import { getLocalStorageData } from "@/utilities/helpers";
 
 const ChatArea = ({ chatRef, scrollToBottom }: any) => {
   const router = useRouter();
+  const chatBox = useRef<any>()
   const reduxMessages = useSelector(({ chat }: any) => chat?.messages);
+  const user = getLocalStorageData("user");
   const slugs = router.query.index;
   const { data, isLoading, isSuccess, isFetching, isError }: any =
     useGetChatDetailsQuery({
@@ -18,6 +20,21 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
   const messages = data?.messages;
   const { toast } = useToast();
   const dispatch = useDispatch();
+
+
+
+
+  useEffect(()=>{
+    if (chatBox) {
+      chatBox.current.addEventListener('DOMNodeInserted',(event:any)=>{
+        const {currentTarget:target} = event;
+        target?.scroll({top:target.scrollHeight,behavior:'smooth'})
+      })
+    }
+  },[])
+
+
+
   useEffect(() => {
     messages?.map((item: any) => {
       dispatch(setMessages(item));
@@ -26,6 +43,8 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
       scrollToBottom();
     };
   }, [data, isSuccess]);
+
+
 
   useEffect(() => {
     if (isError) {
@@ -36,12 +55,12 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
     }
   }, [isError]);
 
-  const user = getLocalStorageData("user");
+
   const userId = user?.id;
   return (
     <>
       <div
-        ref={chatRef}
+        ref={chatBox}
         className=" flex flex-col flex-[1.2] overflow-y-scroll no-scrollbar  w-full  flex-grow-1  py-[30px] px-[25px]"
       >
         {isFetching ? (

@@ -81,12 +81,12 @@ const BookingItem = ({
 
   const disableChatBtn =
     mode !== "text" || status === "cancelled" || status === "rejected";
-  useEffect(() => {
-    if (new_booking) {
-      const latestElement = historyData?.appointment?.slice(0, 0);
-      setModalData(latestElement);
-    }
-  }, [new_booking]);
+  // useEffect(() => {
+  //   if (new_booking) {
+  //     const latestElement = historyData?.appointment?.slice(0, 0);
+  //     setModalData(latestElement);
+  //   }
+  // }, [new_booking]);
 
 
   return (
