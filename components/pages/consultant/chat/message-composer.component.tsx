@@ -21,7 +21,6 @@ import { setMessages } from "@/redux/slices/chats";
 import { useDispatch } from "react-redux";
 
 const MessageComposer = ({
-  scrollToBottom,
   eventSrc,
   showEmoji,
   setShowEmoji,
@@ -89,7 +88,6 @@ const MessageComposer = ({
       if (res?.length > 1) {
         const data = message;
         dispatch(setMessages(data));
-        scrollToBottom();
       }
       if (
         inChat?.agent_in?.includes("1") &&
@@ -146,7 +144,7 @@ const MessageComposer = ({
       );
 
       setMessage("");
-      scrollToBottom();
+
     }
   };
 

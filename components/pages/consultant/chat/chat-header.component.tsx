@@ -46,7 +46,7 @@ const ChatHeader = ({ eventSrc,showChatActions }: any) => {
 
   return (
     <>
-      <div className="w-full h-[70px] flex items-stretch justify-center fixed bg-white ">
+      <div className="w-full h-[70px] flex items-stretch justify-center fixed bg-white left-0 right-0 top-0 px-[23px] lg:ml-[300px] z-10  lg:top-[30px]  ">
         <div
           className={`${
             data?.appointment?.status === "accepted" &&

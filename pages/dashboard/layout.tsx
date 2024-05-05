@@ -18,9 +18,11 @@ const poppins = Poppins({
 
 export default function DashboardLayout({
   children,
+  mainContentStyle,
   showBottomTab = true // Default value set to true
 }: Readonly<{
   children: React.ReactNode;
+  mainContentStyle?: string;
   showBottomTab?: boolean; // Optional prop for showing/hiding bottom tab
 }>) {
   return (
@@ -30,9 +32,16 @@ export default function DashboardLayout({
           <div className="hidden lg:block lg:fixed lg:left-0 lg:top-0 lg:bottom-0 lg:w-[300px] lg:bg-sidebar_bg lg:p-4  ">
             <SideBar />
           </div>
-          <div className=" w-full m-0 min-h-screen p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative   ">
+          <div
+            className={
+              mainContentStyle
+                ? mainContentStyle
+                : `w-full m-0 min-h-screen p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative `
+            }
+          >
             {children}
-            {showBottomTab && <BottomTabBar/>} {/* Conditionally render bottom tab */}
+            {showBottomTab && <BottomTabBar />}{" "}
+            {/* Conditionally render bottom tab */}
           </div>
           <Toaster />
         </div>
@@ -40,4 +49,3 @@ export default function DashboardLayout({
     </StoreProvider>
   );
 }
-

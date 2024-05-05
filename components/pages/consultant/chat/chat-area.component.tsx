@@ -10,6 +10,7 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
   const router = useRouter();
   const chatBox = useRef<any>()
   const reduxMessages = useSelector(({ chat }: any) => chat?.messages);
+  const chatBottom = useRef<any>(null);
   const user = getLocalStorageData("user");
   const slugs = router.query.index;
   const { data, isLoading, isSuccess, isFetching, isError }: any =
@@ -39,7 +40,6 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
     messages?.map((item: any) => {
       dispatch(setMessages(item));
     });
-    scrollToBottom();
   }, [data, isSuccess]);
 
 
@@ -53,12 +53,15 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
     }
   }, [isError]);
 
+  useEffect(()=>{
+    chatBottom.current.scrollIntoView()
+  },[reduxMessages])
 
   const userId = user?.id;
   return (
     <>
       <div
-        className=" flex flex-col flex-[1.2] overflow-y-scroll no-scrollbar  w-full  flex-grow-1  py-[30px] px-[25px] mt-[50px] "
+        className="overflow-y-scroll no-scrollbar  w-full  py-[30px] px-[25px] top-[90px]  lg:h-[500px] lg:min-h-[500px] relative xl:h-[900px] xl:min-h-[900px] "
       >
         {isFetching ? (
           <p className=" text-sm font-bold mt-6 text-center text-zinc-200">
@@ -97,6 +100,7 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
             </p>
           </>
         )}
+                  <div ref={chatBottom} className="py-5 w-full"  id="bottom" />
       </div>
     </>
   );
