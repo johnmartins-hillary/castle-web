@@ -24,14 +24,14 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
 
 
 
-  useEffect(()=>{
-    if (chatBox) {
-      chatBox.current.addEventListener('DOMNodeInserted',(event:any)=>{
-        const {currentTarget:target} = event;
-        target?.scroll({top:target.scrollHeight,behavior:'smooth'})
-      })
-    }
-  },[])
+  // useEffect(()=>{
+  //   if (chatBox) {
+  //     chatBox.current.addEventListener('DOMNodeInserted',(event:any)=>{
+  //       const {currentTarget:target} = event;
+  //       target?.scroll({top:target.scrollHeight,behavior:'smooth'})
+  //     })
+  //   }
+  // },[])
 
 
 
@@ -39,9 +39,7 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
     messages?.map((item: any) => {
       dispatch(setMessages(item));
     });
-    return () => {
-      scrollToBottom();
-    };
+    scrollToBottom();
   }, [data, isSuccess]);
 
 
@@ -60,7 +58,6 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
   return (
     <>
       <div
-        ref={chatBox}
         className=" flex flex-col flex-[1.2] overflow-y-scroll no-scrollbar  w-full  flex-grow-1  py-[30px] px-[25px] mt-[50px] "
       >
         {isFetching ? (

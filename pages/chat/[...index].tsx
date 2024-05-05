@@ -14,14 +14,15 @@ const Chat = () => {
   const router = useRouter();
   const slugs: any = router.query.index;
   const chatAreaRef = useRef<any>();
+  const chatBottom = useRef<any>();
   const [showEmoji, setShowEmoji] = useState(false);
   const [message, setMessage] = useState("");
   const [showChatActions,setShowChatActions] = useState(false)
   const [startTime,setStartTime] = useState(false)
   let eventSrc;
   const scrollToBottom = () => {
-    if (chatAreaRef.current) {
-      chatAreaRef.current.scrollToTop = chatAreaRef.current?.scrollHeight;
+    if (chatBottom) {
+      chatBottom.current?.scrollIntoView({behavior:"smooth"})
     }
   };
   useEffect(()=>{
@@ -36,7 +37,7 @@ const Chat = () => {
         <div className="w-full overflow-y-hidden flex-col flex h-full relative  ">
           <ChatHeader eventSrc={eventSrc} showChatActions={showChatActions} />
           <ChatArea chatRef={chatAreaRef} scrollToBottom={scrollToBottom} />
-
+          <div ref={chatBottom} />
           <MessageComposer
           setShowChatActions={setShowChatActions}
             scrollToBottom={scrollToBottom}
