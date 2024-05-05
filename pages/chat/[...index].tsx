@@ -33,7 +33,7 @@ const Chat = () => {
         <title>Chat - {slugs?.[2]}</title>
       </Head>
       <DashboardLayout showBottomTab={false}>
-        <div className="w-full overflow-y-hidden flex-col flex h-full  ">
+        <div className="w-full overflow-y-hidden flex-col flex h-full relative  ">
           <ChatHeader eventSrc={eventSrc} showChatActions={showChatActions} />
           <ChatArea chatRef={chatAreaRef} scrollToBottom={scrollToBottom} />
 

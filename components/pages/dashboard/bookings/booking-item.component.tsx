@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import AvatarWithBadge from "@/components/avatar/avatar.component";
 import { useLazyGetBookingHistoryQuery } from "@/services/booking";
-import { useVoiceCall } from "@/context/app-context";
 
 interface Props {
   title?: string;
@@ -49,8 +48,6 @@ const BookingItem = ({
   const [showModal, setShowModal] = useState<boolean>(false);
   const [triggerHistory, { data: historyData, isSuccess }]: any =
     useLazyGetBookingHistoryQuery();
-  const [modalData, setModalData] = useState(data);
-  const {new_booking} = useVoiceCall()
   function getStatusColorClass(status: string | undefined) {
     switch (status) {
       case "pending":
@@ -163,7 +160,7 @@ const BookingItem = ({
         </div>
       </div>
       <BookingInfoModal
-        data={modalData}
+        data={data}
         showModal={showModal}
         setShowModal={setShowModal}
       />
