@@ -24,7 +24,7 @@ const Chat = () => {
       <Head>
         <title>Chat - {slugs?.[2]}</title>
       </Head>
-      <DashboardLayout mainContentStyle={'w-full m-0  max-h-[inherit]  p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative lg:max-h-[100vh] lg:h-[100vh] overflow-y-hidden '} showBottomTab={false}>
+      <DashboardLayout mainContentStyle={'w-full m-0  max-h-[inherit]  p-[30px] md:p-[20px] md:px-[43px] lg:w-auto lg:ml-[300px] lg:px-14  relative lg:max-h-[100vh] lg:h-[100vh] lg:overflow-y-hidden '} showBottomTab={false}>
         <div className="w-full h-full relative  ">
           <ChatHeader eventSrc={eventSrc} showChatActions={showChatActions} />
           <ChatArea chatRef={chatAreaRef} />

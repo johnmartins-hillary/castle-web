@@ -61,7 +61,7 @@ const ChatArea = ({ chatRef, scrollToBottom }: any) => {
   return (
     <>
       <div
-        className="overflow-y-scroll no-scrollbar  w-full  py-[30px] px-[25px] top-[90px]  lg:h-[500px] lg:min-h-[500px] relative xl:h-[900px] xl:min-h-[900px] "
+        className="overflow-y-scroll no-scrollbar h-[inherit]  w-full  py-[30px] px-[25px] top-[90px]  lg:h-[500px] lg:min-h-[500px] relative 2xl:h-[900px] 2xl:min-h-[900px] "
       >
         {isFetching ? (
           <p className=" text-sm font-bold mt-6 text-center text-zinc-200">
