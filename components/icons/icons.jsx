@@ -1,7 +1,7 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineEdit } from "react-icons/md";
-import { IoLogOutOutline,IoClose } from "react-icons/io5";
+import { IoLogOutOutline, IoClose, IoChevronForward } from "react-icons/io5";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { HiMiniSpeakerWave, HiMiniSpeakerXMark } from 'react-icons/hi2';
 import { FaMicrophone } from 'react-icons/fa';
@@ -45,4 +45,7 @@ export const MenuIcon = ({ size, color, className, onClick }) => {
 }
 export const CloseIcon = ({ size, color, className, onClick }) => {
     return <TfiClose size={size} color={color} className={className} onClick={onClick} />
+}
+export const ForwardIcon = ({ size, color, className, onClick }) => {
+    return <IoChevronForward size={size} color={color} className={className} onClick={onClick} />
 }

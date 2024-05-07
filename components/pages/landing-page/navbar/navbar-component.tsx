@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CiMenuBurger } from "react-icons/ci";
 import { useState } from "react"; // Import useState hook for managing state
 import LandingPageMenu from "@/components/mobile-menus/landing-page-menu.component";
-import Link from "next/link"
+import Link from "next/link";
 
 const NavBar = () => {
   const routes = [
@@ -15,7 +15,11 @@ const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="w-full pt-[100px] pb-[35px] md:pt-[13px]  flex md:px-[13px] items-stretch justify-between h-[100px] overflow-hidden fixed z-100 bg-white shadow-sm" style={{zIndex: 100}}>
+    // <div className="w-full pt-[100px] pb-[35px] md:pt-[13px]  flex md:px-[13px] items-stretch justify-between h-[100px] overflow-hidden fixed z-100 bg-white shadow-sm" style={{zIndex: 100}}>
+    <div
+      className="w-full  flex  items-stretch justify-between h-[100px] overflow-hidden fixed z-100 bg-white shadow-sm"
+      style={{ zIndex: 100 }}
+    >
       <div className="w-1/2 flex items-center">
         <Image
           width={120}
@@ -34,7 +38,9 @@ const NavBar = () => {
               key={index}
               className="font-semibold text-sm cursor-pointer mx-2"
             >
-              <Link href={link}>{name}</Link>
+              <Link href={link}>
+                {name}
+              </Link>
             </li>
           )}
         </ul>

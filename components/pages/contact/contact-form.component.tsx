@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 
 const ContactForm = () => {
   return (
-    <div className="flex flex-col w-full h-full items-center justify-center pb-8">
+    // <div className="flex flex-col h-full items-center justify-center pb-8 bg-white shadow-[#00000040] shadow-lg rounded-[18px] w-[380px] md:w-[708px] lg:w-[1149px] ">
+    <div className="flex flex-col h-full items-center justify-center pb-8 w-full">
       <div className=" lg:w-1/3 flex flex-col items-center justify-center mt-10  md:max-lg:w-2/5 w-[85%]  ">
         <div className="w-full">
           <h3 className="font-bold text-center text-lg">Send a message</h3>

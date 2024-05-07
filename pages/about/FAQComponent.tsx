@@ -1,21 +1,38 @@
-import {useState} from 'react'
+import { useState } from "react";
 
-const FAQComponent = ({question, answer}:any) => {
-const [showAnswer, setShowAnswer] = useState<boolean>()
+const FAQComponent = ({ question, answer }: any) => {
+  const [showAnswer, setShowAnswer] = useState<boolean>();
 
   return (
-    <div className="w-full md:w-[600px] bg-white rounded-xl p-2 md:p-8 shadow-xl">
-        {!showAnswer && <div className="flex w-full items-center gap-4  text-black cursor-pointer" onClick={() => setShowAnswer(true)}>
-            <span  className="text-[20px] md:text-[26px] cursor-pointer"><strong>+</strong></span>
-            <span className="text-[20px] md:text-[26px]">{question}</span>
-        </div>}
-        {showAnswer && <div className="flex w-full items-center gap-4  text-black cursor-pointer" onClick={() => setShowAnswer(false)}>
-            <span  className="text-[26px] cursor-pointer"><strong>-</strong></span>
-            <span className="text-[20px]">{answer}</span>
-        </div>}
-        <div className=""></div>
-    </div>
-  )
-}
 
-export default FAQComponent
+    <>
+      <div  onClick={() => {
+                setShowAnswer(!showAnswer);
+              }} className={`w-full ${showAnswer ? "h-[331px] md:h-[307px] lg:h-[358px] " : "auto"}  cursor-pointer  md:w-[600px] lg:w-[1149px] bg-white rounded-[38px]  shadow-xl mb-[48px] px-[32px] py-[24px]`}>
+        <div className="w-full flex items-center justify-between">
+          <div className="w-[100%] flex items-baseline justify-start gap-[6px] ">
+            <span
+              onClick={() => {
+                setShowAnswer(!showAnswer);
+              }}
+              className="text-center  font-bold text-[32px] m-0 p-0 cursor-pointer "
+            >
+              {showAnswer ? "-" : "+"}
+            </span>
+            <p className=" text-[18px] font-light leading-[25px] m-0 p-0 lg:text-[32px]  cursor-pointer ">
+              {question}
+            </p>
+          </div>
+        </div>
+
+        {showAnswer && (
+          <div className="w-full mt-[41px] md:mt-[38px] ">
+            <p className=" text-[14px] font-light leading-[20px] lg:text-[20px] cursor-pointer ">{answer}</p>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default FAQComponent;

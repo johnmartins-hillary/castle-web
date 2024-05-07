@@ -21,7 +21,7 @@ export default function LandingPage() {
         <div className="w-full">
           <h1
             // style={{ width: "auto", lineHeight: "50px" }}
-            className=" font-semibold m-0  relative text-[36px] md:text-5xl leading-[43px]  "
+            className=" font-semibold m-0  relative text-[36px] md:text-5xl leading-[32px] md:leading-[43px]  "
           >
             Valuable<br /> Connections<br />await<hr className=" h-[37px] md:h-14 w-1 bg-black top-24 left-28  md:top-28 md:left-40  absolute" />
           </h1>
