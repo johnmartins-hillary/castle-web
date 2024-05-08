@@ -3,7 +3,7 @@ import { MicIcon } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { MdPhone } from "react-icons/md";
 import SimplePeer from "simple-peer";
-
+import Peer from "peerjs-next"
 const VoiceCallModule = () => {
   const peerRef = useRef<any>();
   const localStream = useRef<any>();
@@ -12,40 +12,71 @@ const VoiceCallModule = () => {
   const remoteAudio = useRef<any>();
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const peer = new Peer();
 
-  const callHandler = async () => {
+  // const callHandler = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     localStream.current = stream;
+
+  //     if (localAudio.current) {
+  //       localAudio.current.srcObject = stream;
+  //       localAudio.current.play();
+  //     }
+
+  //     const peer = new SimplePeer({ initiator: true, stream });
+  //     peerRef.current = peer;
+
+  //     setupPeerListeners(peer);
+  //   } catch (error) {
+  //     console.error("Error accessing microphone:", error);
+  //   }
+  // };
+
+  const callHandler = async()=>{
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      localStream.current = stream;
-
-      if (localAudio.current) {
-        localAudio.current.srcObject = stream;
-        localAudio.current.play();
-      }
-
-      const peer = new SimplePeer({ initiator: true, stream });
-      peerRef.current = peer;
-
-      setupPeerListeners(peer);
+      console.log("stream",stream)
+      let call = peer.call('jack',stream)
+      call.on('stream',(remoteStream)=>{
+        console.log("remoteStream",remoteStream)
+        remoteAudio.current.srcObject = remoteStream;
+        remoteAudio.current.play();
+      })
     } catch (error) {
       console.error("Error accessing microphone:", error);
     }
-  };
+  }
 
+  // const answerCallHandler = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  //     localStream.current = stream;
+
+  //     if (localAudio.current) {
+  //       localAudio.current.srcObject = stream;
+  //       localAudio.current.play();
+  //     }
+
+  //     const peer = new SimplePeer({ initiator: false, stream });
+  //     peerRef.current = peer;
+
+  //     setupPeerListeners(peer);
+  //   } catch (error) {
+  //     console.error("Error accessing microphone:", error);
+    // }
   const answerCallHandler = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      localStream.current = stream;
-
-      if (localAudio.current) {
-        localAudio.current.srcObject = stream;
-        localAudio.current.play();
-      }
-
-      const peer = new SimplePeer({ initiator: false, stream });
-      peerRef.current = peer;
-
-      setupPeerListeners(peer);
+      console.log("ans stream",stream)
+        peer.on('call',(call)=>{
+          call.answer(stream);
+          call.on('stream',(remoteStream)=>{
+            localAudio.current.srcObject = remoteStream;
+                  localAudio.current.play();
+        
+          })
+        })
     } catch (error) {
       console.error("Error accessing microphone:", error);
     }

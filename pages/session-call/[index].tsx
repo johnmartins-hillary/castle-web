@@ -5,6 +5,7 @@ import VoiceCallModule from "@/components/pages/session-call/voice-call-module.c
 import EndCall from "@/components/pages/session-call/end-call.component"
 import Head from "next/head"
 import MobileNavbar from "@/components/pages/landing-page/navbar/mobile-navbar.component"
+import TestVoiceCallModule from "@/components/pages/session-call/test-voice-module.component"
 
 const SessionCall =()=>{
     return(
@@ -21,7 +22,8 @@ const SessionCall =()=>{
             </div>
 
             <CallTimer/>
-            <VoiceCallModule/>
+            {/* <VoiceCallModule/> */}
+            <TestVoiceCallModule/>
             {/* <EndCall/> */}
         </DashboardLayout>
         </>
