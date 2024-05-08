@@ -17,6 +17,7 @@ import { chatApi } from "@/services/chat";
 import chats from "@/redux/slices/chats";
 import { callApi } from "@/services/call";
 import { categoryApi } from "@/services/category";
+import { counponApi } from "@/services/coupon";
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -32,6 +33,7 @@ export const makeStore = () => {
       [chatApi.reducerPath]: chatApi.reducer,
       [callApi.reducerPath]: callApi.reducer,
       [categoryApi.reducerPath]: categoryApi.reducer,
+      [counponApi.reducerPath]: counponApi.reducer,
       userState: userReducer,
       userprofile: userProfileSlice,
       singleUser: singleUser,
@@ -52,7 +54,8 @@ export const makeStore = () => {
         withdrawalApi.middleware,
         chatApi.middleware,
         callApi.middleware,
-        categoryApi.middleware
+        categoryApi.middleware,
+        counponApi.middleware
       )
   });
 };
