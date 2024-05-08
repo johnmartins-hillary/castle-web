@@ -25,7 +25,7 @@ const TestVoiceCallModule = () => {
             navigator.mediaDevices?.getUserMedia({audio:true}).then((stream:any)=>{
                 localStream = stream
                 currentStreamRef.current.srcObject = stream
-                // currentStreamRef.current.play()
+                currentStreamRef.current.play()
               }).catch((err:any)=>{
                 console.log("Error getting ccurrent stream",err)
               })
@@ -70,7 +70,6 @@ const TestVoiceCallModule = () => {
     }
     return ( 
         <>
- ``
         <div className="w-full flex items-center justify-center gap-3 mt-24 " >
             {/* <SpeakeronIcon onClick={()=>{}} size={35} className={'bg-black p-2 rounded-sm'} color={'white'} />
             <MicIcon size={27} /> */}
@@ -79,7 +78,7 @@ const TestVoiceCallModule = () => {
             <button onClick={callHandler} >Call</button>
             <button onClick={answerCall} >Answer</button>
 
-            <audio ref={currentStreamRef} ></audio>
+            <audio ref={currentStreamRef} muted={true} ></audio>
             <audio ref={remoteStreamRef} ></audio>
         </div>
          

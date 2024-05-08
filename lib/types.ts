@@ -60,3 +60,10 @@ export interface MessageProp {
   to_id: number;
   id: number;
 }
+
+export interface CallProps {
+  peerId?: string | any;
+  currentStreamRef?: any | undefined;
+  remoteStreamRef?: any | undefined;
+  setCurrentPeer?: any;
+}
