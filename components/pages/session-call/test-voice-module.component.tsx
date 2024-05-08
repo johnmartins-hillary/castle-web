@@ -25,7 +25,7 @@ const TestVoiceCallModule = () => {
             navigator.mediaDevices?.getUserMedia({audio:true}).then((stream:any)=>{
                 localStream = stream
                 currentStreamRef.current.srcObject = stream
-                currentStreamRef.current.play()
+                // currentStreamRef.current.play()
               }).catch((err:any)=>{
                 console.log("Error getting ccurrent stream",err)
               })
