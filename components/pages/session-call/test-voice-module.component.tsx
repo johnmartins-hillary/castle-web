@@ -6,11 +6,6 @@ const TestVoiceCallModule = () => {
   const remoteStreamRef = useRef<any>();
   const [currentPeer, setCurrentPeer] = useState<any>();
   const [roomId, setId] = useState("");
-  let media: any;
-
-  const getUserMedia = media?.getUserMedia;
-  useEffect(() => {}, []);
-
   const callHandler = () => {
     if (typeof window !== undefined) {
       const peerInstance = new Peer(roomId);
@@ -51,11 +46,12 @@ const TestVoiceCallModule = () => {
           ?.getUserMedia({ audio: true })
           .then((stream: any) => {
             localStream = stream;
-            // currentStreamRef.current.srcObject = stream
-            // currentStreamRef.current.play()
+            currentStreamRef.current.srcObject = stream;
+            currentStreamRef.current.volume = 0;
+            currentStreamRef.current.play();
             let call = peerInstance.call(roomId, stream);
-            call.on("stream", () => {
-              remoteStreamRef.current.srcObject = stream;
+            call.on("stream", (remoteStrem: any) => {
+              remoteStreamRef.current.srcObject = remoteStrem;
               remoteStreamRef.current.play();
             });
             setCurrentPeer(call);
